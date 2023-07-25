@@ -1,0 +1,49 @@
+@use "../util/" as ut;
+
+.navbar {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 20px;
+  &__item {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+    // navbar_item[1st one]
+    &:first-child {
+      margin-right: auto;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    &:nth-child(2) {
+      display: block;
+      @include ut.breakpoint(medium) {
+        display: none;
+      }
+    }
+    &:nth-child(3) {
+      display: block;
+      @include ut.breakpoint(medium) {
+        display: none;
+      }
+    }
+    &:last-child {
+      display: none;
+      @include ut.breakpoint(medium) {
+        display: block;
+      }
+    }
+    &__link {
+      display: flex;
+      gap: 2px;
+      align-items: center;
+      text-decoration: none;
+    }
+    &__title {
+      display: flex;
+      gap: 2px;
+      align-items: center;
+      text-decoration: none;
+    }
+  }
+}

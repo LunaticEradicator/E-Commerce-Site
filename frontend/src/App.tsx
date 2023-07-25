@@ -1,10 +1,16 @@
-import { useState } from "react";
-import "./App.css";
+// import { useState } from "react";
+
+import "./sass/style.scss";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Main from "./components/Main";
 
 function App() {
   return (
-    <div>
-      <h1>E-Commerce-Site</h1>
+    <div className="app">
+      <Header />
+      <Main />
+      <Footer />
     </div>
   );
 }
