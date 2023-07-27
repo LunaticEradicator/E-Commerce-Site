@@ -1,0 +1,65 @@
+@use "../util/" as ut;
+
+.main__productDisplayed__header {
+  margin-bottom: 20px;
+  & > a > button {
+    font-size: 1rem;
+  }
+}
+
+.main__productDisplayed__content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  @include ut.breakpoint(medium) {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+.main__productDisplayed__content__top {
+  &__img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+}
+
+.main__productDisplayed__content__middle {
+  border: 2px solid rgb(156, 156, 156);
+  border-radius: 10px;
+  padding: 10px;
+  &__name__title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    @include ut.breakpoint(medium) {
+      font-size: 1.6rem;
+    }
+  }
+  &__price {
+    display: flex;
+    gap: 20px;
+    // justify-content: space-evenly;
+    &__stocks {
+      font-size: 2.5rem;
+      font-weight: bold;
+      @include ut.breakpoint(medium) {
+        font-size: 1.6rem;
+      }
+    }
+  }
+  &__description__desc {
+    font-size: 1.5rem;
+    @include ut.breakpoint(medium) {
+      font-size: 1rem;
+    }
+  }
+  &__addToCart {
+    padding: 10px 0;
+    & > button {
+      @include ut.breakpoint(medium) {
+        font-size: 1rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+// sass custom variables [$font-size] need @use to be used when used imported
+@use "../global/buttonColor" as q;
+
+.button {
+  color: q.$font-color;
+  font-size: q.$font-size;
+  padding: var(--padding);
+  font-weight: bold;
+  cursor: pointer;
+  &__disabled {
+    cursor: not-allowed;
+  }
+  &__loading {
+    height: 100%;
+    opacity: 70%;
+  }
+  &__primary {
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    // font-size: q.$font;
+    padding: var(--padding);
+  }
+  &__secondary {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    // font-size: q.$font;
+    padding: var(--padding);
+  }
+  &__success {
+    background-color: var(--success-color);
+    border: 1px solid var(--success-color);
+    // font-size: q.$font;
+    padding: var(--padding);
+  }
+  &__warning {
+    background-color: var(--warning-color);
+    border: 1px solid var(--warning-color);
+    // font-size: q.$font;
+    padding: var(--padding);
+  }
+  &__danger {
+    background-color: var(--danger-color);
+    border: 1px solid var(--danger-color);
+    // font-size: q.$font;
+    padding: var(--padding);
+  }
+  &__rounded {
+    border-radius: 5px;
+  }
+  &__outline {
+    background-color: white;
+    color: black;
+  }
+  &__primaryOutline {
+    color: var(--primary-color);
+  }
+  &__secondaryOutline {
+    color: var(--secondary-color);
+  }
+  &__successOutline {
+    color: var(--success-color);
+  }
+  &__warningOutline {
+    color: var(--warning-color);
+  }
+  &__dangerOutline {
+    color: var(--danger-color);
+  }
+}
+
+.animation-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

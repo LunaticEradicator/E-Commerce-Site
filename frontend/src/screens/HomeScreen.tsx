@@ -8,17 +8,17 @@ export default function HomeScreen() {
   const renderDetail = products.map((product) => {
     return (
       <Panels key={product._id} className="main__product__panel">
-        <Link to={`product/:${product._id}`}>
+        <Link to={`product/${product._id}`}>
           <img className="main__product__img" src={product.img} alt="img" />
         </Link>
         <div className="main__product__title">
-          <Link to={`/product/:${product._id}`}>{product.name}</Link>
+          <Link to={`/product/${product._id}`}>{product.name}</Link>
         </div>
         <Rating
           rating={product.stats.rating}
           reviewCount={product.stats.reviewCount}
         />
-        <h2 className="main__product__price">${product.price}</h2>
+        <div className="main__product__price">${product.price}</div>
       </Panels>
     );
   });

@@ -6,8 +6,10 @@ import rtx4090 from "./assets/rtx 4090.jpg";
 export default [
   {
     _id: 1,
-    img: rtx4060,
     name: "NVIDIA GeForce RTX 4060",
+    img: rtx4060,
+    description:
+      "The GeForce RTX 4060 let you take on the latest games and apps with the ultra-efficient NVIDIA Ada Lovelace architecture. Experience immersive, AI-accelerated gaming with ray tracing and DLSS 3, and supercharge your creative process and productivity with NVIDIA Studio.",
     price: 299.99,
     countInStock: 151,
     category: "gpu",
@@ -18,8 +20,10 @@ export default [
   },
   {
     _id: 2,
-    img: rtx4060,
     name: "NVIDIA GeForce RTX 4060ti",
+    img: rtx4060,
+    description:
+      "The GeForce RTX™ 4060 Ti and RTX 4060 let you take on the latest games and apps with the ultra-efficient NVIDIA Ada Lovelace architecture. Experience immersive, AI-accelerated gaming with ray tracing and DLSS 3, and supercharge your creative process and productivity with NVIDIA Studio.",
     price: 399.99,
     countInStock: 151,
     category: "gpu",
@@ -30,8 +34,10 @@ export default [
   },
   {
     _id: 3,
-    img: rtx4070,
     name: "NVIDIA GeForce RTX 4070",
+    img: rtx4070,
+    description:
+      "Get equipped for stellar gaming and creating with NVIDIA® GeForce RTX 4070 graphics cards. They’re built with the ultra-efficient NVIDIA Ada Lovelace architecture. Experience fast ray tracing, AI-accelerated performance with DLSS 3, new ways to create, and much more.",
     price: 599.99,
     countInStock: 17,
     category: "gpu",
@@ -42,8 +48,10 @@ export default [
   },
   {
     _id: 4,
-    img: rtx4070,
     name: "NVIDIA GeForce RTX 4070ti",
+    img: rtx4070,
+    description:
+      "Get equipped for stellar gaming and creating with NVIDIA® GeForce RTX 4070 Ti graphics cards. They’re built with the ultra-efficient NVIDIA Ada Lovelace architecture. Experience fast ray tracing, AI-accelerated performance with DLSS 3, new ways to create, and much more.",
     price: 799.99,
     countInStock: 17,
     category: "gpu",
@@ -54,8 +62,10 @@ export default [
   },
   {
     _id: 5,
-    img: rtx4080,
     name: "NVIDIA GeForce RTX 4080",
+    img: rtx4080,
+    description:
+      "The NVIDIA® GeForce RTX™ 4080 delivers the ultra performance and features that enthusiast gamers and creators demand. Bring your games and creative projects to life with ray tracing and AI-powered graphics. It's powered by the ultra-efficient NVIDIA Ada Lovelace architecture and 16GB of superfast G6X memory.",
     price: 1199.99,
     countInStock: 21,
     category: "gpu",
@@ -66,10 +76,12 @@ export default [
   },
   {
     _id: 6,
-    img: rtx4090,
     name: "NVIDIA GeForce RTX 4090",
+    img: rtx4090,
+    description:
+      "The NVIDIA® GeForce RTX™ 4090 is the ultimate GeForce GPU. It brings an enormous leap in performance, efficiency, and AI-powered graphics. Experience ultra-high performance gaming, incredibly detailed virtual worlds, unprecedented productivity, and new ways to create. It’s powered by the NVIDIA Ada Lovelace architecture and comes with 24 GB of G6X memory to deliver the ultimate experience for gamers and creators.",
     price: 1599.99,
-    countInStock: 151,
+    countInStock: 0,
     category: "gpu",
     stats: {
       rating: 4.8,
