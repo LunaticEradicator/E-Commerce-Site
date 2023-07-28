@@ -1,5 +1,5 @@
 import "../sass/components/header.scss";
-import logo from "../assets/logo.png";
+import logo from "/images/logo.png";
 import { Link } from "react-router-dom";
 
 import { IoCartOutline, IoPersonSharp, IoMenuSharp } from "react-icons/io5";

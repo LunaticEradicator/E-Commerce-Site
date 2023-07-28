@@ -1,8 +1,3 @@
-// import rtx4060 from "./assets/rtx 4060.jpg";
-// import rtx4070 from "./assets/rtx 4070.jpg";
-// import rtx4080 from "./assets/rtx 4080.jpg";
-// import rtx4090 from "./assets/rtx 4090.jpg";
-
 export default [
   {
     _id: "1",
