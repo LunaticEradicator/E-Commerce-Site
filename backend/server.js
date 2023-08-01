@@ -4,6 +4,7 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 // import products from "./data/products.js"; // calling it from a separate productRouter file
 import productRouter from "./routes/productRoutes.js";
+import { notFoundURL, errorHandler } from "./middleware/errorHandler.js";
 
 dotenv.config();
 connectDB();
@@ -25,6 +26,10 @@ app.use("/api/products", productRouter);
 //   const selectedProduct = products.find((p) => p._id === req.params.id);
 //   res.json(selectedProduct);
 // });
+
+//! Custom Error Handling
+app.use(notFoundURL);
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`Listing to server ${port}`);
