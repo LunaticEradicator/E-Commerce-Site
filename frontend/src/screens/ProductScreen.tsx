@@ -49,8 +49,8 @@ export default function ProductScreen() {
               {selectedProduct?.name}
             </div>
             <Rating
-              reviewCount={selectedProduct?.stats.reviewCount}
-              rating={selectedProduct?.stats.rating}
+              reviewCount={selectedProduct?.reviewCount}
+              rating={selectedProduct?.rating}
               className="addPadding" // to fix padding [found in rating.scss]
             />
           </div>

@@ -1,20 +1,18 @@
 export default [
   {
-    _id: "1",
+    // _id: "1",
     name: "NVIDIA GeForce RTX 4060",
-    img: "images/rtx 4060.jpg",
+    img: "/images/rtx 4060.jpg",
     description:
       "The GeForce RTX 4060 let you take on the latest games and apps with the ultra-efficient NVIDIA Ada Lovelace architecture. Experience immersive, AI-accelerated gaming with ray tracing and DLSS 3, and supercharge your creative process and productivity with NVIDIA Studio.",
     price: 299.99,
     countInStock: 151,
     category: "gpu",
-    stats: {
-      rating: 1.3,
-      reviewCount: 50,
-    },
+    rating: 1.3,
+    reviewCount: 50,
   },
   {
-    _id: "2",
+    // _id: "2",
     name: "NVIDIA GeForce RTX 4060ti",
     img: "/images/rtx 4060.jpg",
     description:
@@ -22,13 +20,11 @@ export default [
     price: 399.99,
     countInStock: 151,
     category: "gpu",
-    stats: {
-      rating: 1.6,
-      reviewCount: 30,
-    },
+    rating: 1.6,
+    reviewCount: 30,
   },
   {
-    _id: "3",
+    // _id: "3",
     name: "NVIDIA GeForce RTX 4070",
     img: "/images/rtx 4070.jpg",
     description:
@@ -36,13 +32,11 @@ export default [
     price: 599.99,
     countInStock: 17,
     category: "gpu",
-    stats: {
-      rating: 2.1,
-      reviewCount: 17,
-    },
+    rating: 2.1,
+    reviewCount: 17,
   },
   {
-    _id: "4",
+    // _id: "4",
     name: "NVIDIA GeForce RTX 4070ti",
     img: "/images/rtx 4070.jpg",
     description:
@@ -50,13 +44,11 @@ export default [
     price: 799.99,
     countInStock: 17,
     category: "gpu",
-    stats: {
-      rating: 3.2,
-      reviewCount: 21,
-    },
+    rating: 3.2,
+    reviewCount: 21,
   },
   {
-    _id: "5",
+    // _id: "5",
     name: "NVIDIA GeForce RTX 4080",
     img: "/images/rtx 4080.jpg",
     description:
@@ -64,13 +56,11 @@ export default [
     price: 1199.99,
     countInStock: 21,
     category: "gpu",
-    stats: {
-      rating: 4.4,
-      reviewCount: 90,
-    },
+    rating: 4.4,
+    reviewCount: 90,
   },
   {
-    _id: "6",
+    // _id: "6",
     name: "NVIDIA GeForce RTX 4090",
     img: "/images/rtx 4090.jpg",
     description:
@@ -78,9 +68,7 @@ export default [
     price: 1599.99,
     countInStock: 0,
     category: "gpu",
-    stats: {
-      rating: 4.8,
-      reviewCount: 120,
-    },
+    rating: 4.8,
+    reviewCount: 120,
   },
 ];

@@ -13,7 +13,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await axios.get("/api/products");
+      const response = await axios.get("/api/products"); // no need to add localhost since we added proxy in package.json
       const data = response.data;
       setProducts(data);
     };
@@ -25,16 +25,13 @@ export default function HomeScreen() {
   const renderDetail = products.map((product) => {
     return (
       <Panels key={product._id} className="main__product__panel">
-        <Link to={`product/${product._id}`}>
+        <Link to={`products/${product._id}`}>
           <img className="main__product__img" src={product.img} alt="img" />
         </Link>
         <div className="main__product__title">
-          <Link to={`/product/${product._id}`}>{product.name}</Link>
+          <Link to={`/products/${product._id}`}>{product.name}</Link>
         </div>
-        <Rating
-          rating={product.stats.rating}
-          reviewCount={product.stats.reviewCount}
-        />
+        <Rating rating={product.rating} reviewCount={product.reviewCount} />
         <div className="main__product__price">${product.price}</div>
       </Panels>
     );

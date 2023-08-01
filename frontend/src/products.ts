@@ -3,6 +3,8 @@
 // import rtx4080 from "./assets/rtx 4080.jpg";
 // import rtx4090 from "./assets/rtx 4090.jpg";
 
+// no need of this file since we are calling it from backend
+
 export default [
   {
     _id: "1",
@@ -13,10 +15,10 @@ export default [
     price: 299.99,
     countInStock: 151,
     category: "gpu",
-    stats: {
-      rating: 1.3,
-      reviewCount: 50,
-    },
+    // stats: {
+    rating: 1.3,
+    reviewCount: 50,
+    // },
   },
   {
     _id: "2",
@@ -27,10 +29,10 @@ export default [
     price: 399.99,
     countInStock: 151,
     category: "gpu",
-    stats: {
-      rating: 1.6,
-      reviewCount: 30,
-    },
+    // stats: {
+    rating: 1.6,
+    reviewCount: 30,
+    // },
   },
   {
     _id: "3",
@@ -41,10 +43,10 @@ export default [
     price: 599.99,
     countInStock: 17,
     category: "gpu",
-    stats: {
-      rating: 2.1,
-      reviewCount: 17,
-    },
+    // stats: {
+    rating: 2.1,
+    reviewCount: 17,
+    // },
   },
   {
     _id: "4",
@@ -55,10 +57,10 @@ export default [
     price: 799.99,
     countInStock: 17,
     category: "gpu",
-    stats: {
-      rating: 3.2,
-      reviewCount: 21,
-    },
+    // stats: {
+    rating: 3.2,
+    reviewCount: 21,
+    // },
   },
   {
     _id: "5",
@@ -69,10 +71,10 @@ export default [
     price: 1199.99,
     countInStock: 21,
     category: "gpu",
-    stats: {
-      rating: 4.4,
-      reviewCount: 90,
-    },
+    // stats: {
+    rating: 4.4,
+    reviewCount: 90,
+    // },
   },
   {
     _id: "6",
@@ -83,9 +85,9 @@ export default [
     price: 1599.99,
     countInStock: 0,
     category: "gpu",
-    stats: {
-      rating: 4.8,
-      reviewCount: 120,
-    },
+    // stats: {
+    rating: 4.8,
+    reviewCount: 120,
+    // },
   },
 ];
