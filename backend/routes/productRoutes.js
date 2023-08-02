@@ -1,36 +1,43 @@
 import express from "express";
-import asyncHandler from "../middleware/asyncHandler.js";
 // import products from "../data/products.js"; //! no need since we are calling it from database through model we created
-import Product from "../models/productModel.js"; //? Instead we will call through the model we created
+import {
+  getProducts,
+  getProductById,
+} from "../controllers/productController.js";
 
 const router = express.Router();
 
-router.get(
-  "/",
-  asyncHandler(async (req, res) => {
-    const products = await Product.find({}); //? {empty} means we will find all products
-    res.json(products);
-  })
-);
+//! controllers
+router.get("/", getProducts);
+router.get("/:id", getProductById);
 
-router.get(
-  "/:id",
-  asyncHandler(async (req, res) => {
-    // const selectedProduct = products.find((p) => p._id === req.params.id);
-    const selectedProduct = await Product.findById(req.params.id);
-    if (selectedProduct) {
-      res.json(selectedProduct);
-    } else {
-      // won't work because cast error will take place and display a default html message [status:500]
-      // res.status(404).json({ message: "Product Not Found" }); //? instead we created our own custom error handler
-      throw new Error(
-        "Hmm... Seems like the product is missing from our inventory."
-      );
-    }
-  })
-);
+//! Without controllers
+// router.get(
+//   "/",
+//   asyncHandler(async (req, res) => {
+//     const products = await Product.find({}); //? {empty} means we will find all products
+//     res.json(products);
+//   })
+// );
 
-// Till here we are calling from data/product.js
+// router.get(
+//   "/:id",
+//   asyncHandler(async (req, res) => {
+//     // const selectedProduct = products.find((p) => p._id === req.params.id);
+//     const selectedProduct = await Product.findById(req.params.id);
+//     if (selectedProduct) {
+//       res.json(selectedProduct);
+//     } else {
+//       // won't work because cast error will take place and display a default html message [status:500]
+//       // res.status(404).json({ message: "Product Not Found" }); //? instead we created our own custom error handler
+//       throw new Error(
+//         "Hmm... Seems like the product is missing from our inventory."
+//       );
+//     }
+//   })
+// );
+
+//? Till here we are calling from data/product.js
 // router.get(
 //   "/",
 //   asyncHandler(async (req, res) => {

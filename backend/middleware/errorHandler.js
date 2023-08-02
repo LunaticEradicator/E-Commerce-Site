@@ -14,14 +14,10 @@ function errorHandler(err, req, res, next) {
     statusCode = 404;
   }
 
-  //   res.status(404).json({ message: "Product Not Found" });
-
+  // res.status(404).json({ message: "Product Not Found" });
   res.status(statusCode).json({
     message,
-    stack:
-      process.env.NODE_ENV === "production"
-        ? "We are in Production"
-        : err.stack,
+    stack: process.env.NODE_ENV === "production" ? "Deployed" : err.stack,
   });
 }
 
