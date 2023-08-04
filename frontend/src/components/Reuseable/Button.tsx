@@ -2,17 +2,17 @@ import classNames from "classnames";
 import "../../sass/components/button.scss";
 
 interface propButton {
-  children: string | JSX.Element | JSX.Element[];
-  disabled: boolean;
-  className: string;
-  loading: boolean;
-  primary: boolean;
-  secondary: boolean;
-  success: boolean;
-  danger: boolean;
-  warning: boolean;
-  rounded: boolean;
-  outline: boolean;
+  children: string[] | JSX.Element | JSX.Element[];
+  disabled?: boolean;
+  className?: string;
+  loading?: boolean;
+  primary?: boolean;
+  secondary?: boolean;
+  success?: boolean;
+  danger?: boolean;
+  warning?: boolean;
+  rounded?: boolean;
+  outline?: boolean;
 }
 
 export default function Button({

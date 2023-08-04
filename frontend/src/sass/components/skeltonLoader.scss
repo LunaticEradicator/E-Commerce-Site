@@ -1,0 +1,40 @@
+.skeltonParent {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+.outerDiv {
+  position: relative;
+  overflow: hidden;
+  background-color: #dddbdd;
+  margin-bottom: 10px;
+  /* width: 100%;
+  height: 2.5rem; */
+}
+
+.defaultDiv {
+  width: 100%;
+  height: 270px;
+  border-radius: 10px;
+}
+
+.innerDiv {
+  animation: shimmer 2s infinite;
+  inset: 0px;
+  position: absolute;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}

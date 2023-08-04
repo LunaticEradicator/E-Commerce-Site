@@ -5,7 +5,7 @@ import classNames from "classnames";
 type propRating = {
   rating: number;
   reviewCount: number;
-  className: string;
+  className?: string;
 };
 
 export default function Rating({ rating, reviewCount, className }: propRating) {
