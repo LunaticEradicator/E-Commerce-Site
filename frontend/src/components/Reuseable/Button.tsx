@@ -2,7 +2,7 @@ import classNames from "classnames";
 import "../../sass/components/button.scss";
 
 interface propButton {
-  children: string[] | JSX.Element | JSX.Element[];
+  children: string[] | string | JSX.Element | JSX.Element[];
   disabled?: boolean;
   className?: string;
   loading?: boolean;
@@ -29,7 +29,7 @@ export default function Button({
   outline,
   ...rest
 }: propButton) {
-  const style = classNames(rest.className, "button", className, {
+  const style = classNames(rest?.className, "button", className, {
     // if the corresponding boolean[props] is true, select it's class
     button__loading: loading && !disabled,
     button__primary: primary && !disabled,

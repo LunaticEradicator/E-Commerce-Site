@@ -45,7 +45,6 @@ export default function HomeScreen() {
           </div>
           <Rating rating={product.rating} reviewCount={product.reviewCount} />
           <div className="main__product__price">${product.price}</div>
-          <Message danger>Error</Message>;
         </Panels>
       );
     });

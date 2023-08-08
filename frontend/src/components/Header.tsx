@@ -1,9 +1,18 @@
 import "../sass/components/header.scss";
 import logo from "/images/logo.png";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { IoCartOutline, IoPersonSharp, IoMenuSharp } from "react-icons/io5";
+
 export default function Header() {
+  const { cartItems } = useSelector((state: any) => {
+    return state.cart;
+  });
+  const cartHeader = cartItems.reduce((acc, curr) => {
+    return acc + Number(curr.qty);
+  }, 0);
+  console.log(cartHeader);
   return (
     <nav>
       <ul className="navbar">
@@ -18,6 +27,11 @@ export default function Header() {
             <IoCartOutline />
             Cart
           </Link>
+          {cartHeader > 0 && (
+            <div className="cart">
+              <span>{cartHeader}</span>
+            </div>
+          )}
         </li>
         <li className="navbar__item">
           <Link to="/login" className="navbar__item__link">

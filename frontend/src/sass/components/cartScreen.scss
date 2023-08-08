@@ -1,0 +1,104 @@
+@use "../util/" as ut;
+.main__cart {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  margin-left: 50px;
+  gap: 50px;
+  @include ut.breakpoint(medium) {
+    margin-left: 0;
+    grid-template-columns: repeat(auto-fit, minmax(278px, 1fr));
+  }
+}
+
+.main__cart__item {
+  max-width: 600px;
+  &__header {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    @include ut.breakpoint(medium) {
+      font-size: 2rem;
+    }
+  }
+  &__details {
+    &__product {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      &__header {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        @include ut.breakpoint(medium) {
+          font-size: 0.6rem;
+        }
+        &__name {
+          @include ut.breakpoint(medium) {
+            max-width: 15px;
+          }
+          & > :first-child {
+            font-weight: bold;
+          }
+        }
+
+        &__image > img {
+          width: 100px;
+          height: 60px;
+          border-radius: 10px;
+          @include ut.breakpoint(medium) {
+            width: 50px;
+            height: 30px;
+          }
+        }
+      }
+      &__price {
+        font-size: 1.2rem;
+        font-weight: bold;
+        @include ut.breakpoint(medium) {
+          font-size: 0.6rem;
+        }
+      }
+      &__delete {
+        all: unset;
+        :first-child {
+          background-color: rgb(231, 230, 230);
+          padding: 10px;
+          border-radius: 10px;
+          @include ut.breakpoint(medium) {
+            width: 9px;
+            height: 9px;
+            padding: 5px;
+          }
+          &:hover {
+            background-color: rgb(0, 0, 0, 0.4);
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+
+.main__cart__subTotal {
+  max-width: 500px;
+  box-shadow: 2px 0px 5px 2px rgba(0, 0, 0, 0.2);
+  font-size: 2rem;
+  border-radius: 10px;
+  padding: 20px;
+  @include ut.breakpoint(medium) {
+    font-size: 1rem;
+  }
+  &__header {
+    font-size: 3rem;
+    font-weight: bold;
+    @include ut.breakpoint(medium) {
+      font-size: 1.5rem;
+    }
+  }
+  &__button {
+    @include ut.breakpoint(medium) {
+      font-size: 1rem;
+      padding: 10px 8px;
+    }
+  }
+}

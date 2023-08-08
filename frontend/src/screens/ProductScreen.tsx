@@ -1,7 +1,6 @@
 import "../sass/components/productScreen.scss";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-// import { useState, useEffect } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import { useState } from "react";
 // import axios from "axios";
 import SkeltonLoader from "../components/Reuseable/SkeltonLoader.tsx";
 import { useGetSingleProductQuery } from "../store/apis/productsApi.ts";
@@ -9,8 +8,15 @@ import { useGetSingleProductQuery } from "../store/apis/productsApi.ts";
 // import products from "../products";
 import Button from "../components/Reuseable/Button";
 import Rating from "../components/Reuseable/Rating";
+import Message from "../components/Reuseable/Message.tsx";
+
+import { useDispatch } from "react-redux";
+import { addItemsToCart } from "../store/store.ts";
 
 export default function ProductScreen() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [qty, setQty] = useState(1);
   const { id: productId } = useParams();
   const {
     data: selectedProduct,
@@ -28,14 +34,21 @@ export default function ProductScreen() {
   //   fetchSelectedProduct();
   // }, [productId]);
 
-  console.log(selectedProduct);
-  console.log(productId);
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQty(event.target.value);
+  };
+
+  const addToCartHandler = () => {
+    console.log("Clicked");
+    navigate("/cart");
+    dispatch(addItemsToCart({ ...selectedProduct, qty }));
+  };
 
   let renderedSingleProduct;
   if (isLoading) {
     renderedSingleProduct = <SkeltonLoader times={2} className="defaultDiv" />;
   } else if (isError) {
-    renderedSingleProduct = <div>'Error'</div>;
+    renderedSingleProduct = <Message danger>Error</Message>;
   } else {
     renderedSingleProduct = (
       <>
@@ -71,9 +84,28 @@ export default function ProductScreen() {
               </div>
             </div>
 
+            {selectedProduct?.countInStock > 0 && (
+              <div className="main__productDisplayed__content__middle__selectQty">
+                <form action="">
+                  <select onChange={handleInput} name="qty" value={qty}>
+                    {[...Array(selectedProduct?.countInStock).keys()].map(
+                      (x) => {
+                        return (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        );
+                      }
+                    )}
+                  </select>
+                </form>
+              </div>
+            )}
+
             <div className="main__productDisplayed__content__middle__addToCart">
               {/* <Button disabled primary rounded> */}
               <Button
+                onClick={addToCartHandler}
                 disabled={selectedProduct?.countInStock === 0}
                 primary
                 rounded

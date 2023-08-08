@@ -1,5 +1,17 @@
 export default [
   {
+    // _id: "6",
+    name: "NVIDIA GeForce RTX 3090ti",
+    img: "/images/rtx 3090ti.jpg",
+    description:
+      "The NVIDIA® GeForce RTX™ 3090ti is the ultimate GeForce GPU. It brings an enormous leap in performance, efficiency, and AI-powered graphics. Experience ultra-high performance gaming, incredibly detailed virtual worlds, unprecedented productivity, and new ways to create. It’s powered by the NVIDIA Ada Lovelace architecture and comes with 24 GB of G6X memory to deliver the ultimate experience for gamers and creators.",
+    price: 1999.99,
+    countInStock: 0,
+    category: "gpu",
+    rating: 4.7,
+    reviewCount: 210,
+  },
+  {
     // _id: "1",
     name: "NVIDIA GeForce RTX 4060",
     img: "/images/rtx 4060.jpg",
@@ -66,7 +78,7 @@ export default [
     description:
       "The NVIDIA® GeForce RTX™ 4090 is the ultimate GeForce GPU. It brings an enormous leap in performance, efficiency, and AI-powered graphics. Experience ultra-high performance gaming, incredibly detailed virtual worlds, unprecedented productivity, and new ways to create. It’s powered by the NVIDIA Ada Lovelace architecture and comes with 24 GB of G6X memory to deliver the ultimate experience for gamers and creators.",
     price: 1599.99,
-    countInStock: 0,
+    countInStock: 7,
     category: "gpu",
     rating: 4.8,
     reviewCount: 120,
