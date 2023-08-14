@@ -1,71 +1,86 @@
+import { useState } from "react";
+import { IoCartOutline, IoPersonSharp, IoMenuSharp } from "react-icons/io5";
 import "../sass/components/header.scss";
 import logo from "/images/logo.png";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-import { IoCartOutline, IoPersonSharp, IoMenuSharp } from "react-icons/io5";
+import DropDown from "./Reuseable/DropDown";
+import Button from "./Reuseable/Button";
 
 export default function Header() {
-  const { cartItems } = useSelector((state: any) => {
-    return state.cart;
-  });
+  const [isNavExpanded, setIsNavExpanded] = useState(true); ///fixxxxxxx
+  const handleHamburger = () => {
+    setIsNavExpanded((prevIsNavExpanded) => !prevIsNavExpanded);
+    console.log("Clicked");
+  };
+  // const [selected, setSelected] = useState(null);
+
+  // const handleSelected = (newOption) => {
+  //   setSelected(newOption);
+  // };
+
+  const dropDownOptionsUser = [
+    { label: "Profile", value: "profile" },
+    { label: "Logout", value: "logout" },
+  ];
+  const { cartItems } = useSelector((state: any) => state.cart);
+  const { userInfo } = useSelector((state: any) => state.auth);
   const cartHeader = cartItems.reduce((acc, curr) => {
     return acc + Number(curr.qty);
   }, 0);
-  console.log(cartHeader);
+
   return (
     <nav>
-      <ul className="navbar">
+      <ul className={isNavExpanded ? "navbar" : "navbar expanded"}>
         <li className="navbar__item">
           <Link to="/" className="navbar__item__title">
             <img src={logo} alt="logo" />
             E-Commerce
           </Link>
         </li>
-        <li className="navbar__item">
+        <li
+          className={isNavExpanded ? "navbar__item" : "navbar__item expanded"}
+        >
           <Link to="/cart" className="navbar__item__link">
-            <IoCartOutline />
-            Cart
-          </Link>
-          {cartHeader > 0 && (
-            <div className="cart">
-              <span>{cartHeader}</span>
+            <div
+              className="navbar__item__link__innerChild"
+              style={{ display: "flex" }}
+            >
+              <IoCartOutline />
+              Cart
+              {cartHeader > 0 && ( // only display if a item is in cart
+                <div className="cart">
+                  <span>{cartHeader}</span>
+                </div>
+              )}
             </div>
+          </Link>
+        </li>
+        <li
+          className={isNavExpanded ? "navbar__item" : "navbar__item expanded"}
+        >
+          {userInfo ? (
+            <DropDown options={dropDownOptionsUser} name={userInfo.name} />
+          ) : (
+            <Link to="/login" className="navbar__item__link">
+              <IoPersonSharp />
+              Sign In
+            </Link>
           )}
         </li>
-        <li className="navbar__item">
-          <Link to="/login" className="navbar__item__link">
-            <IoPersonSharp />
-            Sign In
-          </Link>
-        </li>
-        <li className="navbar__item">
-          {/* <a className="navbar__item__link" href="#"> */}
+        {/*  hamburger icon */}
+        <Button className="navbar__item" onClick={handleHamburger}>
           <IoMenuSharp />
-          {/* </a> */}
-        </li>
+        </Button>
       </ul>
     </nav>
   );
 }
 
-{
-  /* <div className="header">
-  <div className="header__title">
-    <h2>E-Commerce Site</h2>
-  </div>
-  <div className="header__content">
-    <div className="header__content__cart">
-      <IoCartOutline />
-      Cart
-    </div>
-    <div style={{}} className="header__content__sign">
-      <IoPersonSharp />
-      Sign In
-    </div>
-  </div>
-  <div className="header__hamburger">
-    <IoMenuSharp />
-  </div>
-</div>; */
-}
+// {
+//   userInfo ? (
+//     <DropDown options={dropDownOptionsHamburger} name={""} />
+//   ) : (
+//     <IoMenuSharp />
+//   );
+// }

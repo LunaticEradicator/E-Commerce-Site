@@ -1,0 +1,60 @@
+$padding-spacing: 20px;
+$margin-spacing: 10px;
+
+input {
+  font-size: 1.3rem;
+  outline: none;
+  border: none;
+  background-color: rgba(255, 253, 253, 0.082);
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.164);
+  border-radius: 5px;
+  padding: 10px 5px;
+  margin-top: $margin-spacing;
+}
+label {
+  font-weight: bold;
+}
+
+input:focus {
+  outline: none;
+  border: none;
+  outline: 2px solid rgb(29, 100, 231);
+  box-shadow: 0px 0px 5px 1px rgb(29, 100, 231);
+}
+
+input:not(:focus):not(:placeholder-shown):invalid {
+  outline: 2px solid rgba(184, 30, 30, 0.808);
+  box-shadow: 0px 0px 5px 1px rgb(253, 3, 3);
+}
+input:not(:focus):not(:placeholder-shown):valid {
+  // outline: 2px solid rgba(111, 153, 111, 0.808);
+  box-shadow: 0px 0px 5px 1px rgb(61, 253, 3);
+}
+
+.formContainer {
+  padding: $padding-spacing;
+  &__header {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: $margin-spacing;
+    font-size: 3rem;
+  }
+  &__userEmail {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    margin-bottom: $margin-spacing;
+  }
+  &__userPassword {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+  }
+  &__signInBtn {
+    margin-top: $padding-spacing;
+    padding: 9px 4px;
+  }
+  &__registerLink {
+    margin-top: $padding-spacing;
+  }
+}

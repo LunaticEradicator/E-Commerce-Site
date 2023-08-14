@@ -1,5 +1,11 @@
+@use "../util/" as ut;
+
 main {
   margin: 20px;
+  margin-top: 0px;
+  @include ut.breakpoint(medium) {
+    margin: 5px;
+  }
 }
 
 .main__product {

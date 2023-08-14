@@ -1,0 +1,42 @@
+@use "../util/" as ut;
+.dropdown__header {
+  display: flex;
+  box-sizing: border-box;
+  position: relative;
+  cursor: pointer;
+}
+.dropdown__content {
+  cursor: pointer;
+  width: -webkit-fill-available;
+  position: absolute;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin-right: 5px;
+  text-align: start;
+  cursor: pointer;
+  color: brown;
+  border-radius: 4px;
+  box-shadow: 1px 1px 3px 2px rgb(0 0 0 / 0.2), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  & > a {
+    transition: 0.3s;
+    @include ut.breakpoint(medium) {
+      padding: 10px;
+      padding-left: 0;
+    }
+    &:hover {
+      // background-color: rgb(0, 0, 0);
+      transform: scale(1.05);
+    }
+  }
+}
+
+.extended {
+  @include ut.breakpoint(medium) {
+    position: relative;
+    box-shadow: 1px 1px 3px 2px rgb(0 0 0 / 0.2),
+      0 1px 2px -1px rgb(0 0 0 / 0.1);
+    margin: 5px;
+  }
+}

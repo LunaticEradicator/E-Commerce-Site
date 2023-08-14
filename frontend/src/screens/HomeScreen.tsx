@@ -34,6 +34,7 @@ export default function HomeScreen() {
   } else if (isError) {
     renderDetail = <Message danger>Error</Message>;
   } else {
+    <h1>Latest Product</h1>;
     renderDetail = products.map((product) => {
       return (
         <Panels key={product._id} className="main__product__panel">
@@ -50,5 +51,10 @@ export default function HomeScreen() {
     });
   }
 
-  return <div className="main__product">{renderDetail}</div>;
+  return (
+    <>
+      <h1>Latest Product</h1>
+      <div className="main__product">{renderDetail}</div>
+    </>
+  );
 }

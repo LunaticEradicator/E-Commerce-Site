@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
 import colors from "colors";
 import mongoose from "mongoose";
-import products from "./data/products.js"; // always add extension on backend
-import usersData from "./data/users.js"; // Faker users
+import products from "./data/products.js"; // always add extension[.js]  on backend
+import usersData from "./data/users.js"; //
 import connectDB from "./config/db.js";
 
 //* Models
@@ -19,9 +19,11 @@ const importData = async () => {
     await Product.deleteMany();
     await Order.deleteMany();
 
-    const createdUsers = await User.insertMany(usersData);
+    const createUsers = await User.insertMany(usersData);
 
-    const AdminUser = createdUsers[0]._id;
+    const AdminUser = createUsers[0]._id;
+
+    //adding admin to all products
     const sampleProductsData = products.map((p) => {
       return { ...p, user: AdminUser };
     });

@@ -1,6 +1,6 @@
 // to encrypt password on database []
 import bcrypt from "bcrypt";
-const users = [
+const usersData = [
   {
     name: "Admin User",
     email: "admin@gmail.com",
@@ -21,4 +21,4 @@ const users = [
   },
 ];
 
-export default users;
+export default usersData;

@@ -6,12 +6,15 @@ import {
   removeCartItems,
 } from "./slices/cartSlice.ts";
 
+import { authReducer, setCredentials } from "./slices/authSlice.ts";
+
 const store = configureStore({
   // main reducer which store states
   reducer: {
     // stateName:miniReducer[slice].reducer
     [rootApi.reducerPath]: rootApi.reducer,
     cart: cartReducer,
+    auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(rootApi.middleware),
@@ -19,3 +22,4 @@ const store = configureStore({
 });
 
 export { store, cartReducer, addItemsToCart, removeCartItems };
+export { authReducer, setCredentials };

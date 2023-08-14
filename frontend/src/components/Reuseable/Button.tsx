@@ -19,7 +19,6 @@ export default function Button({
   children,
   disabled,
   className,
-  loading,
   primary,
   secondary,
   success,
@@ -27,6 +26,7 @@ export default function Button({
   warning,
   rounded,
   outline,
+  loading,
   ...rest
 }: propButton) {
   const style = classNames(rest?.className, "button", className, {
@@ -46,6 +46,8 @@ export default function Button({
     button__dangerOutline: danger && outline && !disabled,
     button__disabled: disabled,
   });
+
+  // if (loading)
   return (
     <button {...rest} disabled={disabled ? true : false} className={style}>
       {children}

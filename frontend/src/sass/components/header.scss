@@ -14,34 +14,61 @@
   display: flex;
   align-items: center;
   margin: 0;
+  position: relative;
   padding: 20px;
+  @include ut.breakpoint(medium) {
+    padding: 0px;
+  }
+
   &__item {
     display: flex;
     align-items: center;
     margin: 0 10px;
+    @include ut.breakpoint(medium) {
+      margin: 0;
+    }
     // navbar_item[1st one]
     &:first-child {
       margin-right: auto;
-      font-size: 1.2rem;
+      font-size: 2rem;
       font-weight: bold;
     }
     &:nth-child(2) {
-      display: flex;
-      gap: 5px;
+      font-size: 1.5rem;
+      // &:hover {
+      //   background-color: rgb(204, 203, 203);
+      // }
       @include ut.breakpoint(medium) {
         display: none;
+        padding: 10px;
       }
     }
     &:nth-child(3) {
       display: block;
+      font-size: 1.5rem;
+      // &:hover {
+      //   background-color: rgb(204, 203, 203);
+      // }
       @include ut.breakpoint(medium) {
         display: none;
+        padding: 10px;
+        padding-bottom: 0;
       }
     }
     &:last-child {
+      all: unset;
       display: none;
       @include ut.breakpoint(medium) {
+        padding: 0px;
         display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        // background-color: black;
+      }
+      & > * {
+        width: 30px;
+        height: 30px;
       }
     }
     &__link {
@@ -49,6 +76,11 @@
       gap: 2px;
       align-items: center;
       text-decoration: none;
+      &__innerChild {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+      }
     }
     &__title {
       display: flex;
@@ -56,5 +88,11 @@
       align-items: center;
       text-decoration: none;
     }
+  }
+}
+
+.expanded {
+  @include ut.breakpoint(medium) {
+    display: block !important; // vertical Mobile Navigation Bar
   }
 }

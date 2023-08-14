@@ -1,16 +1,24 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
 // import products from "./data/products.js"; // calling it from a separate productRouter file
 import productRouter from "./routes/productRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 import { notFoundURL, errorHandler } from "./middleware/errorHandler.js";
 
 dotenv.config();
 connectDB();
 const app = express();
-const port = process.env.PORT || 8080;
+// body parser middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+// cookie parser middleware
+app.use(cookieParser());
+
+const port = process.env.PORT || 8080;
 app.use(cors());
 
 app.get("/", (req, res) => {
@@ -18,6 +26,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/products", productRouter);
+app.use("/api/users", userRoutes);
 // app.get("/api/products", (req, res) => {
 //   res.json(products);
 // });
