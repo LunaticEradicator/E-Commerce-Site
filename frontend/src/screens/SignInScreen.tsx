@@ -12,7 +12,11 @@ export default function SignInScreen() {
   const { userInfo } = useSelector((state) => state.auth); // to access different state
   const dispatch = useDispatch(); //  used with setter function
   const navigate = useNavigate();
-  const [login, { isLoading, error }] = useLoginMutation(); // fetch fnc
+  const [loginApiCall, { isLoading, error }] = useLoginMutation(); // fetch fnc
+  const [formData, setFormData] = useState({
+    userEmail: "",
+    userPassword: "",
+  });
 
   // Checking if redirect is there in the URl
   const { search } = useLocation();
@@ -25,10 +29,6 @@ export default function SignInScreen() {
     }
   }, [userInfo, redirect, navigate]);
 
-  const [formData, setFormData] = useState({
-    userEmail: "",
-    userPassword: "",
-  });
   const formControllerHandler = (event) => {
     const { value, name } = event.target;
     setFormData((prevFormData) => {
@@ -36,7 +36,8 @@ export default function SignInScreen() {
     });
     // console.log(formData);
   };
-  // console.log(formData);
+
+  // Submit for login
   const submitHandler = async (event) => {
     event.preventDefault();
     try {
@@ -44,7 +45,7 @@ export default function SignInScreen() {
       // to check if the user entered email and password is there in the database
       // if available we will parse it in the body
       // and get that user's info back
-      const res = await login({
+      const res = await loginApiCall({
         email: formData.userEmail,
         password: formData.userPassword,
       }).unwrap();
@@ -92,14 +93,14 @@ export default function SignInScreen() {
           disabled={isLoading}
           // loading fix thissssssssssssssss
         >
-          Sign In
+          Login In
         </Button>
         {/* {isLoading && <div>Getting User</div>} */}
         <div className="formContainer__registerLink">
           New Customer?{" "}
-          {/* if resigter redirect to redirect page else to to register */}
+          {/* if user is register redirect to redirect page 
+          else to to register */}
           <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
-            {" "}
             Register
           </Link>
         </div>

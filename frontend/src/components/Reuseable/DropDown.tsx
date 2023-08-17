@@ -2,8 +2,6 @@ import "../../sass/components/dropDown.scss";
 import Panels from "./Panels";
 import { useEffect, useRef, useState } from "react";
 import { GoChevronDown } from "react-icons/go";
-import { Link } from "react-router-dom";
-import { IoMenuSharp } from "react-icons/io5";
 
 export default function DropDown({ options, name }) {
   const [isDrop, setIsDrop] = useState(false);
@@ -30,14 +28,9 @@ export default function DropDown({ options, name }) {
 
   const renderedOption = options.map((option) => {
     return (
-      <Link
-        key={option.value}
-        to={`/${option.value}`}
-        onClick={() => setIsDrop(false)}
-      >
-        {/* capitalize first letter */}
+      <div key={option.value} onClick={() => option.handler()}>
         {option.label}
-      </Link>
+      </div>
     );
   });
   return (

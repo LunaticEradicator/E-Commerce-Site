@@ -2,26 +2,50 @@ import { useState } from "react";
 import { IoCartOutline, IoPersonSharp, IoMenuSharp } from "react-icons/io5";
 import "../sass/components/header.scss";
 import logo from "/images/logo.png";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import DropDown from "./Reuseable/DropDown";
 import Button from "./Reuseable/Button";
+import { removeCredentials } from "../store/slices/authSlice";
+import { useLogoutMutation } from "../store/apis/usersApi";
+import { toast } from "react-toastify";
 
 export default function Header() {
-  const [isNavExpanded, setIsNavExpanded] = useState(true); ///fixxxxxxx
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [logoutApiCall] = useLogoutMutation();
+
+  // for nav we add a new class which will make all li be block only when screen is medium
+  const [isNavExpanded, setIsNavExpanded] = useState(true);
   const handleHamburger = () => {
     setIsNavExpanded((prevIsNavExpanded) => !prevIsNavExpanded);
     console.log("Clicked");
   };
-  // const [selected, setSelected] = useState(null);
-
-  // const handleSelected = (newOption) => {
-  //   setSelected(newOption);
-  // };
 
   const dropDownOptionsUser = [
-    { label: "Profile", value: "profile" },
-    { label: "Logout", value: "logout" },
+    {
+      label: "Profile",
+      value: "profile",
+      handler: () => {
+        console.log("profile");
+      },
+    },
+    {
+      label: "Logout",
+      value: "logout",
+      handler: async () => {
+        console.log("logout");
+        try {
+          console.log("logout Inner");
+          toast.success("User Logged Out ");
+          await logoutApiCall().unwrap();
+          navigate("/login");
+          dispatch(removeCredentials());
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    },
   ];
   const { cartItems } = useSelector((state: any) => state.cart);
   const { userInfo } = useSelector((state: any) => state.auth);
@@ -76,11 +100,8 @@ export default function Header() {
     </nav>
   );
 }
+// const [selected, setSelected] = useState(null);
 
-// {
-//   userInfo ? (
-//     <DropDown options={dropDownOptionsHamburger} name={""} />
-//   ) : (
-//     <IoMenuSharp />
-//   );
-// }
+// const handleSelected = (newOption) => {
+//   setSelected(newOption);
+// };
