@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../sass/components/SignInScreen.scss";
+import "../sass/components/signInScreen.scss";
 import FormContainer from "../components/Reuseable/FormContainer";
 import Button from "../components/Reuseable/Button";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -8,22 +8,23 @@ import { useLoginMutation } from "../store/apis/usersApi";
 import { toast } from "react-toastify";
 import { setCredentials } from "../store/store"; // setter function
 
-export default function SignInScreen() {
-  const { userInfo } = useSelector((state) => state.auth); // to access different state
+export default function LoginScreen() {
   const dispatch = useDispatch(); //  used with setter function
   const navigate = useNavigate();
-  const [loginApiCall, { isLoading, error }] = useLoginMutation(); // fetch fnc
+  const [loginApiCall, { isLoading }] = useLoginMutation(); // fetch fnc
   const [formData, setFormData] = useState({
     userEmail: "",
     userPassword: "",
   });
 
-  // Checking if redirect is there in the URl
+  // Checking if user is already logged in
+  const { userInfo } = useSelector((state) => state.auth);
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
   const redirect = searchParams.get("redirect") || "/";
+
   useEffect(() => {
-    // if the userInfo state has value redirect to shipping
+    // if the userInfo state has value redirect to redirect[login,shipping etc]
     if (userInfo) {
       navigate(redirect);
     }
@@ -49,8 +50,8 @@ export default function SignInScreen() {
         email: formData.userEmail,
         password: formData.userPassword,
       }).unwrap();
-      // we are
-      dispatch(setCredentials(res));
+      dispatch(setCredentials({ ...res }));
+      navigate(redirect);
       toast.success("Login Successfully");
     } catch (error) {
       console.log(error);
@@ -62,7 +63,7 @@ export default function SignInScreen() {
   return (
     <FormContainer>
       <div className="formContainer__header">Login User</div>
-      <form action="#">
+      <form action="#" className="formContainer__signIn">
         <div className="formContainer__userEmail">
           <label htmlFor="userEmail">Email Address</label>
           <input
@@ -74,7 +75,7 @@ export default function SignInScreen() {
             onChange={formControllerHandler}
           />
         </div>
-        <div className="formContainer__userPassword">
+        <div className="formContainer__userPasswordSignIn">
           <label htmlFor="userPassword">Password</label>
           <input
             value={formData.userPassword}

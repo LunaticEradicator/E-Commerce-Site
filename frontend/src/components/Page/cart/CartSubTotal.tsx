@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../Reuseable/Button";
 
 export default function CartSubTotal() {
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.cart);
   const navigate = useNavigate();
 
   const handleCheckout = () => {
@@ -11,15 +11,12 @@ export default function CartSubTotal() {
     navigate("/login?redirect=/shipping");
   };
 
-  const subtotalPrice = cartItems.reduce(
-    (acc: number, curr: number | string) => {
-      return acc + curr?.price * curr?.qty;
-    },
-    0
-  );
+  const subtotalPrice = cart.reduce((acc: number, curr: number | string) => {
+    return Number(acc + curr?.price * curr?.qty);
+  }, 0);
 
-  const subtotalItem = cartItems.reduce((acc, curr) => {
-    return parseInt(acc + curr.qty);
+  const subtotalItem = cart.reduce((acc, curr) => {
+    return acc + parseInt(curr.qty);
   }, 0);
 
   const renderedSubTotal = (

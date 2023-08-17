@@ -81,7 +81,7 @@ export default function RegisterScreen() {
   return (
     <FormContainer>
       <div className="formContainer__header">Register User</div>
-      <form action="#">
+      <form action="#" className="formContainer__register">
         <div className="formContainer__userName">
           <label htmlFor="userName">Name</label>
           <input

@@ -47,9 +47,9 @@ export default function Header() {
       },
     },
   ];
-  const { cartItems } = useSelector((state: any) => state.cart);
+  const { cart } = useSelector((state: any) => state.cart);
   const { userInfo } = useSelector((state: any) => state.auth);
-  const cartHeader = cartItems.reduce((acc, curr) => {
+  const cartHeader = cart.reduce((acc, curr) => {
     return acc + Number(curr.qty);
   }, 0);
 
@@ -88,7 +88,7 @@ export default function Header() {
           ) : (
             <Link to="/login" className="navbar__item__link">
               <IoPersonSharp />
-              Sign In
+              Login
             </Link>
           )}
         </li>
