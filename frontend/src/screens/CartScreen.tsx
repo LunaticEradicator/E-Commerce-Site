@@ -1,4 +1,4 @@
-import "../sass/components/cartScreen.scss";
+import "../sass/components/screen/cartScreen.scss";
 import CartDetails from "../components/Page/cart/CartDetails";
 import CartSubTotal from "../components/Page/cart/CartSubTotal";
 

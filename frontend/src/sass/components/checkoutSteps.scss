@@ -1,0 +1,61 @@
+@use "../util/" as ut;
+
+.formContainer {
+  &__checkoutSteps {
+    display: flex;
+    font-size: 1.1rem;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+    &__enable {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      & > a {
+        color: black;
+      }
+      &__icon {
+        width: 20px;
+      }
+    }
+    &__disable {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      & > a {
+        color: rgb(221, 220, 220);
+      }
+      &__icon {
+        width: 20px;
+      }
+    }
+    @include ut.breakpoint(medium) {
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+// .formContainer__checkoutSteps__disable {
+//   display: flex;
+//   align-items: center;
+//   gap: 5px;
+//   & > a {
+//     color: rgb(221, 220, 220);
+//   }
+//   &__icon {
+//     width: 20px;
+//   }
+// }
+
+// .formContainer__checkoutSteps__enable {
+//   display: flex;
+//   align-items: center;
+//   gap: 5px;
+//   & > a {
+//     color: black;
+//   }
+//   &__icon {
+//     width: 20px;
+//   }
+// }

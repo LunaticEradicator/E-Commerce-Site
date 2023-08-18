@@ -3,7 +3,7 @@ import { cartUtilsPrices } from "../utils/cartUtils";
 
 const initialState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart") as string)
-  : { cart: [], saveShippingAddress: {}, payment: "Paypal" };
+  : { cart: [], shippingAddress: {}, payment: "Paypal" };
 
 // const initialState = JSON.parse(localStorage.getItem("cart")) || {
 //   cartItems: [],
@@ -42,11 +42,12 @@ const cartSlice = createSlice({
       return cartUtilsPrices(state);
     },
     saveShippingAddress: (state, action) => {
-      state.shippingPrice = action.payload;
+      state.shippingAddress = action.payload;
       return cartUtilsPrices(state);
     },
   },
 });
 
-export const { addItemsToCart, removeCartItems } = cartSlice.actions;
+export const { addItemsToCart, removeCartItems, saveShippingAddress } =
+  cartSlice.actions;
 export const cartReducer = cartSlice.reducer;

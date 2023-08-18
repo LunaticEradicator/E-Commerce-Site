@@ -8,6 +8,8 @@ export default function CartSubTotal() {
 
   const handleCheckout = () => {
     console.log("clicked");
+    // this condition is checked AT LoginScreen
+    // if user is logged in and if there is userInfo, redirect to redirect [shipping in this case]
     navigate("/login?redirect=/shipping");
   };
 

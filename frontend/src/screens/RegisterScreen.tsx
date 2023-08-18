@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import "../sass/components/registerScreen.scss";
+import "../sass/components/screen/registerScreen.scss";
 import { useState, useEffect } from "react";
 import FormContainer from "../components/Reuseable/FormContainer";
 import Button from "../components/Reuseable/Button";
@@ -10,7 +10,10 @@ import { toast } from "react-toastify";
 import { registerCredentials } from "../store/slices/authSlice";
 
 export default function RegisterScreen() {
-  const { userInfo } = useSelector((state) => state.auth); // to access all states
+  const { userInfo } = useSelector((state) => {
+    console.log(state);
+    return state.auth;
+  }); // to access all states
   const dispatch = useDispatch(); //  used with setter function
   const navigate = useNavigate();
   const [registerApiCall, { isLoading, error }] = useRegisterMutation(); // fetch fnc

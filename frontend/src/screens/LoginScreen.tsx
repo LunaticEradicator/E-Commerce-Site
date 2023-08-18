@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../sass/components/signInScreen.scss";
+import "../sass/components/screen/loginScreen.scss";
 import FormContainer from "../components/Reuseable/FormContainer";
 import Button from "../components/Reuseable/Button";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -17,18 +17,17 @@ export default function LoginScreen() {
     userPassword: "",
   });
 
-  // Checking if user is already logged in
   const { userInfo } = useSelector((state) => state.auth);
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
   const redirect = searchParams.get("redirect") || "/";
-
   useEffect(() => {
-    // if the userInfo state has value redirect to redirect[login,shipping etc]
+    // if the userInfo state has value redirect to "redirect" [shipping]
     if (userInfo) {
       navigate(redirect);
     }
   }, [userInfo, redirect, navigate]);
+  console.log(redirect);
 
   const formControllerHandler = (event) => {
     const { value, name } = event.target;
@@ -62,9 +61,9 @@ export default function LoginScreen() {
 
   return (
     <FormContainer>
-      <div className="formContainer__header">Login User</div>
-      <form action="#" className="formContainer__signIn">
-        <div className="formContainer__userEmail">
+      <div className="formContainer__headerLogin">Login User</div>
+      <form action="#" className="formContainer__login">
+        <div className="formContainer__userEmailLogin">
           <label htmlFor="userEmail">Email Address</label>
           <input
             value={formData.userEmail}
@@ -75,7 +74,7 @@ export default function LoginScreen() {
             onChange={formControllerHandler}
           />
         </div>
-        <div className="formContainer__userPasswordSignIn">
+        <div className="formContainer__userPasswordLogin">
           <label htmlFor="userPassword">Password</label>
           <input
             value={formData.userPassword}
@@ -88,7 +87,7 @@ export default function LoginScreen() {
         </div>
         <Button
           onClick={submitHandler}
-          className="formContainer__signInBtn"
+          className="formContainer__loginBtn"
           secondary
           rounded
           disabled={isLoading}

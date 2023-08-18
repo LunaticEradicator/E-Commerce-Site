@@ -1,4 +1,4 @@
-@use "../util/" as ut;
+@use "../../util/" as ut;
 .main__cart {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
