@@ -29,8 +29,10 @@ const protectedMiddleware = asyncHandler(async (req, res, next) => {
   console.log(req.userCookies);
 });
 
+// only if isAdmin is true we can access admin functionality
+// ie only if we sign in as admin
 const adminMiddleware = (req, res, next) => {
-  console.log(req.userCookies);
+  // console.log(req.userCookies);
   if (req.userCookies && req.userCookies.isAdmin) {
     next();
   } else {

@@ -49,6 +49,7 @@ export default function Header() {
   ];
   const { cart } = useSelector((state: any) => state.cart);
   // if userInfo is available in localStorage, user will be automatically signed
+  // Show the user data
   const { userInfo } = useSelector((state: any) => state.auth);
   const cartHeader = cart.reduce((acc, curr) => {
     return acc + Number(curr.qty);

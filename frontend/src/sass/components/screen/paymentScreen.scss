@@ -1,0 +1,9 @@
+@use "../../util/" as ut;
+.formContainer__payment {
+  &__header {
+    font-size: 3rem;
+    @include ut.breakpoint(medium) {
+      font-size: 1.5rem;
+    }
+  }
+}

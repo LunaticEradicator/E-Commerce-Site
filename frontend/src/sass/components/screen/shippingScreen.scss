@@ -3,31 +3,30 @@
 $padding-spacing: 20px;
 $margin-spacing: 10px;
 
-input {
-  font-size: 1.3rem;
-  outline: none;
-  border: none;
-  background-color: rgba(255, 253, 253, 0.082);
-  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.164);
-  border-radius: 5px;
-  padding: 10px 5px;
-  margin-top: $margin-spacing;
-  @include ut.breakpoint(medium) {
-    font-size: 1rem;
-  }
-}
-label {
-  font-weight: bold;
-}
-
-input:focus {
-  outline: none;
-  border: none;
-  outline: 2px solid rgb(29, 100, 231);
-  box-shadow: 0px 0px 5px 1px rgb(29, 100, 231);
-}
-
 .formContainer__shipping {
+  & input {
+    font-size: 1.3rem;
+    outline: none;
+    border: none;
+    background-color: rgba(255, 253, 253, 0.082);
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.164);
+    border-radius: 5px;
+    padding: 10px 5px;
+    margin-top: $margin-spacing;
+    @include ut.breakpoint(medium) {
+      font-size: 1rem;
+    }
+  }
+  & label {
+    font-weight: bold;
+  }
+
+  & input:focus {
+    outline: none;
+    border: none;
+    outline: 2px solid rgb(29, 100, 231);
+    box-shadow: 0px 0px 5px 1px rgb(29, 100, 231);
+  }
   & input:not(:focus):not(:placeholder-shown) {
     outline: none;
     border: none;

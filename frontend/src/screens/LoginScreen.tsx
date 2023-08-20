@@ -17,24 +17,33 @@ export default function LoginScreen() {
     userPassword: "",
   });
 
+  // when we login using backend a token is created and stored as a cookie
+  // from that cookie we get the token values and save it as userInfo [localStorage]
+  // so if we have userInfo [localStorage] we will be signed in automatically and will be redirected to redirect
+  // [ex : - redirect to shipping from cart if userInfo is there]
+
   const { userInfo } = useSelector((state) => state.auth);
+
+  //checking if url have 'redirect' in it's address
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
   const redirect = searchParams.get("redirect") || "/";
+  // if we does not check for this, redirect will not happen even if we are logged in
+  // one of it's condition is checked AT CartSubTotal component
   useEffect(() => {
-    // if the userInfo state has value redirect to "redirect" [shipping]
+    // if the userInfo state has value [logged in]
+    // navigate url to pages, which have a "redirect" condition [like shipping]
     if (userInfo) {
       navigate(redirect);
     }
   }, [userInfo, redirect, navigate]);
-  console.log(redirect);
+  // console.log(redirect);
 
   const formControllerHandler = (event) => {
     const { value, name } = event.target;
     setFormData((prevFormData) => {
       return { ...prevFormData, [name]: value };
     });
-    // console.log(formData);
   };
 
   // Submit for login
@@ -49,6 +58,7 @@ export default function LoginScreen() {
         email: formData.userEmail,
         password: formData.userPassword,
       }).unwrap();
+      // saving the user info in localStorage so that user won't logoff when the page is refreshed
       dispatch(setCredentials({ ...res }));
       navigate(redirect);
       toast.success("Login Successfully");
@@ -98,8 +108,9 @@ export default function LoginScreen() {
         {/* {isLoading && <div>Getting User</div>} */}
         <div className="formContainer__registerLink">
           New Customer?{" "}
-          {/* if user is register redirect to redirect page 
-          else to to register */}
+          {/* if user tries to checkout without logging in or register 
+           redirect from shipping to login or register 
+          else go to  /register  or /login*/}
           <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
             Register
           </Link>

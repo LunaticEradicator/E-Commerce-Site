@@ -3,18 +3,32 @@ import "../../sass/components/checkoutSteps.scss";
 import iconEnable from "/images/checkout.png";
 import iconDisable from "/images/checkout disable.png";
 
-export default function CheckoutSteps({ step1, step2, step3, step4 }) {
-  // ! fix else part
+interface propCheckoutSteps {
+  step1: boolean;
+  step2?: boolean;
+  step3?: boolean;
+  step4?: boolean;
+}
 
-  function checkoutElement(stepName, classStatus, iconStatus) {
+export default function CheckoutSteps({
+  step1,
+  step2,
+  step3,
+  step4,
+}: propCheckoutSteps) {
+  function checkoutElement(
+    stepName: string,
+    classStatus: string,
+    iconStatus: string,
+    urlName: string
+  ) {
     return (
       <div className={`formContainer__checkoutSteps__${classStatus}`}>
         <Link
           className="formContainer__checkoutSteps__enable__link"
-          to="/login"
+          to={`${urlName}`}
         >
           {stepName}
-          {/* login */}
         </Link>
         <img
           className="formContainer__checkoutSteps__enable__icon"
@@ -28,17 +42,17 @@ export default function CheckoutSteps({ step1, step2, step3, step4 }) {
   return (
     <div className="formContainer__checkoutSteps">
       {step1
-        ? checkoutElement("Login", "enable", iconEnable)
-        : checkoutElement("Login", "disable", iconDisable)}
+        ? checkoutElement("Login", "enable", iconEnable, "/login")
+        : checkoutElement("Login", "disable", iconDisable, "#")}
       {step2
-        ? checkoutElement("Shipping", "enable", iconEnable)
-        : checkoutElement("Shipping", "disable", iconDisable)}
+        ? checkoutElement("Shipping", "enable", iconEnable, "/shipping")
+        : checkoutElement("Shipping", "disable", iconDisable, "#")}
       {step3
-        ? checkoutElement("Payment", "enable", iconEnable)
-        : checkoutElement("Payment", "disable", iconDisable)}
+        ? checkoutElement("Payment", "enable", iconEnable, "/payment")
+        : checkoutElement("Payment", "disable", iconDisable, "#")}
       {step4
-        ? checkoutElement("Checkout", "enable", iconEnable)
-        : checkoutElement("Checkout", "disable", iconDisable)}
+        ? checkoutElement("Checkout", "enable", iconEnable, "/checkout")
+        : checkoutElement("Checkout", "disable", iconDisable, "#")}
     </div>
   );
 }

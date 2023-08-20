@@ -11,6 +11,7 @@ export default function CartSubTotal() {
     // this condition is checked AT LoginScreen
     // if user is logged in and if there is userInfo, redirect to redirect [shipping in this case]
     navigate("/login?redirect=/shipping");
+    // navigate("/shipping");
   };
 
   const subtotalPrice = cart.reduce((acc: number, curr: number | string) => {

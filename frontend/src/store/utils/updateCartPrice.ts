@@ -2,7 +2,7 @@ const addDecimals = (num: number) => {
   return (Math.floor(num * 100) / 100).toFixed(2);
 };
 
-const cartUtilsPrices = (state) => {
+const updateCartPrice = (state) => {
   // Calculate Price [Item Price, Shipping Price, Tax Price, Total Price]
   //? Item Price
   state.itemsPrice = addDecimals(
@@ -28,4 +28,4 @@ const cartUtilsPrices = (state) => {
   return state;
 };
 
-export { addDecimals, cartUtilsPrices };
+export { addDecimals, updateCartPrice };
