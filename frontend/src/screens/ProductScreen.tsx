@@ -1,4 +1,4 @@
-import "../sass/components/screen/productScreen.scss";
+import "../sass/screens/productScreen.scss";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 // import axios from "axios";

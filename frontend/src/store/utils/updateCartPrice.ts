@@ -18,7 +18,7 @@ const updateCartPrice = (state) => {
   // add 5% tax
   state.taxPrice = addDecimals(Number(0.15 * state.itemsPrice).toFixed(2));
   // ? Total Price
-  state.TotalPrice = (
+  state.totalPrice = (
     Number(state.itemsPrice) +
     Number(state.shippingPrice) +
     Number(state.taxPrice)

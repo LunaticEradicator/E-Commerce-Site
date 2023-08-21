@@ -1,4 +1,4 @@
-import "../sass/components/screen/paymentScreen.scss";
+import "../sass/screens/paymentScreen.scss";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,7 +22,7 @@ export default function PaymentScreen() {
   }, [navigate, shippingAddress]);
 
   const [formData, setFormData] = useState({
-    paymentMethod: "PayPal",
+    paymentMethod: "UPI",
   });
 
   const inputHandler = (event) => {
@@ -37,7 +37,7 @@ export default function PaymentScreen() {
     console.log("Payment Submitted");
     event.preventDefault();
     dispatch(savePaymentMethod(formData.paymentMethod));
-    navigate("/checkout");
+    navigate("/placeorders");
   };
 
   return (
@@ -50,13 +50,13 @@ export default function PaymentScreen() {
           <div className="formContainer__payment__type__paypal">
             <fieldset>
               <legend>Select Method</legend>
-              <label htmlFor="paymentMethod">Paypal or Credit/Debit Card</label>
+              <label htmlFor="paymentMethod">UPI</label>
               <input
                 onChange={() => inputHandler(event)}
                 type="radio"
                 name="paymentMethod"
-                value="PayPal"
-                checked={formData.paymentMethod === "PayPal"}
+                value="UPI"
+                checked={formData.paymentMethod === "UPI"}
               />
             </fieldset>
           </div>

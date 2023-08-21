@@ -1,8 +1,9 @@
-@use "../../util/" as ut;
+@use "../util/" as ut;
+
 $padding-spacing: 20px;
 $margin-spacing: 10px;
 
-.formContainer__login {
+.formContainer__shipping {
   & input {
     font-size: 1.3rem;
     outline: none;
@@ -26,7 +27,6 @@ $margin-spacing: 10px;
     outline: 2px solid rgb(29, 100, 231);
     box-shadow: 0px 0px 5px 1px rgb(29, 100, 231);
   }
-
   & input:not(:focus):not(:placeholder-shown) {
     outline: none;
     border: none;
@@ -34,11 +34,7 @@ $margin-spacing: 10px;
     background-color: rgb(232 240 253);
     box-shadow: 0px 0px 5px 1px rgb(29, 100, 231);
   }
-}
-
-.formContainer {
-  padding: $padding-spacing;
-  &__headerLogin {
+  &__header {
     text-align: center;
     font-weight: bold;
     margin-bottom: $margin-spacing;
@@ -47,34 +43,57 @@ $margin-spacing: 10px;
       font-size: 1.5rem;
     }
   }
-  &__userEmailLogin {
+  &__address {
     display: flex;
     flex-direction: column;
     font-size: 1.5rem;
-    margin-bottom: $margin-spacing;
+    margin-bottom: 10px;
     @include ut.breakpoint(medium) {
       font-size: 1rem;
     }
   }
-  &__userPasswordLogin {
+  &__city {
     display: flex;
     flex-direction: column;
     font-size: 1.5rem;
+    margin-bottom: 10px;
     @include ut.breakpoint(medium) {
       font-size: 1rem;
     }
   }
-  &__loginBtn {
-    margin: 10px;
-    margin-bottom: 0px;
-    padding: 9px 4px;
+  &__state {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    @include ut.breakpoint(medium) {
+      font-size: 1rem;
+    }
+  }
+  &__postalCode {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    @include ut.breakpoint(medium) {
+      font-size: 1rem;
+    }
+  }
+  &__country {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    @include ut.breakpoint(medium) {
+      font-size: 1rem;
+    }
+  }
+  &__button {
     @include ut.breakpoint(medium) {
       font-size: 1.3rem;
+      padding: 9px 4px;
     }
-  }
-  &__registerLink {
-    margin-top: $padding-spacing;
-    margin: 10px;
-    margin-bottom: 0px;
   }
 }

@@ -1,4 +1,4 @@
-import "../sass/components/screen/homeScreen.scss";
+import "../sass/screens/homeScreen.scss";
 import { Link } from "react-router-dom";
 import SkeltonLoader from "../components/Reuseable/SkeltonLoader";
 // //  import axios from "axios";

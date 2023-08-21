@@ -30,6 +30,7 @@ export default function CartSubTotal() {
       <div className="main__cart__subTotal__totalPrice">
         Total: ${subtotalPrice.toFixed(2)}
       </div>
+      {/* <span>Final Cost will be show in checkout page</span> */}
       <hr />
       <Button
         onClick={handleCheckout}

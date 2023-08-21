@@ -1,9 +1,9 @@
-@use "../../util/" as ut;
+@use "../util/" as ut;
 
 $padding-spacing: 20px;
 $margin-spacing: 10px;
 
-.formContainer__shipping {
+.formContainer__register {
   & input {
     font-size: 1.3rem;
     outline: none;
@@ -12,7 +12,7 @@ $margin-spacing: 10px;
     box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.164);
     border-radius: 5px;
     padding: 10px 5px;
-    margin-top: $margin-spacing;
+    margin: $margin-spacing;
     @include ut.breakpoint(medium) {
       font-size: 1rem;
     }
@@ -27,13 +27,32 @@ $margin-spacing: 10px;
     outline: 2px solid rgb(29, 100, 231);
     box-shadow: 0px 0px 5px 1px rgb(29, 100, 231);
   }
-  & input:not(:focus):not(:placeholder-shown) {
-    outline: none;
-    border: none;
-    // outline: 2px solid rgb(29, 100, 231);
-    background-color: rgb(232 240 253);
-    box-shadow: 0px 0px 5px 1px rgb(29, 100, 231);
+  & input:not(:focus):not(:placeholder-shown):invalid {
+    background: #f5d0c7;
+    // outline: 2px solid rgba(184, 30, 30, 0.808);
+    box-shadow: 0px 0px 5px 1px rgb(253, 3, 3);
   }
+  & input:not(:focus):not(:placeholder-shown):valid {
+    background: #c7f5c8;
+    box-shadow: 0px 0px 5px 1px rgb(97, 168, 97);
+    // outline: 2px solid rgba(111, 153, 111, 0.808);
+    // box-shadow: 0px 0px 5px 1px rgb(61, 253, 3);
+  }
+  & input:not(:focus):not(:placeholder-shown):invalid ~ .error-message {
+    display: inherit;
+  }
+}
+
+.error-message {
+  display: none;
+  // visibility: hidden;
+  font-weight: bold;
+  color: red;
+  font-size: 0.7rem;
+}
+
+.formContainer {
+  padding: $padding-spacing;
   &__header {
     text-align: center;
     font-weight: bold;
@@ -43,57 +62,53 @@ $margin-spacing: 10px;
       font-size: 1.5rem;
     }
   }
-  &__address {
+  &__userName {
     display: flex;
     flex-direction: column;
     font-size: 1.5rem;
-    margin-bottom: 10px;
+    margin-bottom: $margin-spacing;
     @include ut.breakpoint(medium) {
       font-size: 1rem;
     }
   }
-  &__city {
+  &__userEmail {
     display: flex;
     flex-direction: column;
     font-size: 1.5rem;
-    margin-bottom: 10px;
+    margin-bottom: $margin-spacing;
     @include ut.breakpoint(medium) {
       font-size: 1rem;
     }
   }
-  &__state {
+  &__userPassword {
     display: flex;
     flex-direction: column;
     font-size: 1.5rem;
-    margin-bottom: 10px;
+    margin-bottom: $margin-spacing;
     @include ut.breakpoint(medium) {
       font-size: 1rem;
     }
   }
-  &__postalCode {
+  &__userConfirmPassword {
     display: flex;
     flex-direction: column;
     font-size: 1.5rem;
-    margin-bottom: 10px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    margin-bottom: 0;
     @include ut.breakpoint(medium) {
       font-size: 1rem;
     }
   }
-  &__country {
-    display: flex;
-    flex-direction: column;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    @include ut.breakpoint(medium) {
-      font-size: 1rem;
-    }
-  }
-  &__button {
+  &__registerBtn {
+    margin: 10px;
+    margin-bottom: 0px;
+    padding: 9px 4px;
     @include ut.breakpoint(medium) {
       font-size: 1.3rem;
-      padding: 9px 4px;
     }
+  }
+  &__loginLink {
+    margin-top: $padding-spacing;
+    margin: 10px;
+    margin-bottom: 0px;
   }
 }

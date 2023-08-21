@@ -6,7 +6,7 @@ import Button from "../../Reuseable/Button";
 import Message from "../../Reuseable/Message";
 import { addItemsToCart, removeCartItems } from "../../../store/store";
 
-export default function CartDetails() {
+export default function CartItems() {
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 

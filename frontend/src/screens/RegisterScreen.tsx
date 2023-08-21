@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import "../sass/components/screen/registerScreen.scss";
+import "../sass/screens/registerScreen.scss";
 import { useState, useEffect } from "react";
 import FormContainer from "../components/Reuseable/FormContainer";
 import Button from "../components/Reuseable/Button";

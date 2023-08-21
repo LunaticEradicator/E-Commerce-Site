@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../sass/components/screen/shippingScreen.scss";
+import "../sass/screens/shippingScreen.scss";
 import FormContainer from "../components/Reuseable/FormContainer";
 import Button from "../components/Reuseable/Button";
 import { useNavigate } from "react-router-dom";

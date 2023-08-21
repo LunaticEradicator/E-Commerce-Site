@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../sass/components/screen/loginScreen.scss";
+import "../sass/screens/loginScreen.scss";
 import FormContainer from "../components/Reuseable/FormContainer";
 import Button from "../components/Reuseable/Button";
 import { Link, useNavigate, useLocation } from "react-router-dom";
