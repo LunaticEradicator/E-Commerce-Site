@@ -1,4 +1,4 @@
-import "../sass/screens/PlaceOrder.scss";
+import "../sass/screens/placeOrder.scss";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -47,7 +47,7 @@ export default function PlaceOrderScreen() {
       dispatch(clearCartItems());
       navigate(`/order/${res._id}`);
     } catch (error) {
-      toast.error(error?.data?.message || error.error);
+      toast.error(error?.data?.message || error?.error);
     }
   };
 

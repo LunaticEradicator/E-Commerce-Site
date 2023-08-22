@@ -15,10 +15,6 @@ const addOrderItems = asyncHandler(async (req, res) => {
     totalPrice,
   } = req.body;
 
-  // res.status(201).json(req);
-
-  // res.send(req.userCookies);
-
   if (orderItems && orderItems.length === 0) {
     res.status(400);
     throw new Error("No Order Items");
@@ -29,7 +25,6 @@ const addOrderItems = asyncHandler(async (req, res) => {
         product: x._id,
         _id: undefined,
       })),
-      //    user: req.user._id,
       user: req.userCookies._id,
       shippingAddress,
       paymentMethod,
@@ -48,20 +43,20 @@ const addOrderItems = asyncHandler(async (req, res) => {
 // @auth Private
 const getMyOrders = asyncHandler(async (req, res) => {
   const myOrders = await Order.find({ user: req.user._id });
-  res.state(200).json(myOrders);
-  // if (myOrders) {
-  //   res.state(200).json(myOrders);
-  // } else {
-  //   res.status(404);
-  //   throw new Error("Order of User Not Found");
-  // }
+  // res.state(200).json(myOrders);
+  if (myOrders) {
+    res.state(200).json(myOrders);
+  } else {
+    res.status(404);
+    throw new Error("No Order Found For User");
+  }
 });
 
 // @desc get user order by id
 // @route GET/api/orders/:id
 // @auth Private
 const getMyOrdersById = asyncHandler(async (req, res) => {
-  // add name and email from user to the orderId
+  // add name and email from USER to the OrderById
   const OrderById = await Order.findById(req.params.id).populate(
     "user",
     "name email"
