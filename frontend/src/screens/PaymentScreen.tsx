@@ -37,7 +37,7 @@ export default function PaymentScreen() {
     console.log("Payment Submitted");
     event.preventDefault();
     dispatch(savePaymentMethod(formData.paymentMethod));
-    navigate("/placeorders");
+    navigate("/placeorder");
   };
 
   return (

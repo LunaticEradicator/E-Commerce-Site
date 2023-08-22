@@ -13,6 +13,8 @@ import { toast } from "react-toastify";
 export default function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { cartItems } = useSelector((state: any) => state.cart);
+
   const [logoutApiCall] = useLogoutMutation();
 
   // for nav we add a new class which will make all li be block only when screen is medium
@@ -47,11 +49,10 @@ export default function Header() {
       },
     },
   ];
-  const { cart } = useSelector((state: any) => state.cart);
   // if userInfo is available in localStorage, user will be automatically signed
   // Show the user data
   const { userInfo } = useSelector((state: any) => state.auth);
-  const cartHeader = cart.reduce((acc, curr) => {
+  const cartHeader = cartItems.reduce((acc, curr) => {
     return acc + Number(curr.qty);
   }, 0);
 

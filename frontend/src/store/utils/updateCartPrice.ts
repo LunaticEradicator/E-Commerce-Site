@@ -6,7 +6,7 @@ const updateCartPrice = (state) => {
   // Calculate Price [Item Price, Shipping Price, Tax Price, Total Price]
   //? Item Price
   state.itemsPrice = addDecimals(
-    state.cart.reduce((acc: number, item) => {
+    state.cartItems.reduce((acc: number, item) => {
       console.log(item);
       return Number(acc + item.price * item.qty);
     }, 0)

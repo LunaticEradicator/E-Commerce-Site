@@ -1,11 +1,11 @@
 import { rootApi } from "./rootApi";
-import { BASE_URL } from "../constants";
+import { ORDERS_URL } from "../constants";
 
 const orderApi = rootApi.injectEndpoints({
   endpoints: (builder) => ({
-    addOrderItem: builder.mutation({
+    createOrder: builder.mutation({
       query: (order) => ({
-        url: BASE_URL,
+        url: ORDERS_URL,
         method: "POST",
         body: { ...order },
       }),
@@ -13,4 +13,4 @@ const orderApi = rootApi.injectEndpoints({
   }),
 });
 
-export const { useAddOrderItemMutation } = orderApi;
+export const { useCreateOrderMutation } = orderApi;

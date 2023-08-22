@@ -2,30 +2,56 @@ import "../sass/screens/PlaceOrder.scss";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import Message from "../components/Reuseable/Message";
 import Button from "../components/Reuseable/Button";
+import { useCreateOrderMutation } from "../store/apis/orderApi";
+import { toast } from "react-toastify";
+import { clearCartItems } from "../store/slices/cartSlice";
 
 export default function PlaceOrderScreen() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [createOrder, { error }] = useCreateOrderMutation();
   const {
+    cartItems,
     shippingAddress,
-    payment,
-    cart,
-    shippingPrice,
+    paymentMethod,
     itemsPrice,
+    shippingPrice,
     taxPrice,
     totalPrice,
-  } = useSelector((state) => state.cart);
-  console.log(cart);
+  } = useSelector((state) => {
+    // console.log(state);
+    return state.cart;
+  });
+
   useEffect(() => {
     if (Object.keys(shippingAddress).length === 0) {
       navigate("/shipping");
-    } else if (!payment) {
+    } else if (!paymentMethod) {
       navigate("/payment");
     }
-  }, [shippingAddress, payment, navigate]);
+  }, [shippingAddress, paymentMethod, navigate]);
 
-  const renderedOrderItems = cart.map((item, index) => {
+  const placeOrderHandler = async () => {
+    try {
+      const res = await createOrder({
+        orderItems: cartItems,
+        shippingAddress,
+        paymentMethod,
+        itemsPrice,
+        shippingPrice,
+        taxPrice,
+        totalPrice,
+      }).unwrap();
+
+      dispatch(clearCartItems());
+      navigate(`/order/${res._id}`);
+    } catch (error) {
+      toast.error(error?.data?.message || error.error);
+    }
+  };
+
+  const renderedOrderItems = cartItems.map((item, index) => {
     return (
       <div key={index} className="main__placeOrders__details__order__items">
         <div className="main__placeOrders__details__order__item">
@@ -69,7 +95,7 @@ export default function PlaceOrderScreen() {
           </div>
           <div className="main__placeOrders__details__payment__type">
             <span> Method:</span>
-            {payment}
+            {paymentMethod}
           </div>
           {/* <hr /> */}
         </div>
@@ -109,7 +135,7 @@ export default function PlaceOrderScreen() {
         </div>
 
         <div className="main__placeOrders__summary__placeOrder">
-          <Button secondary rounded>
+          <Button onClick={placeOrderHandler} secondary rounded>
             Place Order
           </Button>
         </div>

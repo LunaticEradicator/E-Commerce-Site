@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../Reuseable/Button";
 
 export default function CartSubTotal() {
-  const { cart } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state) => state.cart);
   const navigate = useNavigate();
 
   const handleCheckout = () => {
@@ -14,11 +14,14 @@ export default function CartSubTotal() {
     // navigate("/shipping");
   };
 
-  const subtotalPrice = cart.reduce((acc: number, curr: number | string) => {
-    return Number(acc + curr?.price * curr?.qty);
-  }, 0);
+  const subtotalPrice = cartItems.reduce(
+    (acc: number, curr: number | string) => {
+      return Number(acc + curr?.price * curr?.qty);
+    },
+    0
+  );
 
-  const subtotalItem = cart.reduce((acc, curr) => {
+  const subtotalItem = cartItems.reduce((acc, curr) => {
     return acc + parseInt(curr.qty);
   }, 0);
 
@@ -34,6 +37,7 @@ export default function CartSubTotal() {
       <hr />
       <Button
         onClick={handleCheckout}
+        disabled={cartItems.length === 0}
         secondary
         rounded
         className="main__cart__subTotal__button"

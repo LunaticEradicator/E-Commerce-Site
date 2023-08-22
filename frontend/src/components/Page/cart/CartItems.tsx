@@ -7,7 +7,7 @@ import Message from "../../Reuseable/Message";
 import { addItemsToCart, removeCartItems } from "../../../store/store";
 
 export default function CartItems() {
-  const { cart } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   const updateCartHandler = (
@@ -22,7 +22,7 @@ export default function CartItems() {
     dispatch(removeCartItems(id));
   };
 
-  const renderedCart = cart.map((item) => {
+  const renderedCart = cartItems.map((item) => {
     return (
       <div key={item._id}>
         <div className="main__cart__item__details__product">
@@ -66,7 +66,7 @@ export default function CartItems() {
   });
   return (
     <>
-      {cart.length > 0 ? (
+      {cartItems.length > 0 ? (
         renderedCart
       ) : (
         <Message>

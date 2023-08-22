@@ -2,7 +2,7 @@ import asyncHandler from "../middleware/asyncHandler.js";
 import Order from "../models/orderModel.js";
 
 // @desc to add order of items
-// @route POST/api/orders/
+// @route POST/api/orders
 // @auth Private
 const addOrderItems = asyncHandler(async (req, res) => {
   const {
@@ -15,14 +15,22 @@ const addOrderItems = asyncHandler(async (req, res) => {
     totalPrice,
   } = req.body;
 
+  // res.status(201).json(req);
+
+  // res.send(req.userCookies);
+
   if (orderItems && orderItems.length === 0) {
-    res.status(404);
+    res.status(400);
     throw new Error("No Order Items");
   } else {
     const order = new Order({
-      orderItems: orderItems.map((x) => {
-        return { ...x, product: x._id, id: undefined };
-      }),
+      orderItems: orderItems.map((x) => ({
+        ...x,
+        product: x._id,
+        _id: undefined,
+      })),
+      //    user: req.user._id,
+      user: req.userCookies._id,
       shippingAddress,
       paymentMethod,
       itemsPrice,
@@ -33,31 +41,31 @@ const addOrderItems = asyncHandler(async (req, res) => {
     const createdOrder = await order.save();
     res.status(201).json(createdOrder);
   }
-  // res.send("add order of items");
 });
 
-// @desc get user order
-// @route GET/api/orders/myorders
+// @desc Get logged in User Order
+// @route GET/api/orders/myorder
 // @auth Private
 const getMyOrders = asyncHandler(async (req, res) => {
-  const myOrder = Order.find({ user: req.user.user._id });
-  res.state(200).json(myOrder);
-  if (myOrder) {
-    res.state(200).json(myOrder);
-  } else {
-    res.status(404);
-    throw new Error("Order of User Not Found");
-  }
-  // res.send("get my order");
+  const myOrders = await Order.find({ user: req.user._id });
+  res.state(200).json(myOrders);
+  // if (myOrders) {
+  //   res.state(200).json(myOrders);
+  // } else {
+  //   res.status(404);
+  //   throw new Error("Order of User Not Found");
+  // }
 });
 
 // @desc get user order by id
 // @route GET/api/orders/:id
 // @auth Private
 const getMyOrdersById = asyncHandler(async (req, res) => {
-  const OrderById = Order.findById(req.params.id)
-    // add name and email from user to the orderId
-    .populate("user", "name email");
+  // add name and email from user to the orderId
+  const OrderById = await Order.findById(req.params.id).populate(
+    "user",
+    "name email"
+  );
 
   if (OrderById) {
     res.status(200).json(OrderById);

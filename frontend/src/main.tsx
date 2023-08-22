@@ -32,7 +32,7 @@ const router = createBrowserRouter(
       <Route path="" element={<ProtectedRoutes />}>
         <Route path="/shipping" element={<ShippingScreen />} />
         <Route path="/payment" element={<PaymentScreen />} />
-        <Route path="/placeorders" element={<PlaceOrderScreen />} />
+        <Route path="/placeorder" element={<PlaceOrderScreen />} />
       </Route>
     </Route>
   )

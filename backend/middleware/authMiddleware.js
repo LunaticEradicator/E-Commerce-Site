@@ -6,13 +6,13 @@ import User from "../models/userModel.js";
 const protectedMiddleware = asyncHandler(async (req, res, next) => {
   // Read the jwt from the cookie
   //   let tokenFromCookie;
-  const tokenFromCookie = req.cookies.jwtCreate;
-
+  let token;
+  token = req.cookies.jwtCreate;
   //checking to see if a jwt token is available in the cookie we parsed
   // if available parse the
-  if (tokenFromCookie) {
+  if (token) {
     try {
-      const decodedToken = jwt.verify(tokenFromCookie, process.env.JWT_SECRET);
+      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
       req.userCookies = await User.findById(decodedToken.userIdFromJWT).select(
         "-password"
       ); // get the user data [res.json] without the password
@@ -26,7 +26,6 @@ const protectedMiddleware = asyncHandler(async (req, res, next) => {
     res.status(401);
     throw new Error("Not Authorized, No Token");
   }
-  console.log(req.userCookies);
 });
 
 // only if isAdmin is true we can access admin functionality
