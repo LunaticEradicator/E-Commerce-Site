@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useNavigate } from "react-router-dom";
-import Button from "../../Reuseable/Button";
+import Button from "../../../components/Reuseable/Button";
 
 export default function CartSubTotal() {
   const { cartItems } = useSelector((state) => state.cart);

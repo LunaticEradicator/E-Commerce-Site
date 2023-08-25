@@ -16,6 +16,7 @@ const authUser = asyncHandler(async (req, res) => {
   console.log(req.body);
 
   // checking if the entered email and password [req.body] meets an user from the User model [usersDB]
+  // if (userExist && password === userExist.password) {
   if (userExist && (await bcrypt.compare(password, userExist.password))) {
     createToken(res, userExist._id);
     res.status(200).json({
@@ -113,6 +114,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     // Because password is hashed we only want to change it if user ask for it
     if (req.body.password) {
       userExist.password = req.body.password;
+      userExist.password = bcrypt.hashSync(userExist.password, 10); // hashing password when updating
     }
 
     // save the date if a new req.body parsing happens

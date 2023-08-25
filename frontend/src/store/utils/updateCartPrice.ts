@@ -7,7 +7,7 @@ const updateCartPrice = (state) => {
   //? Item Price
   state.itemsPrice = addDecimals(
     state.cartItems.reduce((acc: number, item) => {
-      console.log(item);
+      // console.log(item);
       return Number(acc + item.price * item.qty);
     }, 0)
   );

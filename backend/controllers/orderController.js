@@ -38,21 +38,24 @@ const addOrderItems = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc Get logged in User Order
-// @route GET/api/orders/myorder
+// @desc Get All Orders of logged in User
+// @route GET/api/orders/myorders
 // @auth Private
 const getMyOrders = asyncHandler(async (req, res) => {
-  const myOrders = await Order.find({ user: req.user._id });
+  // res.send(req.userCookies);
+  const myOrders = await Order.find({ user: req.userCookies._id });
   // res.state(200).json(myOrders);
-  if (myOrders) {
-    res.state(200).json(myOrders);
-  } else {
-    res.status(404);
-    throw new Error("No Order Found For User");
-  }
+  res.state(200).json(myOrders);
+  // if (myOrders) {
+  //   res.state(200).json(myOrders);
+  // } else {
+  //   res.status(404);
+  //   throw new Error("No Order Found For User");
+  // }
+  // // res.send("get All orders ");
 });
 
-// @desc get user order by id
+// @desc Get a particular Orders of logged in User
 // @route GET/api/orders/:id
 // @auth Private
 const getMyOrdersById = asyncHandler(async (req, res) => {
@@ -72,14 +75,29 @@ const getMyOrdersById = asyncHandler(async (req, res) => {
 });
 
 // @desc Update Order to paid
-// @route GET/api/orders/:id/pay
+// @route PUT/api/orders/:id/pay
 // @auth Private
 const updateOrderToPaid = asyncHandler(async (req, res) => {
-  res.send("Update order to Paid");
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    order.isPaid = true;
+    order.paidAt = Date.now();
+    order.paymentResult = {
+      id: req.body.id,
+      status: req.body.status,
+      update_time: req.body.update_time,
+      email_address: req.body.payer.email_address,
+    };
+    const updatedOrder = await order.save();
+    res.status(200).json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error("Order not found");
+  }
 });
 
 // @desc Update Order to delivered
-// @route GET/api/orders/:id/deliver
+// @route PUT/api/orders/:id/deliver
 // @auth Private/Admin
 const updateOrderToDeliveredAdmin = asyncHandler(async (req, res) => {
   res.send("Admin : Update order to Delivered");

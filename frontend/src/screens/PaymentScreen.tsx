@@ -22,7 +22,7 @@ export default function PaymentScreen() {
   }, [navigate, shippingAddress]);
 
   const [formData, setFormData] = useState({
-    paymentMethod: "UPI",
+    paymentMethod: "PayPal",
   });
 
   const inputHandler = (event) => {
@@ -50,13 +50,13 @@ export default function PaymentScreen() {
           <div className="formContainer__payment__type__paypal">
             <fieldset>
               <legend>Select Method</legend>
-              <label htmlFor="paymentMethod">UPI</label>
+              <label htmlFor="paymentMethod">PayPal</label>
               <input
                 onChange={() => inputHandler(event)}
                 type="radio"
                 name="paymentMethod"
-                value="UPI"
-                checked={formData.paymentMethod === "UPI"}
+                value="PayPal"
+                checked={formData.paymentMethod === "PayPal"}
               />
             </fieldset>
           </div>

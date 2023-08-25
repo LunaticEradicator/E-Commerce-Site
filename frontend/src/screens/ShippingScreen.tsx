@@ -47,11 +47,10 @@ export default function ShippingScreen() {
         })
       );
       navigate("/payment");
-      console.log(event.target.value);
     }
   };
 
-  console.log(shippingAddress);
+  // console.log(shippingAddress);
   // console.log(formData);
 
   return (

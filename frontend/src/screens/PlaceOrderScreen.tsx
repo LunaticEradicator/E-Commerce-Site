@@ -20,7 +20,6 @@ export default function PlaceOrderScreen() {
     taxPrice,
     totalPrice,
   } = useSelector((state) => {
-    // console.log(state);
     return state.cart;
   });
 
@@ -43,7 +42,6 @@ export default function PlaceOrderScreen() {
         taxPrice,
         totalPrice,
       }).unwrap();
-
       dispatch(clearCartItems());
       navigate(`/order/${res._id}`);
     } catch (error) {

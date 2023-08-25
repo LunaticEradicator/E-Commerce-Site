@@ -1,5 +1,5 @@
 import { rootApi } from "./rootApi";
-import { ORDERS_URL } from "../constants";
+import { ORDERS_URL, PAYPAL_URL } from "../constants";
 
 const orderApi = rootApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -10,14 +10,33 @@ const orderApi = rootApi.injectEndpoints({
         body: { ...order },
       }),
     }),
-    getOrderDetails: builder.query({
+    getMyOrderById: builder.query({
       query: (orderId) => ({
         url: `${ORDERS_URL}/${orderId}`,
         method: "GET",
       }),
       keepUnusedDataFor: 5,
     }),
+    //  !!fix
+    payOrder: builder.mutation({
+      query: ({ orderId, details }) => ({
+        url: `${ORDERS_URL}/${orderId}/pay`,
+        method: "PUT",
+        body: { ...details },
+      }),
+    }),
+    getPayPalClientId: builder.query({
+      query: () => ({
+        url: PAYPAL_URL,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useCreateOrderMutation, useGetOrderDetailsQuery } = orderApi;
+export const {
+  useCreateOrderMutation,
+  useGetMyOrderByIdQuery,
+  usePayOrderMutation,
+  useGetPayPalClientIdQuery,
+} = orderApi;

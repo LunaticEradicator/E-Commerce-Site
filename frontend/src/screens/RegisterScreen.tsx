@@ -11,12 +11,24 @@ import { registerCredentials } from "../store/slices/authSlice";
 
 export default function RegisterScreen() {
   const { userInfo } = useSelector((state) => {
-    console.log(state);
+    // console.log(state);
     return state.auth;
   }); // to access all states
   const dispatch = useDispatch(); //  used with setter function
   const navigate = useNavigate();
   const [registerApiCall, { isLoading, error }] = useRegisterMutation(); // fetch fnc
+
+  // Checking if redirect is there in the URl
+  const { search } = useLocation();
+  const searchParams = new URLSearchParams(search);
+  const redirect = searchParams.get("redirect") || "/";
+  useEffect(() => {
+    // if the userInfo state has value redirect to shipping
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [userInfo, redirect, navigate]);
+
   const [formData, setFormData] = useState({
     userName: "",
     userEmail: "",
@@ -30,23 +42,13 @@ export default function RegisterScreen() {
       : event.target.setCustomValidity("");
   }
 
-  // Checking if redirect is there in the URl
-  const { search } = useLocation();
-  const searchParams = new URLSearchParams(search);
-  const redirect = searchParams.get("redirect") || "/";
-  useEffect(() => {
-    // if the userInfo state has value redirect to shipping
-    if (userInfo) {
-      navigate(redirect);
-    }
-  }, [userInfo, redirect, navigate]);
-
   const formControllerHandler = (event) => {
     const { value, name } = event.target;
     setFormData((prevFormData) => {
       return { ...prevFormData, [name]: value };
     });
   };
+
   // Submit for Register
   const submitHandler = async (event) => {
     if (
@@ -154,11 +156,10 @@ export default function RegisterScreen() {
           secondary
           rounded
           disabled={isLoading}
-          // loading fix thissssssssssssssss
+          loading={isLoading}
         >
           Register
         </Button>
-        {/* {isLoading && <div>Getting User</div>} */}
         <div className="formContainer__loginLink">
           Already A User?{" "}
           {/* if user is register redirect to redirect page 

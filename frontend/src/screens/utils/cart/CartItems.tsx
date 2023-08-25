@@ -2,8 +2,8 @@ import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import Button from "../../Reuseable/Button";
-import Message from "../../Reuseable/Message";
+import Button from "../../../components/Reuseable/Button";
+import Message from "../../../components/Reuseable/Message";
 import { addItemsToCart, removeCartItems } from "../../../store/store";
 
 export default function CartItems() {

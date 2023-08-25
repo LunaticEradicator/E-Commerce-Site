@@ -30,6 +30,7 @@ export default function Header() {
       value: "profile",
       handler: () => {
         console.log("profile");
+        navigate("/profile");
       },
     },
     {

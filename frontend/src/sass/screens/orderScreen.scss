@@ -169,8 +169,11 @@ $margin: 10px;
         justify-content: space-between;
       }
     }
-    &__placeOrder {
+    &__payment {
       margin-top: 20px;
+      &__paypal {
+        margin-top: 20px;
+      }
     }
   }
 }

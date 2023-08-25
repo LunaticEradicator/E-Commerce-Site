@@ -1,6 +1,6 @@
 import "../sass/screens/cartScreen.scss";
-import CartItems from "../components/Page/cart/CartItems";
-import CartSubTotal from "../components/Page/cart/CartSubTotal";
+import CartItems from "./utils/cart/CartItems";
+import CartSubTotal from "./utils/cart/CartSubTotal";
 
 export default function CartScreen() {
   return (

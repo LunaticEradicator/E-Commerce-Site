@@ -15,7 +15,6 @@ export default function Message({
   success,
   ...rest
 }: propMessage) {
-  console.log(success);
   const style = classNames("message__info", {
     message__warning: warning,
     message__danger: danger,

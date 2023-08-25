@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import "../../sass/components/button.scss";
+import { GoSync } from "react-icons/go";
 
 interface propButton {
   children: string[] | string | JSX.Element | JSX.Element[];
@@ -47,10 +48,9 @@ export default function Button({
     button__disabled: disabled,
   });
 
-  // if (loading)
   return (
     <button {...rest} disabled={disabled ? true : false} className={style}>
-      {children}
+      {loading ? <GoSync className="animation-spin" /> : children}
     </button>
   );
 }

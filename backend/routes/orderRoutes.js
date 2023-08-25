@@ -18,10 +18,10 @@ const router = express.Router();
 router.post("/", protectedMiddleware, addOrderItems);
 router.get("/myorders", protectedMiddleware, getMyOrders);
 router.get("/:id", protectedMiddleware, getMyOrdersById);
-router.get("/:id/pay", protectedMiddleware, updateOrderToPaid);
+router.put("/:id/pay", protectedMiddleware, updateOrderToPaid);
 
 //! admin
-router.get(
+router.put(
   "/:id/deliver",
   protectedMiddleware,
   adminMiddleware,

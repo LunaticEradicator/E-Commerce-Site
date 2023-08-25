@@ -101,7 +101,7 @@ export default function LoginScreen() {
           secondary
           rounded
           disabled={isLoading}
-          // loading fix thissssssssssssssss
+          loading={isLoading}
         >
           Login In
         </Button>
