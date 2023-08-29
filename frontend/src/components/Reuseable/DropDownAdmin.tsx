@@ -1,9 +1,11 @@
-import "../../sass/components/dropDown.scss";
+import "../../sass/components/dropDownAdmin.scss";
 import Panels from "./Panels";
 import { useEffect, useRef, useState } from "react";
 import { GoChevronDown } from "react-icons/go";
+import { useSelector } from "react-redux";
 
-export default function DropDown({ options, name }) {
+export default function DropDownAdmin({ options, name }) {
+  const { userInfo } = useSelector((state) => state.auth);
   const [isDrop, setIsDrop] = useState(false);
   const divElement = useRef();
   // close when clicked on anywhere in screen
@@ -36,19 +38,19 @@ export default function DropDown({ options, name }) {
   return (
     <div ref={divElement} className="dropDown">
       <Panels onClick={menuHandler} className="dropdown__header">
-        <div className="dropdown__name">
-          {name !== "" && (
-            <>
-              {name}
-              <GoChevronDown />
-            </>
-          )}
-        </div>
+        {userInfo && userInfo.isAdmin && (
+          <div className="dropdown__name">
+            Admin
+            <GoChevronDown />
+          </div>
+        )}
       </Panels>
       {isDrop && (
         <Panels
           className={
-            isDrop ? "dropdown__content extended" : "dropdown__content"
+            isDrop
+              ? "dropdown__content__admin extended"
+              : "dropdown__content__admin"
           }
         >
           {renderedOption}

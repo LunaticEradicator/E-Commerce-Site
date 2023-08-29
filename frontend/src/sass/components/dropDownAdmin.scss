@@ -10,10 +10,10 @@
   display: flex;
   align-items: center;
 }
-.dropdown__content {
-  cursor: pointer;
+.dropdown__content__admin {
   background-color: white;
-  width: -webkit-fill-available;
+  cursor: pointer;
+  width: 8%;
   position: absolute;
   box-sizing: border-box;
   display: flex;
@@ -25,6 +25,9 @@
   color: rgb(42, 165, 69);
   border-radius: 4px;
   box-shadow: 1px 1px 3px 2px rgb(0 0 0 / 0.2), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  @include ut.breakpoint(medium) {
+    width: -webkit-fill-available;
+  }
   & > div {
     transition: 0.3s;
     @include ut.breakpoint(medium) {

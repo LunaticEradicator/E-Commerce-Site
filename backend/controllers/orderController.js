@@ -42,17 +42,13 @@ const addOrderItems = asyncHandler(async (req, res) => {
 // @route GET/api/orders/myorders
 // @auth Private
 const getMyOrders = asyncHandler(async (req, res) => {
-  // res.send(req.userCookies);
   const myOrders = await Order.find({ user: req.userCookies._id });
-  // res.state(200).json(myOrders);
-  res.state(200).json(myOrders);
-  // if (myOrders) {
-  //   res.state(200).json(myOrders);
-  // } else {
-  //   res.status(404);
-  //   throw new Error("No Order Found For User");
-  // }
-  // // res.send("get All orders ");
+  if (myOrders) {
+    res.status(200).json(myOrders);
+  } else {
+    res.status(404);
+    throw new Error("No Order Found For User");
+  }
 });
 
 // @desc Get a particular Orders of logged in User
@@ -96,18 +92,20 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
   }
 });
 
+//! Admin
+// @desc Get all orders
+// @route GET/api/orders
+// @auth Private/Admin
+const getAllOrdersAdmin = asyncHandler(async (req, res) => {
+  const getAllOrders = await Order.find({}).populate("user", "name email");
+  res.status(200).json(getAllOrders);
+});
+
 // @desc Update Order to delivered
 // @route PUT/api/orders/:id/deliver
 // @auth Private/Admin
 const updateOrderToDeliveredAdmin = asyncHandler(async (req, res) => {
   res.send("Admin : Update order to Delivered");
-});
-
-// @desc Get all orders
-// @route GET/api/orders
-// @auth Private/Admin
-const getAllOrdersAdmin = asyncHandler(async (req, res) => {
-  res.send("Admin : Getting All Orders");
 });
 
 export {

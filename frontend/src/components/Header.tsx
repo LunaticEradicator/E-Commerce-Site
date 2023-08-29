@@ -5,6 +5,7 @@ import logo from "/images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import DropDown from "./Reuseable/DropDown";
+import DropDownAdmin from "./Reuseable/DropDownAdmin";
 import Button from "./Reuseable/Button";
 import { removeCredentials } from "../store/slices/authSlice";
 import { useLogoutMutation } from "../store/apis/usersApi";
@@ -14,16 +15,17 @@ export default function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { cartItems } = useSelector((state: any) => state.cart);
-
+  const { userInfo } = useSelector((state: any) => state.auth);
   const [logoutApiCall] = useLogoutMutation();
 
   // for nav we add a new class which will make all li be block only when screen is medium
   const [isNavExpanded, setIsNavExpanded] = useState(true);
-  const handleHamburger = () => {
+  const handleMobileHamburgerIcon = () => {
     setIsNavExpanded((prevIsNavExpanded) => !prevIsNavExpanded);
-    console.log("Clicked");
+    // console.log("Clicked");
   };
 
+  // DropDown value and FNC for user
   const dropDownOptionsUser = [
     {
       label: "Profile",
@@ -50,22 +52,51 @@ export default function Header() {
       },
     },
   ];
-  // if userInfo is available in localStorage, user will be automatically signed
-  // Show the user data
-  const { userInfo } = useSelector((state: any) => state.auth);
+  // DropDown value and FNC for Admin
+  const dropDownOptionsAdmin = [
+    {
+      label: "Users",
+      value: "users",
+      handler: () => {
+        console.log("order");
+        navigate("/admin/userslist");
+      },
+    },
+    {
+      label: "Orders",
+      value: "orders",
+      handler: () => {
+        console.log("order");
+        navigate("/admin/orderlist");
+      },
+    },
+    {
+      label: "Products",
+      value: "products",
+      handler: () => {
+        console.log("order");
+        navigate("/admin/productlist");
+      },
+    },
+  ];
+
+  // Display number of Item selected by user in cart
   const cartHeader = cartItems.reduce((acc, curr) => {
     return acc + Number(curr.qty);
   }, 0);
 
+  //? "expanded" is a class that will only be added if the display is a phone [medium media query]
   return (
     <nav>
       <ul className={isNavExpanded ? "navbar" : "navbar expanded"}>
+        {/*DropDown li ONE [Logo]*/}
         <li className="navbar__item">
           <Link to="/" className="navbar__item__title">
             <img src={logo} alt="logo" />
             E-Commerce
           </Link>
         </li>
+        {/* DropDown li TWO */}
         <li
           className={isNavExpanded ? "navbar__item" : "navbar__item expanded"}
         >
@@ -84,9 +115,22 @@ export default function Header() {
             </div>
           </Link>
         </li>
+        {/* DropDown li THREE */}
+        {userInfo && userInfo.isAdmin && (
+          <li
+            className={isNavExpanded ? "navbar__item" : "navbar__item expanded"}
+          >
+            <DropDownAdmin
+              options={dropDownOptionsAdmin}
+              name={userInfo.name}
+            />
+          </li>
+        )}
+        {/* DropDown li FOUR */}
         <li
           className={isNavExpanded ? "navbar__item" : "navbar__item expanded"}
         >
+          {/* If userInfo is there [if user is logged in] show display userName */}
           {userInfo ? (
             <DropDown options={dropDownOptionsUser} name={userInfo.name} />
           ) : (
@@ -96,8 +140,8 @@ export default function Header() {
             </Link>
           )}
         </li>
-        {/*  hamburger icon */}
-        <Button className="navbar__item" onClick={handleHamburger}>
+        {/* DropDown li Last [hamburger icon ] */}
+        <Button className="navbar__item" onClick={handleMobileHamburgerIcon}>
           <IoMenuSharp />
         </Button>
       </ul>

@@ -11,7 +11,10 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import ProtectedRoutes from "./components/ProtectedRoutes.tsx";
+
+import ProtectedRoutes from "./components/Routes/ProtectedRoutes.tsx";
+import AdminRoutes from "./components/Routes/AdminRoutes.tsx";
+
 import HomeScreen from "./screens/HomeScreen.tsx";
 import ProductScreen from "./screens/ProductScreen.tsx";
 import CartScreen from "./screens/CartScreen.tsx";
@@ -21,6 +24,10 @@ import ShippingScreen from "./screens/ShippingScreen.tsx";
 import PaymentScreen from "./screens/PaymentScreen.tsx";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen.tsx";
 import OrderScreen from "./screens/OrderScreen.tsx";
+import ProfileScreen from "./screens/ProfileScreen.tsx";
+
+//! Admin
+import OrderListScreen from "./screens/admin/OrderListScreen.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,6 +43,10 @@ const router = createBrowserRouter(
         <Route path="/payment" element={<PaymentScreen />} />
         <Route path="/placeorder" element={<PlaceOrderScreen />} />
         <Route path="/order/:id" element={<OrderScreen />} />
+        <Route path="/profile" element={<ProfileScreen />} />
+      </Route>
+      <Route path="" element={<AdminRoutes />}>
+        <Route path="/admin/orderlist" element={<OrderListScreen />} />
       </Route>
     </Route>
   )

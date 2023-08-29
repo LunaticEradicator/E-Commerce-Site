@@ -31,12 +31,28 @@ const orderApi = rootApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    getMyOrders: builder.query({
+      query: () => ({
+        url: `${ORDERS_URL}/myorders`,
+        // method: "GET",
+      }),
+      keepUnusedDataFor: 5,
+    }),
+    getAllOrdersAdmin: builder.query({
+      query: () => ({
+        url: ORDERS_URL,
+        method: "GET",
+      }),
+      keepUnusedDataFor: 5,
+    }),
   }),
 });
 
 export const {
   useCreateOrderMutation,
   useGetMyOrderByIdQuery,
+  useGetMyOrdersQuery,
+  useGetAllOrdersAdminQuery,
   usePayOrderMutation,
   useGetPayPalClientIdQuery,
 } = orderApi;
