@@ -7,16 +7,29 @@ export const productsApi = rootApi.injectEndpoints({
     getProducts: builder.query<void, void>({
       query: () => ({
         url: PRODUCTS_URL,
+        method: "GET",
       }),
       keepUnusedDataFor: 5,
     }),
     getSingleProduct: builder.query({
       query: (id) => ({
         url: `${PRODUCTS_URL}/${id}`,
+        method: "GET",
       }),
       keepUnusedDataFor: 5,
+    }),
+    createProduct: builder.mutation({
+      query: () => ({
+        url: PRODUCTS_URL,
+        method: "POST",
+      }),
+      invalidatesTags: ["Product"],
     }),
   }),
 });
 
-export const { useGetProductsQuery, useGetSingleProductQuery } = productsApi;
+export const {
+  useGetProductsQuery,
+  useGetSingleProductQuery,
+  useCreateProductMutation,
+} = productsApi;

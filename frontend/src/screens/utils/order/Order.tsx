@@ -4,6 +4,8 @@ import Message from "../../../components/Reuseable/Message";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import SkeltonLoader from "../../../components/Reuseable/SkeltonLoader";
+import { useDeliveryOrderMutation } from "../../../store/apis/orderApi";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 // import { PayPalButtons } from "@paypal/react-paypal-js";
 // import { usePayOrderMutation } from "../../../store/apis/orderApi";
 
@@ -17,8 +19,9 @@ export default function Order({
   PayPalButtons,
 }) {
   let renderPayPal;
-  // const [payOrder] = usePayOrderMutation();
-  //! fix paypalllllllllllll
+  const { userInfo } = useSelector((state) => state.auth);
+  const [deliverOrder, { isLoading: deliveryLoading }] =
+    useDeliveryOrderMutation();
 
   function onApprove(data, actions) {
     return actions.order.capture().then(async function (details) {
@@ -31,7 +34,6 @@ export default function Order({
       }
     });
   }
-
   async function onApproveTest() {
     await payOrder({ orderId, details: { payer: {} } });
     console.log(payOrder({ orderId, details: { payer: {} } }));
@@ -53,11 +55,19 @@ export default function Order({
         return orderId;
       });
   }
-
   function onError(error) {
     toast.error(error?.data?.message || error.message);
   }
-  // const testPayHandler = () => {};
+
+  const deliveryHandler = async () => {
+    try {
+      await deliverOrder(orderId);
+      refetch();
+      toast.success("Delivered Successfully");
+    } catch (error) {
+      toast.error(error?.data?.message || error.message);
+    }
+  };
 
   const renderedOrderItems = order?.orderItems.map((item, index) => {
     return (
@@ -179,10 +189,16 @@ export default function Order({
             <span>${order?.totalPrice}</span>
           </div>
         </div>
-
         <div className="main__orders__summary__payment">
           {!order?.isPaid && renderPayPal}
         </div>
+        {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+          <div className="main__orders__summary__deliveryButton">
+            <Button secondary rounded onClick={deliveryHandler}>
+              Mark as Deliver
+            </Button>
+          </div>
+        )}
       </div>
     </>
   );

@@ -2,6 +2,7 @@ export default [
   {
     // _id: "6",
     name: "NVIDIA GeForce RTX 3090ti",
+    brand: "nvidia",
     img: "/images/rtx 3090ti.jpg",
     description:
       "The NVIDIA® GeForce RTX™ 3090ti is the ultimate GeForce GPU. It brings an enormous leap in performance, efficiency, and AI-powered graphics. Experience ultra-high performance gaming, incredibly detailed virtual worlds, unprecedented productivity, and new ways to create. It’s powered by the NVIDIA Ada Lovelace architecture and comes with 24 GB of G6X memory to deliver the ultimate experience for gamers and creators.",
@@ -14,6 +15,7 @@ export default [
   {
     // _id: "1",
     name: "NVIDIA GeForce RTX 4060",
+    brand: "nvidia",
     img: "/images/rtx 4060.jpg",
     description:
       "The GeForce RTX 4060 let you take on the latest games and apps with the ultra-efficient NVIDIA Ada Lovelace architecture. Experience immersive, AI-accelerated gaming with ray tracing and DLSS 3, and supercharge your creative process and productivity with NVIDIA Studio.",
@@ -26,6 +28,7 @@ export default [
   {
     // _id: "2",
     name: "NVIDIA GeForce RTX 4060ti",
+    brand: "nvidia",
     img: "/images/rtx 4060.jpg",
     description:
       "The GeForce RTX™ 4060 Ti and RTX 4060 let you take on the latest games and apps with the ultra-efficient NVIDIA Ada Lovelace architecture. Experience immersive, AI-accelerated gaming with ray tracing and DLSS 3, and supercharge your creative process and productivity with NVIDIA Studio.",
@@ -38,6 +41,7 @@ export default [
   {
     // _id: "3",
     name: "NVIDIA GeForce RTX 4070",
+    brand: "nvidia",
     img: "/images/rtx 4070.jpg",
     description:
       "Get equipped for stellar gaming and creating with NVIDIA® GeForce RTX 4070 graphics cards. They’re built with the ultra-efficient NVIDIA Ada Lovelace architecture. Experience fast ray tracing, AI-accelerated performance with DLSS 3, new ways to create, and much more.",
@@ -50,6 +54,7 @@ export default [
   {
     // _id: "4",
     name: "NVIDIA GeForce RTX 4070ti",
+    brand: "nvidia",
     img: "/images/rtx 4070.jpg",
     description:
       "Get equipped for stellar gaming and creating with NVIDIA® GeForce RTX 4070 Ti graphics cards. They’re built with the ultra-efficient NVIDIA Ada Lovelace architecture. Experience fast ray tracing, AI-accelerated performance with DLSS 3, new ways to create, and much more.",
@@ -62,6 +67,7 @@ export default [
   {
     // _id: "5",
     name: "NVIDIA GeForce RTX 4080",
+    brand: "nvidia",
     img: "/images/rtx 4080.jpg",
     description:
       "The NVIDIA® GeForce RTX™ 4080 delivers the ultra performance and features that enthusiast gamers and creators demand. Bring your games and creative projects to life with ray tracing and AI-powered graphics. It's powered by the ultra-efficient NVIDIA Ada Lovelace architecture and 16GB of superfast G6X memory.",
@@ -74,6 +80,7 @@ export default [
   {
     // _id: "6",
     name: "NVIDIA GeForce RTX 4090",
+    brand: "nvidia",
     img: "/images/rtx 4090.jpg",
     description:
       "The NVIDIA® GeForce RTX™ 4090 is the ultimate GeForce GPU. It brings an enormous leap in performance, efficiency, and AI-powered graphics. Experience ultra-high performance gaming, incredibly detailed virtual worlds, unprecedented productivity, and new ways to create. It’s powered by the NVIDIA Ada Lovelace architecture and comes with 24 GB of G6X memory to deliver the ultimate experience for gamers and creators.",

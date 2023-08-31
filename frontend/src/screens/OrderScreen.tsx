@@ -13,7 +13,6 @@ import {
 } from "../store/apis/orderApi";
 
 export default function OrderScreen() {
-  //! fix paypalllllllllllll
   const { userInfo } = useSelector((state) => state.cart);
   const { id: orderId } = useParams();
   const {

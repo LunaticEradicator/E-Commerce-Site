@@ -2,7 +2,7 @@ import asyncHandler from "../middleware/asyncHandler.js";
 import Product from "../models/productModel.js"; //? Instead we will call through the model we created
 
 // @desc Fetch ALl Products
-// @route GET/api/products/
+// @route GET/api/products
 // @access public
 const getProducts = asyncHandler(async (req, res) => {
   const products = await Product.find({}); //? {empty} means we will find all products
@@ -26,4 +26,24 @@ const getProductById = asyncHandler(async (req, res) => {
   }
 });
 
-export { getProducts, getProductById };
+// @desc Create a new sample product
+// @route POST/api/Products
+// @access PRIVATE/Admin
+const createProduct = asyncHandler(async (req, res) => {
+  const product = new Product({
+    user: req.userCookies._id,
+    name: "Sample Product",
+    brand: "Sample Brand",
+    img: "/images/sample.jpeg",
+    description: "Sample Description",
+    price: 0,
+    countInStock: 0,
+    category: "Sample Categories",
+    rating: 0,
+    reviewCount: 0,
+  });
+  const createdProduct = await product.save();
+  res.status(201).json(createdProduct);
+});
+
+export { getProducts, getProductById, createProduct };

@@ -1,4 +1,4 @@
-import "../../sass/screens/admin/orderListScreen.sass";
+import "../../sass/screens/admin/orderListScreen.scss";
 // import React from "react";
 import { FaTimes } from "react-icons/fa";
 import Button from "../../components/Reuseable/Button";

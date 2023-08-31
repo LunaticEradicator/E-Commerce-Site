@@ -3,13 +3,22 @@ import express from "express";
 import {
   getProducts,
   getProductById,
+  createProduct,
 } from "../controllers/productController.js";
+import {
+  protectedMiddleware,
+  adminMiddleware,
+} from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 //! controllers
+//? public
 router.get("/", getProducts);
 router.get("/:id", getProductById);
+
+//? Admin
+router.post("/", protectedMiddleware, adminMiddleware, createProduct);
 
 //! Without controllers
 // router.get(
