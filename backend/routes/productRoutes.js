@@ -5,6 +5,7 @@ import {
   getProductById,
   createProduct,
   updateProduct,
+  deleteProduct,
 } from "../controllers/productController.js";
 import {
   protectedMiddleware,
@@ -21,6 +22,7 @@ router.get("/:id", getProductById);
 //? Admin
 router.post("/", protectedMiddleware, adminMiddleware, createProduct);
 router.put("/:id/edit", protectedMiddleware, adminMiddleware, updateProduct);
+router.delete("/:id", protectedMiddleware, adminMiddleware, deleteProduct);
 
 //! Without controllers
 // router.get(

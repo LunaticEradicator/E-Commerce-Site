@@ -7,6 +7,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import {
   useGetProductsQuery,
   useCreateProductMutation,
+  useDeleteProductMutation,
 } from "../../store/apis/productsApi";
 import Message from "../../components/Reuseable/Message";
 import SkeltonLoader from "../../components/Reuseable/SkeltonLoader";
@@ -16,9 +17,19 @@ export default function ProductListScreen() {
   const { data: products, isLoading, isError, refetch } = useGetProductsQuery();
   const [createProduct, { isLoading: createProductLoading }] =
     useCreateProductMutation();
-  //   console.log(products);
-  const deleteBtnHandler = (id: number) => {
-    console.log(id);
+  const [deleteProduct, { isLoading: deleteProductLoading }] =
+    useDeleteProductMutation();
+  console.log(products);
+  const deleteBtnHandler = async (id: number) => {
+    try {
+      if (window.confirm(`Do You Want to Delete the selected Product`)) {
+        await deleteProduct(id);
+        toast.success("Product Deleted");
+        refetch();
+      }
+    } catch (error) {
+      toast.error("Cannot Delete Product");
+    }
   };
   const createProductHandler = async () => {
     if (window.confirm("Create A New Sample Product")) {

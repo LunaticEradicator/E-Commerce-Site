@@ -35,7 +35,6 @@ export default function ProductEditScreen() {
     useUpdateProductMutation();
   const [uploadProductImage, { isLoading: uploadProductImageLoading }] =
     useUploadProductImageMutation();
-
   useEffect(() => {
     if (!isLoading) {
       setFormData((prevFormData) => {
@@ -68,12 +67,12 @@ export default function ProductEditScreen() {
     try {
       const res = await uploadProductImage(formData).unwrap();
       toast.success(res.message);
-      setImg(res.image);
+      // setImg(res.image);
       // console.log(res);
       // console.log(event.target.files[0]);
-      // setFormData((prevFormData) => {
-      //   return { ...prevFormData, img: res.image };
-      // });
+      setFormData((prevFormData) => {
+        return { ...prevFormData, img: res.image };
+      });
     } catch (error) {
       toast.error(error?.data?.message || error.error);
     }
@@ -95,6 +94,7 @@ export default function ProductEditScreen() {
       });
       toast.success("Product Updated");
       navigate("/admin/productList");
+      refetch();
     } catch (error) {
       toast.error(error?.data?.message || error.error);
     }
@@ -209,16 +209,7 @@ export default function ProductEditScreen() {
               value={formData?.countInStock}
             />
           </div>
-          <button
-            type="submit"
-            className="main__product__edit__formContainer__updateBtn"
-            // loading={updateProductLoading}
-            disabled={updateProductLoading}
-          >
-            Update Profile
-          </button>
-          {/* <Button
-            type = 
+          <Button
             className="main__product__edit__formContainer__updateBtn"
             secondary
             rounded
@@ -226,7 +217,7 @@ export default function ProductEditScreen() {
             disabled={updateProductLoading}
           >
             Update Profile
-          </Button> */}
+          </Button>
         </form>
       </FormContainer>
     );

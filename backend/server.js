@@ -42,9 +42,8 @@ app.get("/api/config/paypal", (req, res) =>
 );
 
 //static folder
-// const __dirname = path.resolve();
-// app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
-app.use("/uploads", express.static("uploads"));
+const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 //! Custom Error Handling
 app.use(notFoundURL);
