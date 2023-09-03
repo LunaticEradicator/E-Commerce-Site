@@ -64,7 +64,7 @@ export default function Header() {
       handler: () => {
         setIsDropAdmin(false);
         console.log("order");
-        navigate("/admin/userslist");
+        navigate("/admin/userlist");
       },
     },
     {

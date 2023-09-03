@@ -1,16 +1,16 @@
-import "../../sass/screens/admin/productEditScreen.scss";
+import "../../../sass/screens/admin/productEditScreen.scss";
 import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import Button from "../../components/Reuseable/Button";
-import Message from "../../components/Reuseable/Message";
-import FormContainer from "../../components/Reuseable/FormContainer";
+import Button from "../../../components/Reuseable/Button";
+import Message from "../../../components/Reuseable/Message";
+import FormContainer from "../../../components/Reuseable/FormContainer";
 import { toast } from "react-toastify";
-import SkeltonLoader from "../../components/Reuseable/SkeltonLoader";
+import SkeltonLoader from "../../../components/Reuseable/SkeltonLoader";
 import {
   useGetSingleProductQuery,
   useUpdateProductMutation,
   useUploadProductImageMutation,
-} from "../../store/apis/productsApi";
+} from "../../../store/apis/productsApi";
 
 export default function ProductEditScreen() {
   const { id: productId } = useParams();
@@ -24,7 +24,6 @@ export default function ProductEditScreen() {
     category: "",
     countInStock: 0,
   });
-  // const [img, setImg] = useState("");
   const {
     data: product,
     isLoading,
@@ -42,14 +41,13 @@ export default function ProductEditScreen() {
           ...prevFormData,
           name: product?.name,
           img: product?.img,
-          brand: product?.brand,
+          brand: product?.brand.toUpperCase(),
+          category: product?.category.toUpperCase(),
           price: product?.price,
           description: product?.description,
-          category: product?.category,
           countInStock: product?.countInStock,
         };
       });
-      // setImg(product?.img);
     }
   }, [product, isLoading]);
 
@@ -67,9 +65,6 @@ export default function ProductEditScreen() {
     try {
       const res = await uploadProductImage(formData).unwrap();
       toast.success(res.message);
-      // setImg(res.image);
-      // console.log(res);
-      // console.log(event.target.files[0]);
       setFormData((prevFormData) => {
         return { ...prevFormData, img: res.image };
       });
@@ -85,14 +80,13 @@ export default function ProductEditScreen() {
         productId,
         name: formData?.name,
         img: formData?.img,
-        // img: img,
         brand: formData?.brand,
         price: formData?.price,
         description: formData?.description,
         category: formData?.category,
         countInStock: formData?.countInStock,
       });
-      toast.success("Product Updated");
+      toast.success("Product Updated Successfully");
       navigate("/admin/productList");
       refetch();
     } catch (error) {
@@ -153,18 +147,15 @@ export default function ProductEditScreen() {
           {/* If the image is from backend change server to 8080 */}
           {/* Took 2days to fix */}
           {/* See Home Screen */}
-          {/* FIXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */}
           <div className="main__product__edit__formContainer__image">
             <label htmlFor="img">Image</label>
             <input
               onChange={() => formDataHandler(event)}
-              // onChange={(event) => setImg}
               type="text"
               name="img"
               className="main__product__edit__formContainer__image__one"
               placeholder="Enter Image URL"
               required
-              // value={img}
               value={formData?.img}
             />
             <input
@@ -216,7 +207,7 @@ export default function ProductEditScreen() {
             loading={updateProductLoading}
             disabled={updateProductLoading}
           >
-            Update Profile
+            Update Product
           </Button>
         </form>
       </FormContainer>
@@ -225,10 +216,16 @@ export default function ProductEditScreen() {
   return (
     <div className="main__product__edit">
       <Link to="/admin/productList">
-        <Button secondary outline rounded>
+        <Button
+          className="main__product__edit__goBackBtn"
+          secondary
+          outline
+          rounded
+        >
           Go Back
         </Button>
       </Link>
+      <div className="main__product__edit__header">Edit Product</div>
       {rendererSingleProduct}
     </div>
   );

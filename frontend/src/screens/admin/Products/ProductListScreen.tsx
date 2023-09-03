@@ -1,16 +1,16 @@
 // import React from "react";
-import "../../sass/screens/admin/productListScreen.scss";
+import "../../../sass/screens/admin/productListScreen.scss";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import Button from "../../components/Reuseable/Button";
+import Button from "../../../components/Reuseable/Button";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import {
   useGetProductsQuery,
   useCreateProductMutation,
   useDeleteProductMutation,
-} from "../../store/apis/productsApi";
-import Message from "../../components/Reuseable/Message";
-import SkeltonLoader from "../../components/Reuseable/SkeltonLoader";
+} from "../../../store/apis/productsApi";
+import Message from "../../../components/Reuseable/Message";
+import SkeltonLoader from "../../../components/Reuseable/SkeltonLoader";
 
 export default function ProductListScreen() {
   let renderedProductList;
@@ -22,7 +22,7 @@ export default function ProductListScreen() {
   console.log(products);
   const deleteBtnHandler = async (id: number) => {
     try {
-      if (window.confirm(`Do You Want to Delete the selected Product`)) {
+      if (window.confirm(`Delete selected Product`)) {
         await deleteProduct(id);
         toast.success("Product Deleted");
         refetch();
@@ -66,6 +66,8 @@ export default function ProductListScreen() {
           <td>
             <Button
               onClick={() => deleteBtnHandler(product._id)}
+              disabled={deleteProductLoading}
+              loading={deleteProductLoading}
               rounded
               className="productList__deleteButton"
             >

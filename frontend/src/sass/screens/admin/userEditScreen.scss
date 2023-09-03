@@ -3,7 +3,7 @@
 $padding-spacing: 20px;
 $margin-spacing: 10px;
 
-.main__product__edit {
+.main__user__edit {
   input[type="number"] {
     -moz-appearance: textfield;
   }
@@ -67,7 +67,7 @@ $margin-spacing: 10px;
         font-size: 1rem;
       }
     }
-    &__brand {
+    &__email {
       display: flex;
       flex-direction: column;
       font-size: 1.5rem;
@@ -76,58 +76,14 @@ $margin-spacing: 10px;
         font-size: 1rem;
       }
     }
-    &__category {
-      display: flex;
-      flex-direction: column;
-      font-size: 1.5rem;
-      margin-bottom: $margin-spacing;
-      @include ut.breakpoint(medium) {
-        font-size: 1rem;
-      }
-    }
-    &__image {
-      display: flex;
-      flex-direction: column;
-      font-size: 1.5rem;
-      margin-bottom: $margin-spacing;
-      @include ut.breakpoint(medium) {
-        font-size: 1rem;
-      }
-      & > input {
-        margin: 0;
-      }
-      &__two {
-        margin-top: 4px !important;
-        clip-path: inset(0px -10px -10px -10px);
-        // box-shadow: 2px 0px 5px 1px rgba(0, 0, 0, 0.164) !important;
-      }
-    }
-    &__price {
-      display: flex;
-      flex-direction: column;
-      font-size: 1.5rem;
-      margin-bottom: 0;
-      @include ut.breakpoint(medium) {
-        font-size: 1rem;
-      }
-    }
-    &__description {
-      display: flex;
-      flex-direction: column;
-      font-size: 1.5rem;
-      margin-bottom: 0;
-      @include ut.breakpoint(medium) {
-        font-size: 1rem;
-      }
-    }
-    &__countInStock {
-      display: flex;
-      flex-direction: column;
-      font-size: 1.5rem;
-      margin-bottom: 0;
-      @include ut.breakpoint(medium) {
-        font-size: 1rem;
-      }
+    &__isAdmin {
+      // display: flex;
+      // flex-direction: column;
+      // font-size: 1.5rem;
+      // margin-bottom: $margin-spacing;
+      // @include ut.breakpoint(medium) {
+      //   font-size: 1rem;
+      // }
     }
     &__updateBtn {
       margin: 10px;

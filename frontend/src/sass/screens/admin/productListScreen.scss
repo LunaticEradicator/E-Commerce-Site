@@ -24,7 +24,10 @@
       }
     }
     &__button {
-      padding: 4px 8px;
+      @include ut.breakpoint(medium) {
+        padding: 4px 8px;
+        font-size: 1.3rem;
+      }
     }
   }
 }
