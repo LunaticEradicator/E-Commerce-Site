@@ -54,7 +54,14 @@ export default function PlaceOrderScreen() {
       <div key={index} className="main__placeOrders__details__order__items">
         <div className="main__placeOrders__details__order__item">
           <div className="main__placeOrders__details__order__item__image">
-            <img src={item.img} alt={item.name} />
+            <img
+              src={
+                item?.img.includes("upload")
+                  ? `http://localhost:8080${item?.img}`
+                  : item?.img
+              }
+              alt={item.name}
+            />
           </div>
           <div className="main__placeOrders__details__order__item__name">
             <Link to={`/products/${item._id}`}>{item.name}</Link>

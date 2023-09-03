@@ -28,7 +28,14 @@ export default function CartItems() {
         <div className="main__cart__item__details__product">
           <div className="main__cart__item__details__product__header">
             <div className="main__cart__item__details__product__header__image">
-              <img src={item.img} alt={item.name} />
+              <img
+                src={
+                  item?.img.includes("upload")
+                    ? `http://localhost:8080${item?.img}`
+                    : item?.img
+                }
+                alt={item.name}
+              />
             </div>
             <div className="main__cart__item__details__product__header__name">
               <Link to={`/products/${item._id}`}>{item.name}</Link>

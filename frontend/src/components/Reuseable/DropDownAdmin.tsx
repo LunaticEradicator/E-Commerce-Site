@@ -4,10 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import { GoChevronDown } from "react-icons/go";
 import { useSelector } from "react-redux";
 
-export default function DropDownAdmin({ options, name }) {
+export default function DropDownAdmin({
+  options,
+  name,
+  isDropAdmin,
+  setIsDropAdmin,
+}) {
   const { userInfo } = useSelector((state) => state.auth);
-  const [isDrop, setIsDrop] = useState(false);
+  // const [isDrop, setIsDrop] = useState(false);
   const divElement = useRef();
+  // console.log(isDrop);
   // close when clicked on anywhere in screen
   useEffect(() => {
     function handleClick(event: React.ChangeEvent<HTMLInputElement>) {
@@ -15,7 +21,7 @@ export default function DropDownAdmin({ options, name }) {
         return;
       }
       if (!divElement.current.contains(event.target)) {
-        setIsDrop(false);
+        setIsDropAdmin(false);
       }
     }
     document.addEventListener("click", handleClick);
@@ -25,7 +31,7 @@ export default function DropDownAdmin({ options, name }) {
   }, []);
 
   const menuHandler = () => {
-    setIsDrop((prevIsOpen) => !prevIsOpen);
+    setIsDropAdmin((prevIsOpen) => !prevIsOpen);
   };
 
   const renderedOption = options.map((option) => {
@@ -45,10 +51,10 @@ export default function DropDownAdmin({ options, name }) {
           </div>
         )}
       </Panels>
-      {isDrop && (
+      {isDropAdmin && (
         <Panels
           className={
-            isDrop
+            isDropAdmin
               ? "dropdown__content__admin extended"
               : "dropdown__content__admin"
           }

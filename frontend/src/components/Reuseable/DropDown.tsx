@@ -3,8 +3,8 @@ import Panels from "./Panels";
 import { useEffect, useRef, useState } from "react";
 import { GoChevronDown } from "react-icons/go";
 
-export default function DropDown({ options, name }) {
-  const [isDrop, setIsDrop] = useState(false);
+export default function DropDown({ options, name, setIsDrop, isDrop }) {
+  // const [isDrop, setIsDrop] = useState(false);
   const divElement = useRef();
   // close when clicked on anywhere in screen
   useEffect(() => {

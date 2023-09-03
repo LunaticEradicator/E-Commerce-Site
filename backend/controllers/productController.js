@@ -28,7 +28,7 @@ const getProductById = asyncHandler(async (req, res) => {
 
 // @desc Create a new sample product
 // @route POST/api/Products
-// @access PRIVATE/Admin
+// @access PRIVATE/ADMIN
 const createProduct = asyncHandler(async (req, res) => {
   const product = new Product({
     user: req.userCookies._id,
@@ -46,4 +46,29 @@ const createProduct = asyncHandler(async (req, res) => {
   res.status(201).json(createdProduct);
 });
 
-export { getProducts, getProductById, createProduct };
+// @desc Update a single Product
+// @route PUT/api/products/:id/edit
+// @access PRIVATE/ADMIN
+const updateProduct = asyncHandler(async (req, res) => {
+  const { name, price, description, img, brand, category, countInStock } =
+    req.body;
+  const productExist = await Product.findById(req.params.id);
+
+  if (productExist) {
+    productExist.name = name;
+    productExist.price = price;
+    productExist.description = description;
+    productExist.img = img;
+    productExist.brand = brand;
+    productExist.category = category;
+    productExist.countInStock = countInStock;
+
+    const updateProduct = await productExist.save();
+    res.status(200).json(updateProduct);
+  } else {
+    res.status(404);
+    throw new Error("Product Not Found");
+  }
+});
+
+export { getProducts, getProductById, createProduct, updateProduct };

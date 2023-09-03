@@ -22,6 +22,7 @@ export default function ProfileScreen() {
     profilePassword: "",
     profileConfirmPassword: "",
   });
+  console.log(getMyOrders);
 
   // auto-filling name and email in profile
   useEffect(() => {
@@ -181,6 +182,9 @@ export default function ProfileScreen() {
       <div className="main__myOrders">
         {/* <div className="main__myOrders__header">My Orders</div> */}
         {renderedOrders}
+        {getMyOrders?.length === 0 && (
+          <Message style={{ textAlign: "center" }}>You Have No Orders</Message>
+        )}
       </div>
     </div>
   );

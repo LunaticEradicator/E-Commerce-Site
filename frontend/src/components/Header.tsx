@@ -1,6 +1,6 @@
+import "../sass/components/header.scss";
 import { useState } from "react";
 import { IoCartOutline, IoPersonSharp, IoMenuSharp } from "react-icons/io5";
-import "../sass/components/header.scss";
 import logo from "/images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,17 +20,18 @@ export default function Header() {
 
   // for nav we add a new class which will make all li be block only when screen is medium
   const [isNavExpanded, setIsNavExpanded] = useState(true);
-  const handleMobileHamburgerIcon = () => {
+  const navBarExpandHandler = () => {
     setIsNavExpanded((prevIsNavExpanded) => !prevIsNavExpanded);
-    // console.log("Clicked");
   };
 
-  // DropDown value and FNC for user
+  // DropDown value and FNC for User
+  const [isDrop, setIsDrop] = useState(false);
   const dropDownOptionsUser = [
     {
       label: "Profile",
       value: "profile",
       handler: () => {
+        setIsDrop(false);
         console.log("profile");
         navigate("/profile");
       },
@@ -39,6 +40,7 @@ export default function Header() {
       label: "Logout",
       value: "logout",
       handler: async () => {
+        setIsDrop(false);
         console.log("logout");
         try {
           console.log("logout Inner");
@@ -52,12 +54,15 @@ export default function Header() {
       },
     },
   ];
+
   // DropDown value and FNC for Admin
+  const [isDropAdmin, setIsDropAdmin] = useState(false);
   const dropDownOptionsAdmin = [
     {
       label: "Users",
       value: "users",
       handler: () => {
+        setIsDropAdmin(false);
         console.log("order");
         navigate("/admin/userslist");
       },
@@ -66,6 +71,7 @@ export default function Header() {
       label: "Orders",
       value: "orders",
       handler: () => {
+        setIsDropAdmin(false);
         console.log("order");
         navigate("/admin/orderlist");
       },
@@ -74,6 +80,7 @@ export default function Header() {
       label: "Products",
       value: "products",
       handler: () => {
+        setIsDropAdmin(false);
         console.log("order");
         navigate("/admin/productlist");
       },
@@ -123,6 +130,8 @@ export default function Header() {
             <DropDownAdmin
               options={dropDownOptionsAdmin}
               name={userInfo.name}
+              isDropAdmin={isDropAdmin}
+              setIsDropAdmin={setIsDropAdmin}
             />
           </li>
         )}
@@ -132,7 +141,12 @@ export default function Header() {
         >
           {/* If userInfo is there [if user is logged in] show display userName */}
           {userInfo ? (
-            <DropDown options={dropDownOptionsUser} name={userInfo.name} />
+            <DropDown
+              options={dropDownOptionsUser}
+              name={userInfo.name}
+              isDrop={isDrop}
+              setIsDrop={setIsDrop}
+            />
           ) : (
             <Link to="/login" className="navbar__item__link">
               <IoPersonSharp />
@@ -141,7 +155,7 @@ export default function Header() {
           )}
         </li>
         {/* DropDown li Last [hamburger icon ] */}
-        <Button className="navbar__item" onClick={handleMobileHamburgerIcon}>
+        <Button className="navbar__item" onClick={navBarExpandHandler}>
           <IoMenuSharp />
         </Button>
       </ul>

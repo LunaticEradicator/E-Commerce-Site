@@ -39,7 +39,20 @@ export default function HomeScreen() {
       return (
         <Panels key={product._id} className="main__product__panel">
           <Link to={`products/${product._id}`}>
-            <img className="main__product__img" src={product.img} alt="img" />
+            <img
+              className="main__product__img"
+              //!  FIXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+              //? If the image is from backend change server to 8080
+              //? [Took 2 days to fix]
+              //? see ProductEditScreen
+              src={
+                product?.img.includes("upload")
+                  ? `http://localhost:8080${product?.img}`
+                  : product?.img
+              }
+              // src={product?.img}
+              alt="img"
+            />
           </Link>
           <div className="main__product__title">
             <Link to={`/products/${product._id}`}>{product.name}</Link>

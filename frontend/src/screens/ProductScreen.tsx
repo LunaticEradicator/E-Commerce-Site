@@ -55,7 +55,11 @@ export default function ProductScreen() {
         <div className="main__productDisplayed__content">
           <div className="main__productDisplayed__content__top">
             <img
-              src={selectedProduct?.img}
+              src={
+                selectedProduct?.img.includes("upload")
+                  ? `http://localhost:8080${selectedProduct?.img}`
+                  : selectedProduct?.img
+              }
               alt={selectedProduct?.name}
               className="main__productDisplayed__content__top__img"
             />
