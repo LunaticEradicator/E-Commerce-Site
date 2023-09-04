@@ -6,6 +6,7 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
+  createProductReview,
 } from "../controllers/productController.js";
 import {
   protectedMiddleware,
@@ -18,6 +19,9 @@ const router = express.Router();
 //? public
 router.get("/", getProducts);
 router.get("/:id", getProductById);
+
+//? User
+router.post("/:id/reviews", protectedMiddleware, createProductReview);
 
 //? Admin
 router.post("/", protectedMiddleware, adminMiddleware, createProduct);

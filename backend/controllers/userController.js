@@ -164,11 +164,12 @@ const getUserByIdAdmin = asyncHandler(async (req, res) => {
 // @route  PUT/api/users/:id
 // @access private/Admin
 const updateUserAdmin = asyncHandler(async (req, res) => {
+  const { name, email, isAdmin } = req.body;
   const user = await User.findById(req.params.id);
   if (user) {
-    user.name = req.body.name || user.name;
-    user.email = req.body.email || user.name;
-    user.isAdmin = Boolean(req.body.isAdmin);
+    user.name = name || user.name;
+    user.email = email || user.name;
+    user.isAdmin = Boolean(isAdmin);
     const updatedUser = await user.save();
     res.status(200).json({
       _id: updatedUser.id,

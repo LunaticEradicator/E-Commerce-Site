@@ -24,4 +24,14 @@
     background-color: #d4edda;
     border-color: #c3e6cb;
   }
+  &__header {
+    //   text-align: center;
+    font-size: 1.5rem;
+    color: #04ad91;
+    background-color: #ccffee;
+    border-color: #b8daff;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+  }
 }
