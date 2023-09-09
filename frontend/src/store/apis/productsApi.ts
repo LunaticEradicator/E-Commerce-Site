@@ -4,10 +4,13 @@ import { PRODUCTS_URL, UPLOAD_URL } from "../constants";
 export const productsApi = rootApi.injectEndpoints({
   // will be calling as useGetProductsQuery
   endpoints: (builder) => ({
-    getProducts: builder.query<void, void>({
-      query: () => ({
+    getProducts: builder.query({
+      query: ({ pageNumber }) => ({
         url: PRODUCTS_URL,
         method: "GET",
+        params: {
+          pageNumber,
+        },
       }),
       providesTags: ["Product"],
       keepUnusedDataFor: 5,

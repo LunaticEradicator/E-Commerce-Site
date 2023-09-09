@@ -1,7 +1,7 @@
 // import React from "react";
 import "../../../sass/screens/admin/productListScreen.scss";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Button from "../../../components/Reuseable/Button";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import {
@@ -10,16 +10,21 @@ import {
   useDeleteProductMutation,
 } from "../../../store/apis/productsApi";
 import Message from "../../../components/Reuseable/Message";
+import Paginate from "../../../components/Reuseable/Paginate";
 import SkeltonLoader from "../../../components/Reuseable/SkeltonLoader";
 
 export default function ProductListScreen() {
+  const { pageNumber } = useParams();
   let renderedProductList;
-  const { data: products, isLoading, isError, refetch } = useGetProductsQuery();
+  //  with pagination
+  const { data, isLoading, isError, refetch } = useGetProductsQuery({
+    pageNumber,
+  });
   const [createProduct, { isLoading: createProductLoading }] =
     useCreateProductMutation();
   const [deleteProduct, { isLoading: deleteProductLoading }] =
     useDeleteProductMutation();
-  console.log(products);
+  console.log(data?.products);
   const deleteBtnHandler = async (id: number) => {
     try {
       if (window.confirm(`Delete selected Product`)) {
@@ -48,7 +53,7 @@ export default function ProductListScreen() {
   if (isError) {
     renderedProductList = <Message danger>Error Loading Page</Message>;
   } else {
-    renderedProductList = products?.map((product) => {
+    renderedProductList = data?.products?.map((product) => {
       return (
         <tr key={product._id}>
           <td data-label="ID">{product._id}</td>
@@ -111,6 +116,7 @@ export default function ProductListScreen() {
             </thead>
             <tbody>{renderedProductList}</tbody>
           </table>
+          <Paginate page={data.page} pages={data.pages} isAdmin={true} />
         </>
       )}
     </div>

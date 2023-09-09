@@ -1,16 +1,8 @@
 @use "../util/" as ut;
 
-main {
-  margin: 20px;
-  margin-top: 0px;
-  @include ut.breakpoint(medium) {
-    margin: 5px;
-  }
-}
-
 .main__product {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 20px;
   justify-items: center;
 }
@@ -29,8 +21,18 @@ main {
 .main__product__img {
   // width: 250px;
   // height: 140px;
+  // width: 400px;
   width: 100%;
-  height: 170px;
+  height: 260px;
+  @include ut.breakpoint(xLarge) {
+    height: auto;
+  }
+  // @include ut.breakpoint(large) {
+  //   height: 200px;
+  // }
+  // @include ut.breakpoint(medium) {
+  //   height: 220px;
+  // }
 }
 
 .main__product__title {

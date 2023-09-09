@@ -11,6 +11,7 @@
   align-items: center;
 }
 .dropdown__content {
+  z-index: 1; // else it won't be able to select since main position is relative
   cursor: pointer;
   background-color: white;
   width: -webkit-fill-available;

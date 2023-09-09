@@ -1,6 +1,7 @@
 import "../sass/screens/homeScreen.scss";
 import { Link } from "react-router-dom";
 import SkeltonLoader from "../components/Reuseable/SkeltonLoader";
+import { useParams } from "react-router-dom";
 // //  import axios from "axios";
 // // import { useState, useEffect } from "react";
 import { useGetProductsQuery } from "../store/apis/productsApi";
@@ -8,10 +9,14 @@ import { useGetProductsQuery } from "../store/apis/productsApi";
 import Panels from "../components/Reuseable/Panels";
 import Rating from "../components/Reuseable/Rating";
 import Message from "../components/Reuseable/Message";
+import Paginate from "../components/Reuseable/Paginate";
 // import products from "../products"; [frontend we map through it]
 
 export default function HomeScreen() {
-  const { data: products, isLoading, isError } = useGetProductsQuery();
+  const { pageNumber } = useParams();
+  const { data, isLoading, isError } = useGetProductsQuery({ pageNumber });
+  // without pagination
+  // const { data: products, isLoading, isError } = useGetProductsQuery();
 
   // // console.log(useGetProductsQuery());
   // // const [products, setProducts] = useState([]);
@@ -35,13 +40,12 @@ export default function HomeScreen() {
     renderDetail = <Message danger>Error</Message>;
   } else {
     <h1>Latest Product</h1>;
-    renderDetail = products.map((product) => {
+    renderDetail = data?.products.map((product) => {
       return (
         <Panels key={product._id} className="main__product__panel">
-          <Link to={`products/${product._id}`}>
+          <Link to={`/products/${product._id}`}>
             <img
               className="main__product__img"
-              //!  FIXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
               //? If the image is from backend change server to 8080
               //? [Took 2 days to fix]
               //? see ProductEditScreen
@@ -68,6 +72,7 @@ export default function HomeScreen() {
     <>
       <h1>Latest Product</h1>
       <div className="main__product">{renderDetail}</div>
+      <Paginate page={data.page} pages={data.pages} isAdmin={false} />
     </>
   );
 }

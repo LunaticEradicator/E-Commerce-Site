@@ -5,8 +5,18 @@ import Product from "../models/productModel.js"; //? Instead we will call throug
 // @route GET/api/products
 // @access public
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({}); //? {empty} means we will find all products
-  res.json(products);
+  const pageSize = 4; // number of item displayed on screen;
+  const page = Number(req.query.pageNumber) || 1; // find the page number using url
+  const count = await Product.countDocuments(); // totalNumber of product
+
+  const products = await Product.find({})
+    .limit(pageSize)
+    .skip(pageSize * (page - 1)); // {empty} means we will find all products
+  res.json({ products, page, pages: Math.ceil(count / pageSize) });
+
+  // without Pagination [getting all product in a single page]
+  // const products = await Product.find({}); //? {empty} means we will find all products
+  // res.json(products);
 });
 
 // @desc Fetch single product

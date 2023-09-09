@@ -11,6 +11,7 @@
   align-items: center;
 }
 .dropdown__content__admin {
+  z-index: 1; // else it won't be able to select since main position is relative
   background-color: white;
   cursor: pointer;
   width: fit-content;
