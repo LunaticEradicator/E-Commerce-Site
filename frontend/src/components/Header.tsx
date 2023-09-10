@@ -10,6 +10,7 @@ import Button from "./Reuseable/Button";
 import { removeCredentials } from "../store/slices/authSlice";
 import { useLogoutMutation } from "../store/apis/usersApi";
 import { toast } from "react-toastify";
+import SearchBox from "./Reuseable/SearchBox";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -106,21 +107,9 @@ export default function Header() {
         {/* DropDown li TWO */}
         <li
           className={isNavExpanded ? "navbar__item" : "navbar__item expanded"}
+          // className="search"
         >
-          <Link to="/cart" className="navbar__item__link">
-            <div
-              className="navbar__item__link__innerChild"
-              style={{ display: "flex" }}
-            >
-              <IoCartOutline />
-              Cart
-              {cartHeader > 0 && ( // only display if a item is in cart
-                <div className="cart">
-                  <span>{cartHeader}</span>
-                </div>
-              )}
-            </div>
-          </Link>
+          <SearchBox />
         </li>
         {/* DropDown li THREE */}
         {userInfo && userInfo.isAdmin && (
@@ -153,6 +142,26 @@ export default function Header() {
               Login
             </Link>
           )}
+        </li>
+
+        {/* DropDown li FIVE*/}
+        <li
+          className={isNavExpanded ? "navbar__item" : "navbar__item expanded"}
+        >
+          <Link to="/cart" className="navbar__item__link">
+            <div
+              className="navbar__item__link__innerChild"
+              style={{ display: "flex" }}
+            >
+              <IoCartOutline />
+              Cart
+              {cartHeader > 0 && ( // only display if a item is in cart
+                <div className="cart">
+                  <span>{cartHeader}</span>
+                </div>
+              )}
+            </div>
+          </Link>
         </li>
         {/* DropDown li Last [hamburger icon ] */}
         <Button className="navbar__item" onClick={navBarExpandHandler}>

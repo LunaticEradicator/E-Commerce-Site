@@ -12,41 +12,46 @@
 }
 .dropdown__content__admin {
   z-index: 1; // else it won't be able to select since main position is relative
-  background-color: white;
   cursor: pointer;
+  color: rgb(42, 165, 69);
+  background-color: white;
   width: fit-content;
   position: absolute;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  padding: 10px;
   margin-right: 5px;
   text-align: start;
-  cursor: pointer;
-  color: rgb(42, 165, 69);
   border-radius: 4px;
   box-shadow: 1px 1px 3px 2px rgb(0 0 0 / 0.2), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   @include ut.breakpoint(medium) {
     width: -webkit-fill-available;
   }
   & > div {
-    transition: 0.3s;
+    transition: all 0.3s;
     @include ut.breakpoint(medium) {
       padding: 10px;
       padding-left: 0;
     }
     &:hover {
-      // background-color: rgb(0, 0, 0);
+      background-color: rgb(14, 14, 14);
+      color: white;
       transform: scale(1.05);
     }
   }
 }
 
 .extended {
-  @include ut.breakpoint(medium) {
+  margin-top: 10px;
+  width: 180px;
+  & > div {
+    padding: 10px;
+  }
+  @include ut.breakpoint(large) {
     position: relative;
     box-shadow: 1px 1px 3px 2px rgb(0 0 0 / 0.2),
       0 1px 2px -1px rgb(0 0 0 / 0.1);
     margin: 5px;
+    width: 100%;
   }
 }

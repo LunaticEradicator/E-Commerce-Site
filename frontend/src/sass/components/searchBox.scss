@@ -1,0 +1,35 @@
+@use "../util/" as ut;
+.searchBox {
+  &__form {
+    &__search {
+      display: flex;
+      & > :last-child {
+        background-color: #c9c8c8;
+        display: flex;
+        padding: 5px;
+        border-radius: 0px;
+        border: 0px;
+        padding: 10px;
+        @include ut.breakpoint(xLarge) {
+          font-size: 1rem;
+        }
+      }
+    }
+    input {
+      font-size: 1.5rem;
+      outline: none;
+      border: none;
+      flex-grow: 1;
+      padding: 0 10px;
+      @include ut.breakpoint(xLarge) {
+        font-size: 1.2rem;
+      }
+      @include ut.breakpoint(medium) {
+        font-size: 1rem;
+      }
+    }
+    label {
+      font-weight: bold;
+    }
+  }
+}

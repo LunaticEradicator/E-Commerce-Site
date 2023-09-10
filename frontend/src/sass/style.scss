@@ -4,10 +4,15 @@
 @use "./util/" as ut;
 
 main {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   position: relative;
   margin: 20px;
   margin-top: 0px;
+  @include ut.breakpoint(xLarge) {
+    height: auto;
+  }
   @include ut.breakpoint(medium) {
     margin: 5px;
   }
@@ -50,7 +55,7 @@ select {
 }
 
 a {
-  color: black;
+  color: rgb(100, 99, 99);
 }
 
 @include ut.breakpoint(large) {

@@ -1,5 +1,5 @@
 import asyncHandler from "../middleware/asyncHandler.js";
-import Product from "../models/productModel.js"; //? Instead we will call through the model we created
+import Product from "../models/productModel.js"; // Instead we will call through the model we created
 
 // @desc Fetch ALl Products
 // @route GET/api/products
@@ -7,16 +7,18 @@ import Product from "../models/productModel.js"; //? Instead we will call throug
 const getProducts = asyncHandler(async (req, res) => {
   const pageSize = 4; // number of item displayed on screen;
   const page = Number(req.query.pageNumber) || 1; // find the page number using url
-  const count = await Product.countDocuments(); // totalNumber of product
+  // for product searching
+  // we are using regex so that strict search won't happen
+  const keyword = req.query.keyword
+    ? { name: { $regex: req.query.keyword, $options: "i" } }
+    : {};
 
-  const products = await Product.find({})
+  const count = await Product.countDocuments({ ...keyword }); // totalNumber of product
+
+  const products = await Product.find({ ...keyword })
     .limit(pageSize)
     .skip(pageSize * (page - 1)); // {empty} means we will find all products
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
-
-  // without Pagination [getting all product in a single page]
-  // const products = await Product.find({}); //? {empty} means we will find all products
-  // res.json(products);
 });
 
 // @desc Fetch single product
@@ -145,3 +147,19 @@ export {
   deleteProduct,
   createProductReview,
 };
+
+//? without search
+// const getProducts = asyncHandler(async (req, res) => {
+//   const pageSize = 4; // number of item displayed on screen;
+//   const page = Number(req.query.pageNumber) || 1; // find the page number using url
+//   const count = await Product.countDocuments(); // totalNumber of product
+
+//   const products = await Product.find()
+//     .limit(pageSize)
+//     .skip(pageSize * (page - 1)); // {empty} means we will find all products
+//   res.json({ products, page, pages: Math.ceil(count / pageSize) });
+
+//?   // without Pagination [getting all product in a single page]
+//   // const products = await Product.find({}); //? {empty} means we will find all products
+//   // res.json(products);
+// });

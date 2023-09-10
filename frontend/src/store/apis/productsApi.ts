@@ -5,10 +5,11 @@ export const productsApi = rootApi.injectEndpoints({
   // will be calling as useGetProductsQuery
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: ({ pageNumber }) => ({
+      query: ({ keyword, pageNumber }) => ({
         url: PRODUCTS_URL,
         method: "GET",
         params: {
+          keyword,
           pageNumber,
         },
       }),

@@ -13,8 +13,11 @@ import Paginate from "../components/Reuseable/Paginate";
 // import products from "../products"; [frontend we map through it]
 
 export default function HomeScreen() {
-  const { pageNumber } = useParams();
-  const { data, isLoading, isError } = useGetProductsQuery({ pageNumber });
+  const { keyword, pageNumber } = useParams();
+  const { data, isLoading, isError } = useGetProductsQuery({
+    keyword,
+    pageNumber,
+  });
   // without pagination
   // const { data: products, isLoading, isError } = useGetProductsQuery();
 
@@ -72,7 +75,12 @@ export default function HomeScreen() {
     <>
       <h1>Latest Product</h1>
       <div className="main__product">{renderDetail}</div>
-      <Paginate page={data.page} pages={data.pages} isAdmin={false} />
+      <Paginate
+        page={data.page}
+        pages={data.pages}
+        isAdmin={false}
+        keyword={keyword ? keyword : ""}
+      />
     </>
   );
 }

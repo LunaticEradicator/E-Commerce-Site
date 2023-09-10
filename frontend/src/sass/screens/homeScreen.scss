@@ -5,6 +5,9 @@
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 20px;
   justify-items: center;
+  @include ut.breakpoint(medium) {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
 }
 
 .main__product__panel {
