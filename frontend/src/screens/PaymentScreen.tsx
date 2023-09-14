@@ -6,6 +6,7 @@ import FormContainer from "../components/Reuseable/FormContainer";
 import CheckoutSteps from "../components/Reuseable/CheckoutSteps";
 import Button from "../components/Reuseable/Button";
 import { savePaymentMethod } from "../store/slices/cartSlice";
+import Meta from "../components/Reuseable/Meta";
 
 export default function PaymentScreen() {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ export default function PaymentScreen() {
 
   return (
     <FormContainer>
+      <Meta title={"Payment"} />
       <CheckoutSteps step1 step2 step3 />
       {/* <FormContainer> */}
       <div className="formContainer__payment">

@@ -6,6 +6,7 @@ import Button from "../components/Reuseable/Button";
 import { useCreateOrderMutation } from "../store/apis/orderApi";
 import { toast } from "react-toastify";
 import { clearCartItems } from "../store/slices/cartSlice";
+import Meta from "../components/Reuseable/Meta";
 
 export default function PlaceOrderScreen() {
   const navigate = useNavigate();
@@ -52,6 +53,7 @@ export default function PlaceOrderScreen() {
   const renderedOrderItems = cartItems.map((item, index) => {
     return (
       <div key={index} className="main__placeOrders__details__order__items">
+        <Meta title={"Place Order"} />
         <div className="main__placeOrders__details__order__item">
           <div className="main__placeOrders__details__order__item__image">
             <img

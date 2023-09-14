@@ -17,8 +17,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItemsToCart } from "../store/store.ts";
 import Reviews from "./utils/Product/Reviews.tsx";
 import FormContainer from "../components/Reuseable/FormContainer.tsx";
+import Meta from "../components/Reuseable/Meta.tsx";
 
 export default function ProductScreen() {
+  const { id: productId } = useParams();
   const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,7 +35,6 @@ export default function ProductScreen() {
   // const [comment, setComment] = useState("");
   // const [rating, setRating] = useState(0);
 
-  const { id: productId } = useParams();
   const {
     data: selectedProduct,
     isLoading,
@@ -270,6 +271,7 @@ export default function ProductScreen() {
   return (
     <div className="main__productDisplayed">
       <div className="main__productDisplayed__header">
+        <Meta title={selectedProduct?.name} />
         <Link to="/">
           <Button secondary rounded outline>
             Go Back

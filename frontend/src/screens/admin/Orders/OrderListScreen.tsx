@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Message from "../../../components/Reuseable/Message";
 import SkeltonLoader from "../../../components/Reuseable/SkeltonLoader";
 import { useGetAllOrdersAdminQuery } from "../../../store/apis/orderApi";
+import Meta from "../../../components/Reuseable/Meta";
 
 export default function OrderListScreen() {
   const { data: getAllOrders, isLoading, error } = useGetAllOrdersAdminQuery();
@@ -49,6 +50,7 @@ export default function OrderListScreen() {
 
   return (
     <div>
+      <Meta title={"Orders"} />
       <table>
         <caption>Orders</caption>
         <thead>

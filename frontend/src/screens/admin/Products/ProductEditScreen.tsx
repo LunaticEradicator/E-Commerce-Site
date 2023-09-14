@@ -11,6 +11,7 @@ import {
   useUpdateProductMutation,
   useUploadProductImageMutation,
 } from "../../../store/apis/productsApi";
+import Meta from "../../../components/Reuseable/Meta";
 
 export default function ProductEditScreen() {
   const { id: productId } = useParams();
@@ -215,6 +216,7 @@ export default function ProductEditScreen() {
   }
   return (
     <div className="main__product__edit">
+      <Meta title={product?.name} />
       <Link to="/admin/productList">
         <Button
           className="main__product__edit__goBackBtn"

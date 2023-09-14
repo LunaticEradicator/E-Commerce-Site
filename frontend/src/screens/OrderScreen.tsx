@@ -11,6 +11,7 @@ import {
   useGetMyOrderByIdQuery,
   useGetPayPalClientIdQuery,
 } from "../store/apis/orderApi";
+import Meta from "../components/Reuseable/Meta";
 
 export default function OrderScreen() {
   const { userInfo } = useSelector((state) => state.cart);
@@ -70,6 +71,7 @@ export default function OrderScreen() {
   }
   return (
     <>
+      <Meta title={"Order Screen"} />
       <div className="main__orders__header">Order: {order?._id}</div>
       <div className="main__orders">{renderedOrder}</div>{" "}
     </>

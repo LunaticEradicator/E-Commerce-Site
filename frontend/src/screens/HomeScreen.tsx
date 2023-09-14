@@ -16,6 +16,7 @@ import Panels from "../components/Reuseable/Panels";
 import Rating from "../components/Reuseable/Rating";
 import Message from "../components/Reuseable/Message";
 import Paginate from "../components/Reuseable/Paginate";
+import Meta from "../components/Reuseable/Meta";
 // import products from "../products"; [frontend we map through it]
 
 export default function HomeScreen() {
@@ -100,6 +101,7 @@ export default function HomeScreen() {
   };
   return (
     <>
+      <Meta title={"E-Commerce"} />
       {!keyword && (
         <div className="carousel">
           {/* fix for smaller screen */}

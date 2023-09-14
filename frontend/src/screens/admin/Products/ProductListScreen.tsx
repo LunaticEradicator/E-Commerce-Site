@@ -12,6 +12,7 @@ import {
 import Message from "../../../components/Reuseable/Message";
 import Paginate from "../../../components/Reuseable/Paginate";
 import SkeltonLoader from "../../../components/Reuseable/SkeltonLoader";
+import Meta from "../../../components/Reuseable/Meta";
 
 export default function ProductListScreen() {
   const { pageNumber } = useParams();
@@ -85,6 +86,7 @@ export default function ProductListScreen() {
   }
   return (
     <div className="productList">
+      <Meta title={"Products"} />
       {isLoading ? (
         <SkeltonLoader times={1} className="defaultDiv" />
       ) : (

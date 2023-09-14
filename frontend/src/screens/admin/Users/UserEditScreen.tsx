@@ -10,6 +10,7 @@ import {
   useGetUserDetailsAdminQuery,
   useUpdateUserAdminMutation,
 } from "../../../store/apis/usersApi";
+import Meta from "../../../components/Reuseable/Meta";
 
 export default function UserEditScreen() {
   const { id: userId } = useParams();
@@ -128,6 +129,8 @@ export default function UserEditScreen() {
   }
   return (
     <div className="main__user__edit">
+      <Meta title={user?.name} />
+
       <Link to="/admin/userList">
         <Button secondary outline rounded>
           Go Back

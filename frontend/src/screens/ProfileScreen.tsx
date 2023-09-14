@@ -9,6 +9,7 @@ import SkeltonLoader from "../components/Reuseable/SkeltonLoader";
 import Message from "../components/Reuseable/Message";
 import Details from "./utils/Profile/Details";
 import Button from "../components/Reuseable/Button";
+import Meta from "../components/Reuseable/Meta";
 
 export default function ProfileScreen() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -103,6 +104,7 @@ export default function ProfileScreen() {
   };
   return (
     <div className="main__profile">
+      <Meta title={`User Profile`} />
       {/* <FormContainer> */}
       <div className="main__profile__formContainer">
         <div className="main__profile__formContainer__header">User Profile</div>

@@ -9,6 +9,7 @@ import {
   useGetUsersAdminQuery,
   useDeleteUserByAdminMutation,
 } from "../../../store/apis/usersApi";
+import Meta from "../../../components/Reuseable/Meta";
 
 export default function UserListScreen() {
   const { data: users, isLoading, isError, refetch } = useGetUsersAdminQuery();
@@ -74,6 +75,7 @@ export default function UserListScreen() {
 
   return (
     <>
+      <Meta title={"Users"} />
       <table>
         <caption>Users</caption>
         <thead>

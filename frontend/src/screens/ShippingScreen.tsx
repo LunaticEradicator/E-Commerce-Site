@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingAddress } from "../store/slices/cartSlice";
 import CheckoutSteps from "../components/Reuseable/CheckoutSteps";
+import Meta from "../components/Reuseable/Meta";
 
 export default function ShippingScreen() {
   const { shippingAddress } = useSelector((state) => state.cart);
@@ -55,6 +56,7 @@ export default function ShippingScreen() {
 
   return (
     <FormContainer>
+      <Meta title={"Shipping"} />
       <CheckoutSteps step1 step2 />
       <div className="formContainer__shipping__header">Shipping Address</div>
       <form action="" className="formContainer__shipping">
