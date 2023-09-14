@@ -104,10 +104,9 @@ export default function Header() {
             E-Commerce
           </Link>
         </li>
-        {/* DropDown li TWO */}
+        {/* DropDown li TWO SearchBox */}
         <li
           className={isNavExpanded ? "navbar__item" : "navbar__item expanded"}
-          // className="search"
         >
           <SearchBox />
         </li>

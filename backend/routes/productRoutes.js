@@ -7,6 +7,7 @@ import {
   updateProduct,
   deleteProduct,
   createProductReview,
+  topRatedProduct,
 } from "../controllers/productController.js";
 import {
   protectedMiddleware,
@@ -18,6 +19,7 @@ const router = express.Router();
 //! controllers
 //? public
 router.get("/", getProducts);
+router.get("/top", topRatedProduct);
 router.get("/:id", getProductById);
 
 //? User

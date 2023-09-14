@@ -1,10 +1,16 @@
 import "../sass/screens/homeScreen.scss";
+import "../sass/components/carousel.scss";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SkeltonLoader from "../components/Reuseable/SkeltonLoader";
 import { useParams } from "react-router-dom";
+import Carousel from "../components/Reuseable/Carousel";
 // //  import axios from "axios";
 // // import { useState, useEffect } from "react";
-import { useGetProductsQuery } from "../store/apis/productsApi";
+import {
+  useGetProductsQuery,
+  useGetTopRatedProductQuery,
+} from "../store/apis/productsApi";
 
 import Panels from "../components/Reuseable/Panels";
 import Rating from "../components/Reuseable/Rating";
@@ -20,29 +26,36 @@ export default function HomeScreen() {
   });
   // without pagination
   // const { data: products, isLoading, isError } = useGetProductsQuery();
-
-  // // console.log(useGetProductsQuery());
-  // // const [products, setProducts] = useState([]);
-
-  // // useEffect(() => {
-  // //   const fetchProducts = async () => {
-  // //     const response = await axios.get("/api/products"); // no need to add localhost since we added proxy in package.json
-  // //     const data = response.data;
-  // //     setProducts(data);
-  // //   };
-  // //   fetchProducts();
-  // // }, []);
-  // console.log(products);
+  const {
+    data: topRatedProduct,
+    isLoading: topRatedLoading,
+    isError: topRatedError,
+  } = useGetTopRatedProductQuery();
 
   let renderDetail;
-  if (isLoading) {
+  // to make carousel responsive
+  // we are checking the updated screen width
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowSize(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+  // console.log(windowSize);
+
+  if (isLoading || topRatedLoading) {
     // renderDetail = <h2 style={{ textAlign: "center" }}>Loading Data ....</h2>;
     renderDetail = <SkeltonLoader times={6} className="defaultDiv" />;
     return renderDetail;
-  } else if (isError) {
+  } else if (isError || topRatedError) {
     renderDetail = <Message danger>Error</Message>;
   } else {
-    <h1>Latest Product</h1>;
     renderDetail = data?.products.map((product) => {
       return (
         <Panels key={product._id} className="main__product__panel">
@@ -70,17 +83,54 @@ export default function HomeScreen() {
       );
     });
   }
-
+  const responsiveCarousel = () => {
+    if (windowSize > 768 && windowSize <= 1024) {
+      return 980;
+    } else if (windowSize > 425 && windowSize <= 768) {
+      return 680;
+    } else if (windowSize > 375 && windowSize <= 425) {
+      return 400;
+    } else if (windowSize > 320 && windowSize <= 375) {
+      return 360;
+    } else if (windowSize <= 320) {
+      return 300;
+    } else {
+      return 1350;
+    }
+  };
   return (
     <>
-      <h1>Latest Product</h1>
+      {!keyword && (
+        <div className="carousel">
+          {/* fix for smaller screen */}
+          <Carousel
+            slides={topRatedProduct}
+            parentWidth={responsiveCarousel()}
+          />
+        </div>
+      )}
+
+      <h1 className="main__featured">Featured Product</h1>
       <div className="main__product">{renderDetail}</div>
       <Paginate
-        page={data.page}
-        pages={data.pages}
+        page={data?.page}
+        pages={data?.pages}
         isAdmin={false}
         keyword={keyword ? keyword : ""}
       />
     </>
   );
 }
+
+// console.log(useGetProductsQuery());
+// const [products, setProducts] = useState([]);
+
+// useEffect(() => {
+//   const fetchProducts = async () => {
+//     const response = await axios.get("/api/products"); // no need to add localhost since we added proxy in package.json
+//     const data = response.data;
+//     setProducts(data);
+//   };
+//   fetchProducts();
+// }, []);
+// console.log(products);

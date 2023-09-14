@@ -9,7 +9,7 @@ export default function SearchBox() {
   const { keyword } = useParams();
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState(keyword || "");
-  console.log(searchValue);
+  // console.log(searchValue);
   const submitHandler = (event) => {
     event.preventDefault();
     //   searchValue

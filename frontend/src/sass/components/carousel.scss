@@ -1,0 +1,83 @@
+@use "../util/" as ut;
+.carousel {
+  width: 1350px;
+  height: 550px;
+  margin: 0px auto;
+  // margin-bottom: 0;
+  @include ut.breakpoint(larger) {
+    width: 980px;
+    height: 490px;
+  }
+  @include ut.breakpoint(large) {
+    width: 680px;
+    height: 340px;
+  }
+  @include ut.breakpoint(medium) {
+    height: 260px;
+    width: 400px;
+  }
+  @include ut.breakpoint(small) {
+    width: 360px;
+  }
+  @include ut.breakpoint(xSmall) {
+    width: 300px;
+  }
+  & .leftArrowStyle {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 32px;
+    font-size: 4rem;
+    color: white;
+    z-index: 1;
+    cursor: pointer;
+    @include ut.breakpoint(large) {
+      font-size: 3rem;
+    }
+    @include ut.breakpoint(medium) {
+      font-size: 2rem;
+    }
+    transition: all 0.3s;
+    &:hover {
+      color: rgb(19, 212, 19);
+    }
+  }
+  & .rightArrowStyle {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 32px;
+    font-size: 4rem;
+    color: white;
+    z-index: 1;
+    cursor: pointer;
+    @include ut.breakpoint(large) {
+      font-size: 3rem;
+    }
+    @include ut.breakpoint(medium) {
+      font-size: 2rem;
+    }
+    transition: all 0.3s;
+    &:hover {
+      color: rgb(19, 212, 19);
+    }
+  }
+  & .slideName {
+    padding: 20px;
+    width: -webkit-fill-available;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 2.5rem;
+    @include ut.breakpoint(large) {
+      font-size: 2rem;
+    }
+    @include ut.breakpoint(medium) {
+      font-size: 1.5rem;
+    }
+    @include ut.breakpoint(xSmall) {
+      font-size: 1rem;
+    }
+  }
+}

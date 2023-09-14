@@ -1,5 +1,19 @@
 @use "../util/" as ut;
 
+.main__featured {
+  font-size: 4rem;
+  margin-top: 0;
+  @include ut.breakpoint(xLarge) {
+    font-size: 3rem;
+  }
+  @include ut.breakpoint(large) {
+    font-size: 2.5rem;
+  }
+  @include ut.breakpoint(medium) {
+    font-size: 2rem;
+  }
+  // text-align: center;
+}
 .main__product {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
