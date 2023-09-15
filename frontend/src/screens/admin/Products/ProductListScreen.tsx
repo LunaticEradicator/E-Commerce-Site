@@ -11,7 +11,7 @@ import {
 } from "../../../store/apis/productsApi";
 import Message from "../../../components/Reuseable/Message";
 import Paginate from "../../../components/Reuseable/Paginate";
-import SkeltonLoader from "../../../components/Reuseable/SkeltonLoader";
+import Loader from "../../../components/Reuseable/Loader";
 import Meta from "../../../components/Reuseable/Meta";
 
 export default function ProductListScreen() {
@@ -88,7 +88,7 @@ export default function ProductListScreen() {
     <div className="productList">
       <Meta title={"Products"} />
       {isLoading ? (
-        <SkeltonLoader times={1} className="defaultDiv" />
+        <Loader />
       ) : (
         <>
           <div className="productList__header">

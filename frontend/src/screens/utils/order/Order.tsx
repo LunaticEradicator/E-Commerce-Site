@@ -3,7 +3,7 @@ import Button from "../../../components/Reuseable/Button";
 import Message from "../../../components/Reuseable/Message";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import SkeltonLoader from "../../../components/Reuseable/SkeltonLoader";
+import Loader from "../../../components/Reuseable/Loader";
 import { useDeliveryOrderMutation } from "../../../store/apis/orderApi";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 // import { PayPalButtons } from "@paypal/react-paypal-js";
@@ -96,16 +96,16 @@ export default function Order({
   });
 
   if (loadingPayOrder) {
-    renderPayPal = <SkeltonLoader times={2} className="defaultDiv" />;
+    renderPayPal = <Loader />;
   } else if (isPending) {
-    renderPayPal = <SkeltonLoader times={2} className="defaultDiv" />;
+    renderPayPal = <Loader />;
   } else {
     renderPayPal = (
       <>
         <div className="main__orders__summary__payment__trial">
-          <Button onClick={onApproveTest} secondary rounded>
+          {/* <Button onClick={onApproveTest} secondary rounded>
             Test Pay
-          </Button>
+          </Button> */}
         </div>
         <div className="main__orders__summary__payment__paypal">
           {/* <PayPalScriptProvider options={{ clientId: "test" }}> */}

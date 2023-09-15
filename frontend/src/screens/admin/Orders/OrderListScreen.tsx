@@ -3,7 +3,7 @@ import { FaTimes } from "react-icons/fa";
 import Button from "../../../components/Reuseable/Button";
 import { Link } from "react-router-dom";
 import Message from "../../../components/Reuseable/Message";
-import SkeltonLoader from "../../../components/Reuseable/SkeltonLoader";
+import Loader from "../../../components/Reuseable/Loader";
 import { useGetAllOrdersAdminQuery } from "../../../store/apis/orderApi";
 import Meta from "../../../components/Reuseable/Meta";
 
@@ -13,7 +13,7 @@ export default function OrderListScreen() {
   let renderedOrderList;
 
   if (isLoading) {
-    renderedOrderList = <SkeltonLoader times={2} className="defaultDiv" />;
+    renderedOrderList = <Loader />;
   } else if (error) {
     renderedOrderList = <Message danger>Error Loading Page</Message>;
   } else {

@@ -58,9 +58,10 @@ export default function Carousel({ slides, parentWidth }) {
   //? condition that will only mark the first dot when page loads
   //  else it won't be filled
   if (
-    updatedSlides[0].isCheckedColor === false &&
-    updatedSlides[1].isCheckedColor !== true &&
-    updatedSlides[2].isCheckedColor !== true
+    updatedSlides[0]?.isCheckedColor === false &&
+    updatedSlides[1]?.isCheckedColor !== true &&
+    updatedSlides[2]?.isCheckedColor !== true &&
+    updatedSlides[3]?.isCheckedColor !== true
   ) {
     updatedSlides[0].isCheckedColor = true;
   }
@@ -118,7 +119,13 @@ export default function Carousel({ slides, parentWidth }) {
     return {
       ...sliderStyle,
       // updatedSlides[0].img => an image
-      backgroundImage: `url('${updatedSlides[slideIndex]?.img}')`,
+
+      // backgroundImage: `url('${updatedSlides[slideIndex]?.img}')`,
+      backgroundImage: `url('${
+        updatedSlides[slideIndex]?.img.includes("upload")
+          ? `http://localhost:8080${updatedSlides[slideIndex]?.img}`
+          : updatedSlides[slideIndex]?.img
+      }')`,
       width: `${parentWidth}px`,
     };
   };

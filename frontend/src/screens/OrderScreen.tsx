@@ -3,7 +3,7 @@ import Order from "./utils/order/Order";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import SkeltonLoader from "../components/Reuseable/SkeltonLoader";
+import Loader from "../components/Reuseable/Loader";
 import Message from "../components/Reuseable/Message";
 import { usePayPalScriptReducer, PayPalButtons } from "@paypal/react-paypal-js";
 import {
@@ -53,7 +53,7 @@ export default function OrderScreen() {
 
   let renderedOrder;
   if (isLoading) {
-    renderedOrder = <SkeltonLoader times={2} className="defaultDiv" />;
+    renderedOrder = <Loader />;
   } else if (isError) {
     <Message danger>Error</Message>;
   } else {

@@ -5,7 +5,7 @@ import Button from "../../../components/Reuseable/Button";
 import Message from "../../../components/Reuseable/Message";
 import FormContainer from "../../../components/Reuseable/FormContainer";
 import { toast } from "react-toastify";
-import SkeltonLoader from "../../../components/Reuseable/SkeltonLoader";
+import Loader from "../../../components/Reuseable/Loader";
 import {
   useGetUserDetailsAdminQuery,
   useUpdateUserAdminMutation,
@@ -70,7 +70,7 @@ export default function UserEditScreen() {
 
   let rendererSingleProduct;
   if (isLoading) {
-    rendererSingleProduct = <SkeltonLoader times={1} className="defaultDiv" />;
+    rendererSingleProduct = <Loader />;
   } else if (isError) {
     rendererSingleProduct = <Message danger>Error</Message>;
   } else {

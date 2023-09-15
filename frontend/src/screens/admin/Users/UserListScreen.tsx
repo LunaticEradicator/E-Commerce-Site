@@ -4,7 +4,7 @@ import Button from "../../../components/Reuseable/Button";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import Message from "../../../components/Reuseable/Message";
-import SkeltonLoader from "../../../components/Reuseable/SkeltonLoader";
+import Loader from "../../../components/Reuseable/Loader";
 import {
   useGetUsersAdminQuery,
   useDeleteUserByAdminMutation,
@@ -31,7 +31,7 @@ export default function UserListScreen() {
   };
 
   if (isLoading) {
-    renderedOrderList = <SkeltonLoader times={2} className="defaultDiv" />;
+    renderedOrderList = <Loader />;
   } else if (isError) {
     renderedOrderList = <Message danger>Error Loading Page</Message>;
   } else {

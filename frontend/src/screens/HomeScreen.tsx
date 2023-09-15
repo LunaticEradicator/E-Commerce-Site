@@ -2,7 +2,7 @@ import "../sass/screens/homeScreen.scss";
 import "../sass/components/carousel.scss";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import SkeltonLoader from "../components/Reuseable/SkeltonLoader";
+import Loader from "../components/Reuseable/Loader";
 import { useParams } from "react-router-dom";
 import Carousel from "../components/Reuseable/Carousel";
 // //  import axios from "axios";
@@ -52,7 +52,8 @@ export default function HomeScreen() {
 
   if (isLoading || topRatedLoading) {
     // renderDetail = <h2 style={{ textAlign: "center" }}>Loading Data ....</h2>;
-    renderDetail = <SkeltonLoader times={6} className="defaultDiv" />;
+    // renderDetail = <SkeltonLoader times={6} className="defaultDiv" />;
+    renderDetail = <Loader />;
     return renderDetail;
   } else if (isError || topRatedError) {
     renderDetail = <Message danger>Error</Message>;
@@ -111,7 +112,6 @@ export default function HomeScreen() {
           />
         </div>
       )}
-
       <h1 className="main__featured">Featured Product</h1>
       <div className="main__product">{renderDetail}</div>
       <Paginate

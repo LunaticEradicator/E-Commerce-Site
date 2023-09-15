@@ -41,7 +41,7 @@ export default function Rating({ rating, reviewCount, className }: propRating) {
         {starFive}
       </div>
       <span className="main__product__user__reviews">
-        {reviewCount && ` ${reviewCount} reviews`}
+        {reviewCount && ` ${reviewCount} ratings`}
       </span>
     </div>
   );

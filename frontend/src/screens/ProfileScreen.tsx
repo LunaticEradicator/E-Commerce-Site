@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCredentials } from "../store/store";
 import { useUpdateProfileMutation } from "../store/apis/usersApi";
 import { useGetMyOrdersQuery } from "../store/apis/orderApi";
-import SkeltonLoader from "../components/Reuseable/SkeltonLoader";
+import Loader from "../components/Reuseable/Loader";
 import Message from "../components/Reuseable/Message";
 import Details from "./utils/Profile/Details";
 import Button from "../components/Reuseable/Button";
@@ -41,7 +41,7 @@ export default function ProfileScreen() {
   let renderedOrders;
 
   if (isLoading) {
-    renderedOrders = <SkeltonLoader times={1} className="defaultDiv" />;
+    renderedOrders = <Loader />;
   } else if (error) {
     renderedOrders = <Message>{error}</Message>;
   } else {

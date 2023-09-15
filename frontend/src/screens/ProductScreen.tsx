@@ -3,7 +3,7 @@
 import "../sass/screens/productScreen.scss";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
-import SkeltonLoader from "../components/Reuseable/SkeltonLoader.tsx";
+import Loader from "../components/Reuseable/Loader.tsx";
 import {
   useGetSingleProductQuery,
   useCreateProductReviewMutation,
@@ -15,7 +15,6 @@ import Message from "../components/Reuseable/Message.tsx";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addItemsToCart } from "../store/store.ts";
-import Reviews from "./utils/Product/Reviews.tsx";
 import FormContainer from "../components/Reuseable/FormContainer.tsx";
 import Meta from "../components/Reuseable/Meta.tsx";
 
@@ -81,7 +80,7 @@ export default function ProductScreen() {
 
   let renderedSingleProduct;
   if (isLoading) {
-    renderedSingleProduct = <SkeltonLoader times={2} className="defaultDiv" />;
+    renderedSingleProduct = <Loader />;
   } else if (isError) {
     renderedSingleProduct = <Message danger>Error</Message>;
   } else {

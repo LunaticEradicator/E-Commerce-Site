@@ -12,6 +12,7 @@ import {
   useUploadProductImageMutation,
 } from "../../../store/apis/productsApi";
 import Meta from "../../../components/Reuseable/Meta";
+import Loader from "../../../components/Reuseable/Loader";
 
 export default function ProductEditScreen() {
   const { id: productId } = useParams();
@@ -97,7 +98,7 @@ export default function ProductEditScreen() {
 
   let rendererSingleProduct;
   if (isLoading) {
-    rendererSingleProduct = <SkeltonLoader times={1} className="defaultDiv" />;
+    rendererSingleProduct = <Loader />;
   } else if (isError) {
     rendererSingleProduct = <Message danger>Error</Message>;
   } else {
