@@ -15,7 +15,7 @@ export default function UserListScreen() {
   const { data: users, isLoading, isError, refetch } = useGetUsersAdminQuery();
   const [deleteUserByAdmin, { isLoading: deleteUserLoading }] =
     useDeleteUserByAdminMutation();
-  console.log(users);
+  // console.log(users);
   let renderedOrderList;
 
   const deleteBtnHandler = async (id: string) => {
@@ -35,42 +35,44 @@ export default function UserListScreen() {
   } else if (isError) {
     renderedOrderList = <Message danger>Error Loading Page</Message>;
   } else {
-    renderedOrderList = users.map((user) => {
-      return (
-        <tr key={user._id}>
-          <td data-label="ID">{user._id}</td>
-          <td data-label="NAME">{user.name}</td>
-          <td data-label="Email">
-            <a href={`mailto:${user.email}`}>{user.email}</a>
-          </td>
-          <td data-label="ADMIN">
-            {user.isAdmin ? (
-              <FaCheck style={{ color: "green" }} />
-            ) : (
-              <FaTimes style={{ color: "red" }} />
-            )}
-          </td>
-          <td>
-            <Button rounded className="main__myOrders__button">
-              <Link to={`/admin/userlist/${user._id}/edit`}>
-                <FaEdit style={{ color: "black", width: "15px" }} />
-              </Link>
-            </Button>
-          </td>
-          <td>
-            <Button
-              onClick={() => deleteBtnHandler(user._id)}
-              rounded
-              disabled={deleteUserLoading}
-              loading={deleteUserLoading}
-              className="productList__deleteButton"
-            >
-              <FaTrash style={{ color: "white", width: "15px" }} />
-            </Button>
-          </td>
-        </tr>
-      );
-    });
+    renderedOrderList =
+      users &&
+      users.map((user) => {
+        return (
+          <tr key={user._id}>
+            <td data-label="ID">{user._id}</td>
+            <td data-label="NAME">{user.name}</td>
+            <td data-label="Email">
+              <a href={`mailto:${user.email}`}>{user.email}</a>
+            </td>
+            <td data-label="ADMIN">
+              {user.isAdmin ? (
+                <FaCheck style={{ color: "green" }} />
+              ) : (
+                <FaTimes style={{ color: "red" }} />
+              )}
+            </td>
+            <td>
+              <Button rounded className="main__myOrders__button">
+                <Link to={`/admin/userlist/${user._id}/edit`}>
+                  <FaEdit style={{ color: "black", width: "15px" }} />
+                </Link>
+              </Button>
+            </td>
+            <td>
+              <Button
+                onClick={() => deleteBtnHandler(user._id)}
+                rounded
+                disabled={deleteUserLoading}
+                loading={deleteUserLoading}
+                className="productList__deleteButton"
+              >
+                <FaTrash style={{ color: "white", width: "15px" }} />
+              </Button>
+            </td>
+          </tr>
+        );
+      });
   }
 
   return (

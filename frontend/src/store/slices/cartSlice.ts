@@ -13,27 +13,24 @@ const cartSlice = createSlice({
     // action is the upcoming payload of it
     addItemsToCart: (state, action) => {
       const itemToAdd = action.payload;
-      console.log(itemToAdd);
       //check if the product is already added in cart
-      const itemExist = state.cartItems.find((x) => {
-        console.log(itemToAdd._id);
+      const itemExist = state.cartItems.find((x: any) => {
         return x._id === itemToAdd._id;
       });
-      // add qty to the existing item
       if (itemExist) {
-        console.log(itemExist._id);
-        state.cartItems = state.cartItems.map((x) => {
+        // add qty to the existing item
+        state.cartItems = state.cartItems.map((x: any) => {
           return x._id === itemExist._id ? itemToAdd : x;
         });
-        // add a new item if it is not in cart
       } else {
+        // add a new item if it is not in cart
         state.cartItems = [...state.cartItems, itemToAdd];
       }
       //util fnc to add prices
       return updateCartPrice(state);
     },
     removeCartItems: (state, action) => {
-      state.cartItems = state.cartItems.filter((product) => {
+      state.cartItems = state.cartItems.filter((product: any) => {
         return product._id !== action.payload;
       });
       return updateCartPrice(state);
@@ -46,7 +43,7 @@ const cartSlice = createSlice({
       state.paymentMethod = action.payload;
       return updateCartPrice(state);
     },
-    clearCartItems: (state, action) => {
+    clearCartItems: (state) => {
       state.cartItems = [];
       return updateCartPrice(state);
     },

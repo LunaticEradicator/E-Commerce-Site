@@ -2,7 +2,7 @@ import "../sass/screens/profileScreen.scss";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
-import { setCredentials } from "../store/store";
+import { RootState, setCredentials } from "../store/store";
 import { useUpdateProfileMutation } from "../store/apis/usersApi";
 import { useGetMyOrdersQuery } from "../store/apis/orderApi";
 import Loader from "../components/Reuseable/Loader";
@@ -12,7 +12,7 @@ import Button from "../components/Reuseable/Button";
 import Meta from "../components/Reuseable/Meta";
 
 export default function ProfileScreen() {
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const [updateProfile, { isLoading: loadingUpdateProfile }] =
     useUpdateProfileMutation();
@@ -43,7 +43,7 @@ export default function ProfileScreen() {
   if (isLoading) {
     renderedOrders = <Loader />;
   } else if (error) {
-    renderedOrders = <Message>{error}</Message>;
+    renderedOrders = <Message>Error Loading Page</Message>;
   } else {
     renderedOrders = (
       <table>
@@ -59,7 +59,8 @@ export default function ProfileScreen() {
           </tr>
         </thead>
         <tbody>
-          {getMyOrders.map((order) => {
+          {/* getMyOrders && */}
+          {getMyOrders?.map((order) => {
             return <Details key={order._id} {...order} />;
           })}
         </tbody>
@@ -67,20 +68,22 @@ export default function ProfileScreen() {
     );
   }
 
-  function validatePassword(event) {
+  function validatePassword(event: React.KeyboardEvent<HTMLInputElement>) {
     formData.profileConfirmPassword !== formData.profilePassword
-      ? event.target.setCustomValidity(".error-message")
-      : event.target.setCustomValidity("");
+      ? (event.target as HTMLInputElement).setCustomValidity(".error-message")
+      : (event.target as HTMLInputElement).setCustomValidity("");
   }
 
-  const formControllerHandler = (event) => {
+  const formControllerHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { value, name } = event.target;
     setFormData((prevFormData) => {
       return { ...prevFormData, [name]: value };
     });
   };
 
-  const submitHandler = async (event) => {
+  const submitHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     try {
       // we are send back a mutation from ${BASE_URL} / auth`
@@ -97,8 +100,9 @@ export default function ProfileScreen() {
       dispatch(setCredentials({ ...resBody }));
       toast.success("Profile Updated Successfully");
     } catch (error) {
-      console.log(error);
-      toast.error(error?.data?.message || error.error);
+      // console.log(error);
+      toast.error((error as Error).message);
+      // toast.error(error?.data?.message || error.error);
     }
     console.log("Submitted");
   };
@@ -112,7 +116,7 @@ export default function ProfileScreen() {
           <div className="main__profile__formContainer__name">
             <label htmlFor="profileName">Name</label>
             <input
-              onChange={() => formControllerHandler(event)}
+              onChange={(event) => formControllerHandler(event)}
               type="text"
               name="profileName"
               id="profileName"
@@ -124,7 +128,7 @@ export default function ProfileScreen() {
           <div className="main__profile__formContainer__email">
             <label htmlFor="profileEmail">Email</label>
             <input
-              onChange={() => formControllerHandler(event)}
+              onChange={(event) => formControllerHandler(event)}
               type="email"
               name="profileEmail"
               placeholder=""
@@ -138,7 +142,7 @@ export default function ProfileScreen() {
           <div className="main__profile__formContainer__password">
             <label htmlFor="profilePassword">Password</label>
             <input
-              onChange={() => formControllerHandler(event)}
+              onChange={(event) => formControllerHandler(event)}
               type="password"
               name="profilePassword"
               placeholder="Enter Password"
@@ -158,7 +162,7 @@ export default function ProfileScreen() {
           <div className="main__profile__formContainer__confirmPassword">
             <label htmlFor="profileConfirmPassword">Confirm Password</label>
             <input
-              onChange={() => formControllerHandler(event)}
+              onChange={(event) => formControllerHandler(event)}
               type="password"
               name="profileConfirmPassword"
               placeholder="Enter Confirm Password"
@@ -169,7 +173,7 @@ export default function ProfileScreen() {
             <p className="error-message">Password Does Not Match</p>
           </div>
           <Button
-            onClick={submitHandler}
+            onClick={() => submitHandler}
             className="main__profile__formContainer__updateBtn"
             secondary
             rounded
@@ -184,9 +188,7 @@ export default function ProfileScreen() {
       <div className="main__myOrders">
         {/* <div className="main__myOrders__header">My Orders</div> */}
         {renderedOrders}
-        {getMyOrders?.length === 0 && (
-          <Message style={{ textAlign: "center" }}>You Have No Orders</Message>
-        )}
+        {getMyOrders?.length === 0 && <Message>You Have No Orders</Message>}
       </div>
     </div>
   );

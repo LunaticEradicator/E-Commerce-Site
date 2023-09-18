@@ -8,15 +8,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRegisterMutation } from "../store/apis/usersApi";
 import { toast } from "react-toastify";
 import { registerCredentials } from "../store/slices/authSlice";
+import { RootState } from "../store/store";
 
 export default function RegisterScreen() {
-  const { userInfo } = useSelector((state) => {
+  const { userInfo } = useSelector((state: RootState) => {
     // console.log(state);
     return state.auth;
   }); // to access all states
   const dispatch = useDispatch(); //  used with setter function
   const navigate = useNavigate();
-  const [registerApiCall, { isLoading, error }] = useRegisterMutation(); // fetch fnc
+  const [registerApiCall, { isLoading }] = useRegisterMutation(); // fetch fnc
 
   // Checking if redirect is there in the URl
   const { search } = useLocation();
@@ -36,13 +37,15 @@ export default function RegisterScreen() {
     userConfirmPassword: "",
   });
 
-  function validatePassword(event) {
+  function validatePassword(event: React.KeyboardEvent<HTMLInputElement>) {
     formData.userConfirmPassword !== formData.userPassword
-      ? event.target.setCustomValidity(".error-message")
-      : event.target.setCustomValidity("");
+      ? (event.target as HTMLInputElement).setCustomValidity(".error-message")
+      : (event.target as HTMLInputElement).setCustomValidity("");
   }
 
-  const formControllerHandler = (event) => {
+  const formControllerHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { value, name } = event.target;
     setFormData((prevFormData) => {
       return { ...prevFormData, [name]: value };
@@ -50,7 +53,7 @@ export default function RegisterScreen() {
   };
 
   // Submit for Register
-  const submitHandler = async (event) => {
+  const submitHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (
       formData.userConfirmPassword !== formData.userPassword ||
       formData.userName !== "" ||
@@ -77,7 +80,8 @@ export default function RegisterScreen() {
         toast.success("Registered Successfully");
       } catch (error) {
         console.log(error);
-        toast.error(error?.data?.message || error.error);
+        toast.error((error as Error).message);
+        // toast.error(error?.data?.message || error.error);
       }
       console.log("Submitted");
     }
@@ -145,7 +149,7 @@ export default function RegisterScreen() {
             name="userConfirmPassword"
             required
             placeholder="Confirm password"
-            onKeyUp={() => validatePassword(event)}
+            onKeyUp={(event) => validatePassword(event)}
             onChange={formControllerHandler}
           />
           <p className="error-message">Password Does Not Match</p>

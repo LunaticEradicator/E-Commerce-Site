@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 type propRating = {
   rating: number;
-  reviewCount: number;
+  reviewCount: number | string;
   className?: string;
 };
 

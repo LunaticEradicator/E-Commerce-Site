@@ -11,5 +11,6 @@ export default defineConfig({
       },
     },
   },
+  // base: "/E-Commerce-Site/",
   plugins: [react()],
 });

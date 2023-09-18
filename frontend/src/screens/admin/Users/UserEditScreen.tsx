@@ -44,14 +44,14 @@ export default function UserEditScreen() {
     }
   }, [user, isLoading]);
 
-  const formDataHandler = (event) => {
+  const formDataHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name, checked, type } = event.target;
     setFormData((prevFormData) => {
       return { ...prevFormData, [name]: type === "checkbox" ? checked : value };
     });
   };
 
-  const submitHandler = async (event) => {
+  const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       await updateProduct({
@@ -64,7 +64,8 @@ export default function UserEditScreen() {
       navigate("/admin/userList");
       refetch();
     } catch (error) {
-      toast.error(error?.data?.message || error.error);
+      toast.error((error as Error).message);
+      // toast.error(error?.data?.message || error.error);
     }
   };
 
@@ -78,14 +79,14 @@ export default function UserEditScreen() {
       <FormContainer>
         <form
           action="#"
-          onSubmit={submitHandler}
+          onSubmit={(event) => submitHandler(event)}
           className="main__user__edit__formContainer"
           // encType="multipart/form-data"
         >
           <div className="main__user__edit__formContainer__name">
             <label htmlFor="name">Name</label>
             <input
-              onChange={() => formDataHandler(event)}
+              onChange={(event) => formDataHandler(event)}
               type="text"
               name="name"
               id="name"
@@ -96,7 +97,7 @@ export default function UserEditScreen() {
           <div className="main__user__edit__formContainer__email">
             <label htmlFor="email">Email</label>
             <input
-              onChange={() => formDataHandler(event)}
+              onChange={(event) => formDataHandler(event)}
               type="email"
               name="email"
               id="email"
@@ -110,7 +111,7 @@ export default function UserEditScreen() {
               type="checkbox"
               name="isAdmin"
               id="isAdmin"
-              onChange={() => formDataHandler(event)}
+              onChange={(event) => formDataHandler(event)}
               checked={formData?.isAdmin}
             />
           </div>

@@ -6,41 +6,55 @@ import { toast } from "react-toastify";
 import Loader from "../../../components/Reuseable/Loader";
 import { useDeliveryOrderMutation } from "../../../store/apis/orderApi";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-// import { PayPalButtons } from "@paypal/react-paypal-js";
+import { RootState } from "../../../store/store";
+import { usePayOrderMutation } from "../../../store/apis/orderApi";
+import { PayPalButtons } from "@paypal/react-paypal-js";
 // import { usePayOrderMutation } from "../../../store/apis/orderApi";
 
+interface postProp {
+  refetch: any;
+  order: any;
+  isPending: boolean;
+  orderId: number;
+  // PayPalButtons: unknown;
+  // payOrder: unknown;
+  // loadingPayOrder: boolean;
+}
 export default function Order({
   refetch,
   order,
-  loadingPayOrder,
   isPending,
-  payOrder,
   orderId,
-  PayPalButtons,
-}) {
+}: // payOrder,
+// PayPalButtons,
+// loadingPayOrder,
+postProp) {
   let renderPayPal;
-  const { userInfo } = useSelector((state) => state.auth);
-  const [deliverOrder, { isLoading: deliveryLoading }] =
-    useDeliveryOrderMutation();
+  const { userInfo } = useSelector((state: RootState) => state.auth);
+  const [deliverOrder] = useDeliveryOrderMutation();
+  const [payOrder, { isLoading: loadingPayOrder }] = usePayOrderMutation();
 
-  function onApprove(data, actions) {
-    return actions.order.capture().then(async function (details) {
+  function onApprove(data: unknown, actions: any) {
+    console.log(data);
+    return actions.order.capture().then(async function (details: unknown) {
       try {
         await payOrder({ orderId, details });
         refetch();
         toast.success("Payment Successful");
       } catch (error) {
-        toast.error(error?.data?.message || error.message);
+        toast.error((error as Error).message);
+        // toast.error(error?.data?.message || error.message);
       }
     });
   }
-  async function onApproveTest() {
-    await payOrder({ orderId, details: { payer: {} } });
-    console.log(payOrder({ orderId, details: { payer: {} } }));
-    refetch();
-    toast.success("Payment Successful");
-  }
-  function createOrder(data, actions) {
+  // async function onApproveTest() {
+  //   await payOrder({ orderId, details: { payer: {} } });
+  //   console.log(payOrder({ orderId, details: { payer: {} } }));
+  //   refetch();
+  //   toast.success("Payment Successful");
+  // }
+  function createOrder(data: unknown, actions: any) {
+    console.log(data);
     return actions.order
       .create({
         purchase_units: [
@@ -51,12 +65,13 @@ export default function Order({
           },
         ],
       })
-      .then((orderId) => {
+      .then((orderId: unknown) => {
         return orderId;
       });
   }
-  function onError(error) {
-    toast.error(error?.data?.message || error.message);
+  function onError(error: unknown) {
+    toast.error((error as Error).message);
+    // toast.error(error?.data?.message || error.message);
   }
 
   const deliveryHandler = async () => {
@@ -65,35 +80,38 @@ export default function Order({
       refetch();
       toast.success("Delivered Successfully");
     } catch (error) {
-      toast.error(error?.data?.message || error.message);
+      toast.error((error as Error).message);
+      //  toast.error(error?.data?.message || error.message);
     }
   };
 
-  const renderedOrderItems = order?.orderItems.map((item, index) => {
-    return (
-      <div key={index} className="main__orders__details__order__items">
-        <div className="main__orders__details__order__item">
-          <div className="main__orders__details__order__item__image">
-            <img
-              src={
-                item?.img.includes("upload")
-                  ? `http://localhost:8080${item?.img}`
-                  : item?.img
-              }
-              alt={item.name}
-            />
+  const renderedOrderItems = order?.orderItems.map(
+    (item: any, index: number) => {
+      return (
+        <div key={index} className="main__orders__details__order__items">
+          <div className="main__orders__details__order__item">
+            <div className="main__orders__details__order__item__image">
+              <img
+                src={
+                  item?.img.includes("upload")
+                    ? `http://localhost:8080${item?.img}`
+                    : item?.img
+                }
+                alt={item.name}
+              />
+            </div>
+            <div className="main__orders__details__order__item__name">
+              <Link to={`/products/${item._id}`}>{item.name}</Link>
+            </div>
+            <div className="main__orders__details__order__item__qty">
+              {`${item.qty} x $${item.price} = $${item.qty * item.price}`}
+            </div>
           </div>
-          <div className="main__orders__details__order__item__name">
-            <Link to={`/products/${item._id}`}>{item.name}</Link>
-          </div>
-          <div className="main__orders__details__order__item__qty">
-            {`${item.qty} x $${item.price} = $${item.qty * item.price}`}
-          </div>
+          <hr />
         </div>
-        <hr />
-      </div>
-    );
-  });
+      );
+    }
+  );
 
   if (loadingPayOrder) {
     renderPayPal = <Loader />;

@@ -25,20 +25,20 @@ const orderApi = rootApi.injectEndpoints({
         body: { ...details },
       }),
     }),
-    getPayPalClientId: builder.query({
+    getPayPalClientId: builder.query<any, void>({
       query: () => ({
         url: PAYPAL_URL,
         method: "GET",
       }),
     }),
-    getMyOrders: builder.query({
+    getMyOrders: builder.query<Array<any>, void>({
       query: () => ({
         url: `${ORDERS_URL}/myorders`,
         // method: "GET",
       }),
       keepUnusedDataFor: 5,
     }),
-    getAllOrdersAdmin: builder.query({
+    getAllOrdersAdmin: builder.query<Array<any>, void>({
       query: () => ({
         url: ORDERS_URL,
         method: "GET",

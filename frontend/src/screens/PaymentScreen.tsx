@@ -7,11 +7,12 @@ import CheckoutSteps from "../components/Reuseable/CheckoutSteps";
 import Button from "../components/Reuseable/Button";
 import { savePaymentMethod } from "../store/slices/cartSlice";
 import Meta from "../components/Reuseable/Meta";
+import { RootState } from "../store/store";
 
 export default function PaymentScreen() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { shippingAddress } = useSelector((state) => state.cart);
+  const { shippingAddress } = useSelector((state: RootState) => state.cart);
 
   useEffect(() => {
     // console.log(!shippingAddress);
@@ -26,7 +27,7 @@ export default function PaymentScreen() {
     paymentMethod: "PayPal",
   });
 
-  const inputHandler = (event) => {
+  const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
     setFormData((prevFormData) => {
       return { ...prevFormData, [name]: value };
@@ -34,7 +35,7 @@ export default function PaymentScreen() {
     console.log(value);
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log("Payment Submitted");
     event.preventDefault();
     dispatch(savePaymentMethod(formData.paymentMethod));
@@ -54,7 +55,7 @@ export default function PaymentScreen() {
               <legend>Select Method</legend>
               <label htmlFor="paymentMethod">PayPal</label>
               <input
-                onChange={() => inputHandler(event)}
+                onChange={(event) => inputHandler(event)}
                 type="radio"
                 name="paymentMethod"
                 value="PayPal"
@@ -63,7 +64,7 @@ export default function PaymentScreen() {
             </fieldset>
           </div>
           <div>
-            <Button onClick={() => submitHandler(event)} rounded secondary>
+            <Button onClick={(event) => submitHandler(event)} rounded secondary>
               Continue
             </Button>
           </div>

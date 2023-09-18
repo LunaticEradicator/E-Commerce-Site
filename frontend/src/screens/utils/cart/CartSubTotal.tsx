@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/Reuseable/Button";
+import type { RootState } from "../../../store/store";
 
 export default function CartSubTotal() {
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state: RootState) => state.cart);
   const navigate = useNavigate();
 
   const handleCheckout = () => {
@@ -14,14 +15,11 @@ export default function CartSubTotal() {
     // navigate("/shipping");
   };
 
-  const subtotalPrice = cartItems.reduce(
-    (acc: number, curr: number | string) => {
-      return Number(acc + curr?.price * curr?.qty);
-    },
-    0
-  );
+  const subtotalPrice = cartItems.reduce((acc: number, curr: any) => {
+    return Number(acc + curr?.price * curr?.qty);
+  }, 0);
 
-  const subtotalItem = cartItems.reduce((acc, curr) => {
+  const subtotalItem = cartItems.reduce((acc: number, curr: any) => {
     return acc + parseInt(curr.qty);
   }, 0);
 

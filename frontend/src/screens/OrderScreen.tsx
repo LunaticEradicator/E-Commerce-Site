@@ -1,20 +1,20 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+//  @ts-nocheck
 import "../sass/screens/orderScreen.scss";
 import Order from "./utils/order/Order";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Loader from "../components/Reuseable/Loader";
 import Message from "../components/Reuseable/Message";
 import { usePayPalScriptReducer, PayPalButtons } from "@paypal/react-paypal-js";
 import {
-  usePayOrderMutation,
+  // usePayOrderMutation,
   useGetMyOrderByIdQuery,
   useGetPayPalClientIdQuery,
 } from "../store/apis/orderApi";
 import Meta from "../components/Reuseable/Meta";
 
 export default function OrderScreen() {
-  const { userInfo } = useSelector((state) => state.cart);
   const { id: orderId } = useParams();
   const {
     data: order,
@@ -23,7 +23,7 @@ export default function OrderScreen() {
     refetch,
   } = useGetMyOrderByIdQuery(orderId);
 
-  const [payOrder, { isLoading: loadingPayOrder }] = usePayOrderMutation();
+  // const [payOrder, { isLoading: loadingPayOrder }] = usePayOrderMutation();
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
   const {
     data: paypal,
@@ -61,11 +61,11 @@ export default function OrderScreen() {
       <Order
         refetch={refetch}
         orderId={orderId}
-        payOrder={payOrder}
         order={order}
-        loadingPayOrder={loadingPayOrder}
         isPending={isPending}
         PayPalButtons={PayPalButtons}
+        // payOrder={payOrder}
+        // loadingPayOrder={loadingPayOrder}
       />
     );
   }

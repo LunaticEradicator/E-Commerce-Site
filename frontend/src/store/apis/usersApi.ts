@@ -17,7 +17,7 @@ const usersApi = rootApi.injectEndpoints({
         body: data,
       }),
     }),
-    logout: builder.mutation({
+    logout: builder.mutation<void, void>({
       query: () => ({
         url: `${USERS_URL}/logout`,
         method: "POST",
@@ -30,7 +30,7 @@ const usersApi = rootApi.injectEndpoints({
         body: data,
       }),
     }),
-    getUsersAdmin: builder.query({
+    getUsersAdmin: builder.query<Array<any>, void>({
       query: () => ({
         url: USERS_URL,
         method: "GET",

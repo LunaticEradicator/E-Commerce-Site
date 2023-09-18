@@ -1,26 +1,34 @@
 import "../../sass/components/dropDownAdmin.scss";
 import Panels from "./Panels";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { GoChevronDown } from "react-icons/go";
 import { useSelector } from "react-redux";
+import type { RootState } from "../../store/store";
+
+interface postProp {
+  options: { label: string; value: string; handler: () => void }[];
+  isDropAdmin: boolean;
+  setIsDropAdmin: any;
+  // setIsDrop: (value: boolean) => void | any;
+}
 
 export default function DropDownAdmin({
   options,
-  name,
   isDropAdmin,
   setIsDropAdmin,
-}) {
-  const { userInfo } = useSelector((state) => state.auth);
-  // const [isDrop, setIsDrop] = useState(false);
-  const divElement = useRef();
-  // console.log(isDrop);
-  // close when clicked on anywhere in screen
+}: postProp) {
+  const { userInfo } = useSelector((state: RootState) => state.auth);
+  const divElement = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    function handleClick(event: React.ChangeEvent<HTMLInputElement>) {
+    // close when clicked on anywhere in screen
+    function handleClick(event: Event) {
       if (!divElement.current) {
         return;
       }
-      if (!divElement.current.contains(event.target)) {
+      if (
+        event.target instanceof HTMLElement &&
+        !divElement.current.contains(event.target)
+      ) {
         setIsDropAdmin(false);
       }
     }
@@ -28,10 +36,10 @@ export default function DropDownAdmin({
     return () => {
       document.removeEventListener("click", handleClick);
     };
-  }, []);
+  }, [setIsDropAdmin]);
 
   const menuHandler = () => {
-    setIsDropAdmin((prevIsOpen) => !prevIsOpen);
+    setIsDropAdmin((prevIsOpen: boolean) => !prevIsOpen);
   };
 
   const renderedOption = options.map((option) => {
@@ -43,14 +51,14 @@ export default function DropDownAdmin({
   });
   return (
     <div ref={divElement} className="dropDown">
-      <Panels onClick={menuHandler} className="dropdown__header">
+      <div onClick={menuHandler} className="dropdown__header">
         {userInfo && userInfo.isAdmin && (
           <div className="dropdown__name">
             Admin
             <GoChevronDown />
           </div>
         )}
-      </Panels>
+      </div>
       {isDropAdmin && (
         <Panels
           className={

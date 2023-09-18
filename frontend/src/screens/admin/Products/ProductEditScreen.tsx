@@ -5,7 +5,6 @@ import Button from "../../../components/Reuseable/Button";
 import Message from "../../../components/Reuseable/Message";
 import FormContainer from "../../../components/Reuseable/FormContainer";
 import { toast } from "react-toastify";
-import SkeltonLoader from "../../../components/Reuseable/SkeltonLoader";
 import {
   useGetSingleProductQuery,
   useUpdateProductMutation,
@@ -34,8 +33,7 @@ export default function ProductEditScreen() {
   } = useGetSingleProductQuery(productId);
   const [updateProduct, { isLoading: updateProductLoading }] =
     useUpdateProductMutation();
-  const [uploadProductImage, { isLoading: uploadProductImageLoading }] =
-    useUploadProductImageMutation();
+  const [uploadProductImage] = useUploadProductImageMutation();
   useEffect(() => {
     if (!isLoading) {
       setFormData((prevFormData) => {
@@ -53,14 +51,17 @@ export default function ProductEditScreen() {
     }
   }, [product, isLoading]);
 
-  const formDataHandler = (event) => {
+  const formDataHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
     setFormData((prevFormData) => {
       return { ...prevFormData, [name]: value };
     });
   };
 
-  const uploadFileHandler = async (event) => {
+  const uploadFileHandler = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (!event.target.files) return;
     const formData = new FormData();
     formData.append("image", event.target.files[0]);
     console.log(formData.get("image"));
@@ -71,11 +72,11 @@ export default function ProductEditScreen() {
         return { ...prevFormData, img: res.image };
       });
     } catch (error) {
-      toast.error(error?.data?.message || error.error);
+      toast.error((error as Error).message);
     }
   };
 
-  const submitHandler = async (event) => {
+  const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       await updateProduct({
@@ -92,7 +93,8 @@ export default function ProductEditScreen() {
       navigate("/admin/productList");
       refetch();
     } catch (error) {
-      toast.error(error?.data?.message || error.error);
+      toast.error((error as Error).message);
+      // toast.error(error?.data?.message || error.error);
     }
   };
 
@@ -105,7 +107,7 @@ export default function ProductEditScreen() {
     rendererSingleProduct = (
       <FormContainer>
         <form
-          onSubmit={submitHandler}
+          onSubmit={(event) => submitHandler(event)}
           className="main__product__edit__formContainer"
           // encType="multipart/form-data"
           action="#"
@@ -113,7 +115,7 @@ export default function ProductEditScreen() {
           <div className="main__product__edit__formContainer__name">
             <label htmlFor="name">Name</label>
             <input
-              onChange={() => formDataHandler(event)}
+              onChange={(event) => formDataHandler(event)}
               type="text"
               name="name"
               id="name"
@@ -125,7 +127,7 @@ export default function ProductEditScreen() {
           <div className="main__product__edit__formContainer__brand">
             <label htmlFor="brand">Brand</label>
             <input
-              onChange={() => formDataHandler(event)}
+              onChange={(event) => formDataHandler(event)}
               type="text"
               name="brand"
               id="brand"
@@ -137,7 +139,7 @@ export default function ProductEditScreen() {
           <div className="main__product__edit__formContainer__category">
             <label htmlFor="category">Category</label>
             <input
-              onChange={() => formDataHandler(event)}
+              onChange={(event) => formDataHandler(event)}
               type="text"
               name="category"
               id="category"
@@ -152,7 +154,7 @@ export default function ProductEditScreen() {
           <div className="main__product__edit__formContainer__image">
             <label htmlFor="img">Image</label>
             <input
-              onChange={() => formDataHandler(event)}
+              onChange={(event) => formDataHandler(event)}
               type="text"
               name="img"
               className="main__product__edit__formContainer__image__one"
@@ -169,7 +171,7 @@ export default function ProductEditScreen() {
           <div className="main__product__edit__formContainer__price">
             <label htmlFor="price">Price</label>
             <input
-              onChange={() => formDataHandler(event)}
+              onChange={(event) => formDataHandler(event)}
               type="number"
               name="price"
               id="price"
@@ -181,7 +183,7 @@ export default function ProductEditScreen() {
           <div className="main__product__edit__formContainer__description">
             <label htmlFor="description">Description</label>
             <input
-              onChange={() => formDataHandler(event)}
+              onChange={(event) => formDataHandler(event)}
               type="text"
               name="description"
               id="description"
@@ -193,7 +195,7 @@ export default function ProductEditScreen() {
           <div className="main__product__edit__formContainer__countInStock">
             <label htmlFor="countInStock">Items In Stock</label>
             <input
-              onChange={() => formDataHandler(event)}
+              onChange={(event) => formDataHandler(event)}
               type="number"
               name="countInStock"
               id="countInStock"

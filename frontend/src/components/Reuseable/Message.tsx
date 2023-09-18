@@ -6,8 +6,8 @@ interface propMessage {
   danger?: boolean;
   success?: boolean;
   header?: boolean;
-  children: string | JSX.Element | JSX.Element[];
-  className: string;
+  children?: string | JSX.Element | JSX.Element[] | (string | JSX.Element)[];
+  className?: string;
 }
 
 export default function Message({
@@ -19,7 +19,7 @@ export default function Message({
   className,
   ...rest
 }: propMessage) {
-  const style = classNames(
+  const styleClass = classNames(
     "message__info",
     {
       message__warning: warning,
@@ -31,7 +31,7 @@ export default function Message({
   );
 
   return (
-    <div {...rest} className={style}>
+    <div {...rest} className={styleClass}>
       {children}
     </div>
   );

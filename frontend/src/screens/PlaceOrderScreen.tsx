@@ -7,11 +7,12 @@ import { useCreateOrderMutation } from "../store/apis/orderApi";
 import { toast } from "react-toastify";
 import { clearCartItems } from "../store/slices/cartSlice";
 import Meta from "../components/Reuseable/Meta";
+import { RootState } from "../store/store";
 
 export default function PlaceOrderScreen() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [createOrder, { error }] = useCreateOrderMutation();
+  const [createOrder] = useCreateOrderMutation();
   const {
     cartItems,
     shippingAddress,
@@ -20,7 +21,7 @@ export default function PlaceOrderScreen() {
     shippingPrice,
     taxPrice,
     totalPrice,
-  } = useSelector((state) => {
+  } = useSelector((state: RootState) => {
     return state.cart;
   });
 
@@ -46,11 +47,12 @@ export default function PlaceOrderScreen() {
       dispatch(clearCartItems());
       navigate(`/order/${res._id}`);
     } catch (error) {
-      toast.error(error?.data?.message || error?.error);
+      toast.error((error as Error).message);
+      // toast.error(error?.data?.message || error?.error);
     }
   };
 
-  const renderedOrderItems = cartItems.map((item, index) => {
+  const renderedOrderItems = cartItems.map((item: any, index: number) => {
     return (
       <div key={index} className="main__placeOrders__details__order__items">
         <Meta title={"Place Order"} />

@@ -7,9 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveShippingAddress } from "../store/slices/cartSlice";
 import CheckoutSteps from "../components/Reuseable/CheckoutSteps";
 import Meta from "../components/Reuseable/Meta";
+import { RootState } from "../store/store";
 
 export default function ShippingScreen() {
-  const { shippingAddress } = useSelector((state) => state.cart);
+  const { shippingAddress } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -20,14 +21,14 @@ export default function ShippingScreen() {
     country: shippingAddress?.country || "",
   });
 
-  const formHandler = (event) => {
+  const formHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => {
       return { ...prevFormData, [name]: value };
     });
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (
       formData.address === "" ||
       formData.city === "" ||
@@ -68,7 +69,7 @@ export default function ShippingScreen() {
             value={formData.address}
             name="address"
             placeholder="Enter Your Address"
-            onChange={() => formHandler(event)}
+            onChange={(event) => formHandler(event)}
           />
         </div>
         <div className="formContainer__shipping__city">
@@ -79,7 +80,7 @@ export default function ShippingScreen() {
             value={formData.city}
             name="city"
             placeholder="Enter Your City"
-            onChange={() => formHandler(event)}
+            onChange={(event) => formHandler(event)}
           />
         </div>
         <div className="formContainer__shipping__state">
@@ -90,7 +91,7 @@ export default function ShippingScreen() {
             value={formData.state}
             name="state"
             placeholder="Enter Your State"
-            onChange={() => formHandler(event)}
+            onChange={(event) => formHandler(event)}
           />
         </div>
         <div className="formContainer__shipping__postalCode">
@@ -101,7 +102,7 @@ export default function ShippingScreen() {
             value={formData.postalCode}
             name="postalCode"
             placeholder="Enter Your Pincode"
-            onChange={() => formHandler(event)}
+            onChange={(event) => formHandler(event)}
           />
         </div>
         <div className="formContainer__shipping__country">
@@ -112,11 +113,11 @@ export default function ShippingScreen() {
             value={formData.country}
             name="country"
             placeholder="Enter Your Country"
-            onChange={() => formHandler(event)}
+            onChange={(event) => formHandler(event)}
           />
         </div>
         <Button
-          onClick={() => submitHandler(event)}
+          onClick={(event) => submitHandler(event)}
           secondary
           rounded
           className="formContainer__shipping__button"

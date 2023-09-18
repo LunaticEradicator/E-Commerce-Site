@@ -17,35 +17,37 @@ export default function OrderListScreen() {
   } else if (error) {
     renderedOrderList = <Message danger>Error Loading Page</Message>;
   } else {
-    renderedOrderList = getAllOrders.map((order) => {
-      return (
-        <tr key={order._id}>
-          <td data-label="ID">{order._id}</td>
-          <td data-label="USER">{order.user && order.user.name}</td>
-          <td data-label="DATE">{order.createdAt.substring(0, 10)}</td>
-          <td data-label="TOTAL">{order.totalPrice}</td>
-          <td data-label="PAID">
-            {order.isPaid ? (
-              order.paidAt.substring(0, 10)
-            ) : (
-              <FaTimes style={{ color: "red" }} />
-            )}
-          </td>
-          <td data-label="DELIVERED">
-            {order.isDelivered ? (
-              order.deliveredAt.substring(0, 10)
-            ) : (
-              <FaTimes style={{ color: "red" }} />
-            )}
-          </td>
-          <td>
-            <Button rounded>
-              <Link to={`/order/${order._id}`}>Details</Link>
-            </Button>
-          </td>
-        </tr>
-      );
-    });
+    renderedOrderList =
+      getAllOrders &&
+      getAllOrders.map((order) => {
+        return (
+          <tr key={order._id}>
+            <td data-label="ID">{order._id}</td>
+            <td data-label="USER">{order.user && order.user.name}</td>
+            <td data-label="DATE">{order.createdAt.substring(0, 10)}</td>
+            <td data-label="TOTAL">{order.totalPrice}</td>
+            <td data-label="PAID">
+              {order.isPaid ? (
+                order.paidAt.substring(0, 10)
+              ) : (
+                <FaTimes style={{ color: "red" }} />
+              )}
+            </td>
+            <td data-label="DELIVERED">
+              {order.isDelivered ? (
+                order.deliveredAt.substring(0, 10)
+              ) : (
+                <FaTimes style={{ color: "red" }} />
+              )}
+            </td>
+            <td>
+              <Button rounded>
+                <Link to={`/order/${order._id}`}>Details</Link>
+              </Button>
+            </td>
+          </tr>
+        );
+      });
   }
 
   return (

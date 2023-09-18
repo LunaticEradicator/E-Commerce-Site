@@ -1,7 +1,7 @@
 import "../../sass/components/searchBox.scss";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Button from "./Button";
 
@@ -10,7 +10,7 @@ export default function SearchBox() {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState(keyword || "");
   // console.log(searchValue);
-  const submitHandler = (event) => {
+  const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     //   searchValue
     if (keyword !== "") {
@@ -23,7 +23,11 @@ export default function SearchBox() {
   };
   return (
     <div className="searchBox">
-      <form className="searchBox__form" onSubmit={submitHandler} action="#">
+      <form
+        className="searchBox__form"
+        onSubmit={(event) => submitHandler(event)}
+        action="#"
+      >
         <div className="searchBox__form__search">
           <input
             type="text"

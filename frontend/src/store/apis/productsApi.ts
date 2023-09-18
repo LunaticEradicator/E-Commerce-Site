@@ -23,7 +23,7 @@ export const productsApi = rootApi.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
-    createProduct: builder.mutation({
+    createProduct: builder.mutation<void, void>({
       query: () => ({
         url: PRODUCTS_URL,
         method: "POST",
@@ -58,7 +58,7 @@ export const productsApi = rootApi.injectEndpoints({
         body: data,
       }),
     }),
-    getTopRatedProduct: builder.query({
+    getTopRatedProduct: builder.query<[any], void>({
       query: () => ({
         url: `${PRODUCTS_URL}/top`,
         method: "GET",

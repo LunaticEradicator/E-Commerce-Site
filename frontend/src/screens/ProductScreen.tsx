@@ -14,13 +14,13 @@ import Rating from "../components/Reuseable/Rating";
 import Message from "../components/Reuseable/Message.tsx";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addItemsToCart } from "../store/store.ts";
+import { RootState, addItemsToCart } from "../store/store.ts";
 import FormContainer from "../components/Reuseable/FormContainer.tsx";
 import Meta from "../components/Reuseable/Meta.tsx";
 
 export default function ProductScreen() {
   const { id: productId } = useParams();
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -44,7 +44,8 @@ export default function ProductScreen() {
   const [createReview, { isLoading: productReviewLoading }] =
     useCreateProductReviewMutation();
 
-  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+  // const handleInput = (event: React.ChangeEventHandler<HTMLSelectElement>) => {
+  const handleInput = (event: any) => {
     const { value, name } = event.target;
     // setQty(value);
     setFormData((prevFormData) => {
@@ -58,7 +59,7 @@ export default function ProductScreen() {
     dispatch(addItemsToCart({ ...selectedProduct, qty: formData?.qty }));
   };
 
-  const submitHandler = async (event) => {
+  const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       await createReview({
@@ -74,7 +75,8 @@ export default function ProductScreen() {
         return { ...prevFormData, comment: "", rating: 0 };
       });
     } catch (error) {
-      toast.error(error?.data?.message || error.error);
+      toast.error((error as Error).message);
+      // toast.error(error?.data?.message || error.error);
     }
   };
 
@@ -174,7 +176,7 @@ export default function ProductScreen() {
             {selectedProduct.reviews.length === 0 && (
               <Message>No Reviews</Message>
             )}
-            {selectedProduct.reviews.map((review) => {
+            {selectedProduct.reviews.map((review: any) => {
               return (
                 <div className="main__productDisplayed__reviews__content__info">
                   <h2>{review?.name}</h2>
@@ -201,14 +203,14 @@ export default function ProductScreen() {
                   Write a Review
                 </Message>
                 <FormContainer>
-                  <form action="#" onSubmit={submitHandler}>
+                  <form action="#" onSubmit={(event) => submitHandler(event)}>
                     <div className="main__productDisplayed__reviews__content__create__topic">
                       <label htmlFor="topic">Header</label>
                       <textarea
                         name="topic"
                         id="topic"
-                        cols="10"
-                        rows="1"
+                        cols={10}
+                        rows={1}
                         value={formData?.topic}
                         onChange={handleInput}
                         required
@@ -219,8 +221,8 @@ export default function ProductScreen() {
                       <textarea
                         name="comment"
                         id="comment"
-                        cols="10"
-                        rows="2"
+                        cols={10}
+                        rows={2}
                         value={formData?.comment}
                         onChange={handleInput}
                         required

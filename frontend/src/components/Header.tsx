@@ -11,12 +11,13 @@ import { removeCredentials } from "../store/slices/authSlice";
 import { useLogoutMutation } from "../store/apis/usersApi";
 import { toast } from "react-toastify";
 import SearchBox from "./Reuseable/SearchBox";
+import type { RootState } from "../store/store";
 
 export default function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { cartItems } = useSelector((state: any) => state.cart);
-  const { userInfo } = useSelector((state: any) => state.auth);
+  const { cartItems } = useSelector((state: RootState) => state.cart);
+  const { userInfo } = useSelector((state: RootState) => state.auth);
   const [logoutApiCall] = useLogoutMutation();
 
   // for nav we add a new class which will make all li be block only when screen is medium
@@ -89,8 +90,8 @@ export default function Header() {
   ];
 
   // Display number of Item selected by user in cart
-  const cartHeader = cartItems.reduce((acc, curr) => {
-    return acc + Number(curr.qty);
+  const cartHeader = cartItems.reduce((acc: number, curr: any) => {
+    return acc + Number(curr?.qty);
   }, 0);
 
   //? "expanded" is a class that will only be added if the display is a phone [medium media query]
@@ -117,7 +118,7 @@ export default function Header() {
           >
             <DropDownAdmin
               options={dropDownOptionsAdmin}
-              name={userInfo.name}
+              // name={userInfo.name}
               isDropAdmin={isDropAdmin}
               setIsDropAdmin={setIsDropAdmin}
             />
@@ -163,9 +164,11 @@ export default function Header() {
           </Link>
         </li>
         {/* DropDown li Last [hamburger icon ] */}
+        {/* <div onClick={navBarExpandHandler}> */}
         <Button className="navbar__item" onClick={navBarExpandHandler}>
           <IoMenuSharp />
         </Button>
+        {/* </div> */}
       </ul>
     </nav>
   );

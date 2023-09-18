@@ -58,7 +58,7 @@ export default function HomeScreen() {
   } else if (isError || topRatedError) {
     renderDetail = <Message danger>Error</Message>;
   } else {
-    renderDetail = data?.products.map((product) => {
+    renderDetail = data?.products.map((product: any) => {
       return (
         <Panels key={product._id} className="main__product__panel">
           <Link to={`/products/${product._id}`}>
@@ -107,7 +107,7 @@ export default function HomeScreen() {
         <div className="carousel">
           {/* fix for smaller screen */}
           <Carousel
-            slides={topRatedProduct}
+            slides={topRatedProduct!}
             parentWidth={responsiveCarousel()}
           />
         </div>

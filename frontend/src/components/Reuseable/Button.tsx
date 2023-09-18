@@ -14,6 +14,7 @@ interface propButton {
   warning?: boolean;
   rounded?: boolean;
   outline?: boolean;
+  onClick?: (event?: any) => void;
 }
 
 export default function Button({
@@ -28,9 +29,10 @@ export default function Button({
   rounded,
   outline,
   loading,
+  onClick,
   ...rest
 }: propButton) {
-  const style = classNames(rest?.className, "button", className, {
+  const style = classNames("button", className, {
     // if the corresponding boolean[props] is true, select it's class
     button__loading: loading && !disabled,
     button__primary: primary && !disabled,
@@ -49,7 +51,12 @@ export default function Button({
   });
 
   return (
-    <button {...rest} disabled={disabled ? true : false} className={style}>
+    <button
+      {...rest}
+      onClick={onClick}
+      disabled={disabled ? true : false}
+      className={style}
+    >
       {loading ? <GoSync className="animation-spin" /> : children}
     </button>
   );

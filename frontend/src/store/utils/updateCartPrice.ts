@@ -1,12 +1,12 @@
-const addDecimals = (num: number) => {
+const addDecimals = (num: any) => {
   return (Math.floor(num * 100) / 100).toFixed(2);
 };
 
-const updateCartPrice = (state) => {
+const updateCartPrice = (state: any) => {
   // Calculate Price [Item Price, Shipping Price, Tax Price, Total Price]
   //? Item Price
   state.itemsPrice = addDecimals(
-    state.cartItems.reduce((acc: number, item) => {
+    state.cartItems.reduce((acc: number, item: any) => {
       // console.log(item);
       return Number(acc + item.price * item.qty);
     }, 0)
@@ -16,7 +16,7 @@ const updateCartPrice = (state) => {
   state.shippingPrice = addDecimals(state.itemsPrice > 1000 ? 0 : 120);
   //? Tax Price
   // add 5% tax
-  state.taxPrice = addDecimals(Number(0.15 * state.itemsPrice).toFixed(2));
+  state.taxPrice = addDecimals(Number(0.05 * state.itemsPrice).toFixed(2));
   // ? Total Price
   state.totalPrice = (
     Number(state.itemsPrice) +

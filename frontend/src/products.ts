@@ -1,9 +1,5 @@
-// import rtx4060 from "./assets/rtx 4060.jpg";
-// import rtx4070 from "./assets/rtx 4070.jpg";
-// import rtx4080 from "./assets/rtx 4080.jpg";
-// import rtx4090 from "./assets/rtx 4090.jpg";
-
-// no need of this file since we are calling it from backend
+//? Only When Using Frontend
+//?no need of this file since we are calling it from backend
 
 export default [
   {

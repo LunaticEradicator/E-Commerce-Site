@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const sliderContainerStyle = {
   height: "90%",
   position: "relative",
-};
+} as React.CSSProperties;
 const sliderStyle = {
   width: "100%",
   height: "100%",
@@ -32,9 +32,15 @@ const slidesContainerStylesOverflowHidden = {
   height: "100%",
   borderRadius: "10px",
 };
-
-export default function Carousel({ slides, parentWidth }) {
-  const timeRef = useRef(null);
+// interface sike {}
+interface postProps {
+  slides: [object | any];
+  parentWidth: number;
+}
+export default function Carousel({ slides, parentWidth }: postProps) {
+  // const timeRef = useRef(timeRef.current>(null));
+  // const timeRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const timeRef = useRef<number>();
   const [currentIndex, setCurrentIndex] = useState(0);
   // updatedSlides add a extra property [isCheckedColor]
   // updatedSlide will only return if the product is in stock
@@ -66,12 +72,12 @@ export default function Carousel({ slides, parentWidth }) {
     updatedSlides[0].isCheckedColor = true;
   }
 
-  const ChangeDotColorAutomatically = (newIndex) => {
+  const ChangeDotColorAutomatically = (newIndex: number) => {
     // Automatically Change Dot Color
     // If the AutomaticIndex [newIndex] === Dot Index
     // Dot will change color [ if isCheckedColor === true ]
-    setUpdatedSlides((prevUpdatedSlides) =>
-      prevUpdatedSlides.map((slide, index) => {
+    setUpdatedSlides((prevUpdatedSlides: object[]) =>
+      prevUpdatedSlides.map((slide: object, index: number) => {
         return index === newIndex
           ? { ...slide, isCheckedColor: true }
           : { ...slide, isCheckedColor: false };
@@ -79,13 +85,13 @@ export default function Carousel({ slides, parentWidth }) {
     );
   };
 
-  const ChangeDotColorManually = (id) => {
+  const ChangeDotColorManually = (id: number) => {
     // Change Dot Color when user clicks
     // If functionId  === Dot Id
     // Dot will change color [ if isCheckedColor === true ]
     setUpdatedSlides((prevUpdatedSlides) =>
       prevUpdatedSlides.map((slide) => {
-        return slide._id === id
+        return slide?._id === id
           ? { ...slide, isCheckedColor: true }
           : { ...slide, isCheckedColor: false };
       })
@@ -108,14 +114,14 @@ export default function Carousel({ slides, parentWidth }) {
     ChangeDotColorAutomatically(newIndex);
   }, [currentIndex, updatedSlides]);
 
-  const dotHandler = (dotIndex, id) => {
+  const dotHandler = (dotIndex: number, id: number) => {
     setCurrentIndex(dotIndex);
     ChangeDotColorManually(id);
   };
 
   // To Change Image With Index
   // Using the Data Array
-  const getSlideStylesWidthBackground = (slideIndex) => {
+  const getSlideStylesWidthBackground = (slideIndex: number) => {
     return {
       ...sliderStyle,
       // updatedSlides[0].img => an image
@@ -127,7 +133,7 @@ export default function Carousel({ slides, parentWidth }) {
           : updatedSlides[slideIndex]?.img
       }')`,
       width: `${parentWidth}px`,
-    };
+    } as React.CSSProperties;
   };
 
   // Transform [Animation]
@@ -147,6 +153,8 @@ export default function Carousel({ slides, parentWidth }) {
     timeRef.current = setTimeout(() => {
       nextArrowHeadHandler();
     }, 3100);
+
+    console.log(timeRef.current);
     return () => clearTimeout(timeRef.current);
   }, [nextArrowHeadHandler]);
 
@@ -164,7 +172,7 @@ export default function Carousel({ slides, parentWidth }) {
       {/* Animation */}
       <div style={slidesContainerStylesOverflowHidden}>
         <div style={getSlidesContainerStylesWithWidth()}>
-          {updatedSlides?.map((slide, slideIndex) => {
+          {updatedSlides?.map((slide, slideIndex: number) => {
             return (
               slide && (
                 <div key={slideIndex}>

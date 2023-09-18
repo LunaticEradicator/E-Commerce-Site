@@ -5,24 +5,25 @@ import { useSelector, useDispatch } from "react-redux";
 import Button from "../../../components/Reuseable/Button";
 import Message from "../../../components/Reuseable/Message";
 import { addItemsToCart, removeCartItems } from "../../../store/store";
+import type { RootState } from "../../../store/store";
 
 export default function CartItems() {
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
 
   const updateCartHandler = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLSelectElement>,
     product: object
   ) => {
     dispatch(addItemsToCart({ ...product, qty: event.target.value }));
   };
 
-  const removeItemHandler = (id) => {
-    console.log(id);
+  const removeItemHandler = (id: number) => {
+    // console.log(id);
     dispatch(removeCartItems(id));
   };
 
-  const renderedCart = cartItems.map((item) => {
+  const renderedCart = cartItems.map((item: any) => {
     return (
       <div key={item._id}>
         <div className="main__cart__item__details__product">
@@ -48,7 +49,7 @@ export default function CartItems() {
           <div className="main__cart__item__details__product__qty">
             <form action="#">
               <select
-                onChange={() => updateCartHandler(event, item)}
+                onChange={(event) => updateCartHandler(event, item)}
                 name="cart"
                 value={item.qty}
               >

@@ -43,7 +43,8 @@ export default function ProductListScreen() {
         await createProduct();
         refetch();
       } catch (error) {
-        toast.error(error?.data?.message || error.error);
+        toast.error((error as Error).message);
+        // toast.error(error?.data?.message || error.error);
       }
     }
   };
@@ -54,7 +55,7 @@ export default function ProductListScreen() {
   if (isError) {
     renderedProductList = <Message danger>Error Loading Page</Message>;
   } else {
-    renderedProductList = data?.products?.map((product) => {
+    renderedProductList = data?.products?.map((product: any) => {
       return (
         <tr key={product._id}>
           <td data-label="ID">{product._id}</td>

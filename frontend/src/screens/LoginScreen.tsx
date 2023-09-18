@@ -6,7 +6,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "../store/apis/usersApi";
 import { toast } from "react-toastify";
-import { setCredentials } from "../store/store"; // setter function
+import { RootState, setCredentials } from "../store/store"; // setter function
 
 export default function LoginScreen() {
   const dispatch = useDispatch(); //  used with setter function
@@ -22,7 +22,7 @@ export default function LoginScreen() {
   // so if we have userInfo [localStorage] we will be signed in automatically and will be redirected to redirect
   // [ex : - redirect to shipping from cart if userInfo is there]
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state: RootState) => state.auth);
 
   //checking if url have 'redirect' in it's address
   const { search } = useLocation();
@@ -39,7 +39,9 @@ export default function LoginScreen() {
   }, [userInfo, redirect, navigate]);
   // console.log(redirect);
 
-  const formControllerHandler = (event) => {
+  const formControllerHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { value, name } = event.target;
     setFormData((prevFormData) => {
       return { ...prevFormData, [name]: value };
@@ -47,7 +49,9 @@ export default function LoginScreen() {
   };
 
   // Submit for login
-  const submitHandler = async (event) => {
+  const submitHandler = async (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
     event.preventDefault();
     try {
       // we are send back a mutation from ${BASE_URL} / auth`
@@ -64,7 +68,8 @@ export default function LoginScreen() {
       toast.success("Login Successfully");
     } catch (error) {
       console.log(error);
-      toast.error(error?.data?.message || error.error);
+      toast.error((error as Error).message);
+      // toast.error(error?.data?.message || error.error);
     }
     console.log("Submitted");
   };
@@ -96,7 +101,7 @@ export default function LoginScreen() {
           />
         </div>
         <Button
-          onClick={submitHandler}
+          onClick={(event) => submitHandler(event)}
           className="formContainer__loginBtn"
           secondary
           rounded

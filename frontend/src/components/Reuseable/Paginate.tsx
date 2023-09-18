@@ -6,7 +6,7 @@ interface postProp {
   pages: number;
   page: number;
   isAdmin: boolean;
-  keyword: string;
+  keyword?: string;
 }
 export default function Paginate({
   pages,
