@@ -5,7 +5,7 @@ import Product from "../models/productModel.js"; // Instead we will call through
 // @route GET/api/products
 // @access public
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 5; // number of item displayed on screen;
+  const pageSize = process.env.PAGINATION_LIMIT; // number of item displayed on screen;
   const page = Number(req.query.pageNumber) || 1; // find the page number using url
   // for product searching
   // we are using regex so that strict search won't happen

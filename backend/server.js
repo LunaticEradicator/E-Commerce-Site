@@ -26,9 +26,9 @@ app.use(cookieParser());
 const port = process.env.PORT || 8080;
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("...........Running API.........");
-});
+// app.get("/", (req, res) => {
+//   res.send("...........Running API.........");
+// });
 
 // routes
 app.use("/api/products", productRouter);
@@ -53,10 +53,13 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
   });
 } else {
-  app.listen(port, () => {
-    console.log(`Listing to server ${port}`);
+  app.get("/", (req, res) => {
+    res.send("...........Running API.........");
   });
 }
+app.listen(port, () => {
+  console.log(`Listing to server ${port}`);
+});
 
 //! Custom Error Handling
 app.use(notFoundURL);

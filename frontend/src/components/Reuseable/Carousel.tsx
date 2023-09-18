@@ -45,21 +45,22 @@ export default function Carousel({ slides, parentWidth }: postProps) {
   // updatedSlides add a extra property [isCheckedColor]
   // updatedSlide will only return if the product is in stock
   const [updatedSlides, setUpdatedSlides] = useState(
-    slides
-      .map((slide) => {
-        return (
-          slide.countInStock !== 0 && {
-            ...slide,
-            isCheckedColor: false, // to fill first dot when page loads
-          }
-        );
-      })
-      // if product is not in stock it will return a false value in array
-      // so to skip the false value
-      // we filter and only return the truthy value
-      .filter((slide) => {
-        return slide && slide;
-      })
+    slides &&
+      slides
+        .map((slide) => {
+          return (
+            slide.countInStock !== 0 && {
+              ...slide,
+              isCheckedColor: false, // to fill first dot when page loads
+            }
+          );
+        })
+        // if product is not in stock it will return a false value in array
+        // so to skip the false value
+        // we filter and only return the truthy value
+        .filter((slide) => {
+          return slide && slide;
+        })
   );
   //? condition that will only mark the first dot when page loads
   //  else it won't be filled
