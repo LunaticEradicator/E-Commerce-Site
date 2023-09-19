@@ -126,12 +126,15 @@ export default function Carousel({ slides, parentWidth }: postProps) {
     return {
       ...sliderStyle,
       // updatedSlides[0].img => an image
-
       // backgroundImage: `url('${updatedSlides[slideIndex]?.img}')`,
+      //? Multer res.send changed from filepath to filename
+      //? If img-name does not contain 'images'
+      //? then we will add '/uploads/img-name'
+      //? since multer img-name only has 'filename'
       backgroundImage: `url('${
-        updatedSlides[slideIndex]?.img.includes("upload")
-          ? `http://localhost:8080${updatedSlides[slideIndex]?.img}`
-          : updatedSlides[slideIndex]?.img
+        updatedSlides[slideIndex]?.img.includes("images")
+          ? updatedSlides[slideIndex]?.img
+          : `/uploads/${updatedSlides[slideIndex]?.img}`
       }')`,
       width: `${parentWidth}px`,
     } as React.CSSProperties;
@@ -155,7 +158,7 @@ export default function Carousel({ slides, parentWidth }: postProps) {
       nextArrowHeadHandler();
     }, 3100);
 
-    console.log(timeRef.current);
+    // console.log(timeRef.current);
     return () => clearTimeout(timeRef.current);
   }, [nextArrowHeadHandler]);
 

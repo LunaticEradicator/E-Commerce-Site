@@ -41,9 +41,8 @@ postProp) {
         await payOrder({ orderId, details });
         refetch();
         toast.success("Payment Successful");
-      } catch (error) {
-        toast.error((error as Error).message);
-        // toast.error(error?.data?.message || error.message);
+      } catch (error: any) {
+        toast.error(error?.data?.message || error.error);
       }
     });
   }
@@ -69,9 +68,8 @@ postProp) {
         return orderId;
       });
   }
-  function onError(error: unknown) {
-    toast.error((error as Error).message);
-    // toast.error(error?.data?.message || error.message);
+  function onError(error: any) {
+    toast.error(error?.data?.message || error.error);
   }
 
   const deliveryHandler = async () => {
@@ -79,9 +77,8 @@ postProp) {
       await deliverOrder(orderId);
       refetch();
       toast.success("Delivered Successfully");
-    } catch (error) {
-      toast.error((error as Error).message);
-      //  toast.error(error?.data?.message || error.message);
+    } catch (error: any) {
+      toast.error(error?.data?.message || error.error);
     }
   };
 
@@ -93,9 +90,9 @@ postProp) {
             <div className="main__orders__details__order__item__image">
               <img
                 src={
-                  item?.img.includes("upload")
-                    ? `http://localhost:8080${item?.img}`
-                    : item?.img
+                  item?.img.includes("images")
+                    ? item?.img
+                    : `/uploads/${item?.img}`
                 }
                 alt={item.name}
               />

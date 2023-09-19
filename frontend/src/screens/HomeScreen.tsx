@@ -64,15 +64,15 @@ export default function HomeScreen() {
           <Link to={`/products/${product._id}`}>
             <img
               className="main__product__img"
-              //? If the image is from backend change server to 8080
-              //? [Took 2 days to fix]
-              //? see ProductEditScreen
+              //? Multer res.send changed from filepath to filename
+              //? If img-name does not contain 'images'
+              //? then we will add '/uploads/img-name'
+              //? since multer img-name only has 'filename'
               src={
-                product?.img.includes("upload")
-                  ? `http://localhost:8080${product?.img}`
-                  : product?.img
+                product?.img.includes("images")
+                  ? product?.img
+                  : `/uploads/${product?.img}`
               }
-              // src={product?.img}
               alt="img"
             />
           </Link>

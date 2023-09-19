@@ -66,10 +66,8 @@ export default function LoginScreen() {
       dispatch(setCredentials({ ...res }));
       navigate(redirect);
       toast.success("Login Successfully");
-    } catch (error) {
-      console.log(error);
-      toast.error((error as Error).message);
-      // toast.error(error?.data?.message || error.error);
+    } catch (error: any) {
+      toast.error(error?.data?.message || error.error);
     }
     console.log("Submitted");
   };

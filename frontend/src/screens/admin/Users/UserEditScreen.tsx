@@ -63,9 +63,8 @@ export default function UserEditScreen() {
       toast.success("User Updated Successfully");
       navigate("/admin/userList");
       refetch();
-    } catch (error) {
-      toast.error((error as Error).message);
-      // toast.error(error?.data?.message || error.error);
+    } catch (error: any) {
+      toast.error(error?.data?.message || error.error);
     }
   };
 

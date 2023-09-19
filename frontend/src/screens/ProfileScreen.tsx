@@ -99,10 +99,8 @@ export default function ProfileScreen() {
       // we are saving it in localStorage
       dispatch(setCredentials({ ...resBody }));
       toast.success("Profile Updated Successfully");
-    } catch (error) {
-      // console.log(error);
-      toast.error((error as Error).message);
-      // toast.error(error?.data?.message || error.error);
+    } catch (error: any) {
+      toast.error(error?.data?.message || error.error);
     }
     console.log("Submitted");
   };

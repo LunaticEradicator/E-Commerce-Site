@@ -46,9 +46,8 @@ export default function PlaceOrderScreen() {
       }).unwrap();
       dispatch(clearCartItems());
       navigate(`/order/${res._id}`);
-    } catch (error) {
-      toast.error((error as Error).message);
-      // toast.error(error?.data?.message || error?.error);
+    } catch (error: any) {
+      toast.error(error?.data?.message || error?.error);
     }
   };
 
@@ -60,9 +59,9 @@ export default function PlaceOrderScreen() {
           <div className="main__placeOrders__details__order__item__image">
             <img
               src={
-                item?.img.includes("upload")
-                  ? `http://localhost:8080${item?.img}`
-                  : item?.img
+                item?.img.includes("images")
+                  ? item?.img
+                  : `/uploads/${item?.img}`
               }
               alt={item.name}
             />

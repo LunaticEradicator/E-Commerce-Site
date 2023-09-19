@@ -42,16 +42,12 @@ export default function ProductListScreen() {
       try {
         await createProduct();
         refetch();
-      } catch (error) {
-        toast.error((error as Error).message);
-        // toast.error(error?.data?.message || error.error);
+      } catch (error: any) {
+        toast.error(error?.data?.message || error.error);
       }
     }
   };
 
-  // if (isLoading) {
-  //   renderedProductList = <SkeltonLoader times={1} className="defaultDiv" />;
-  // } else
   if (isError) {
     renderedProductList = <Message danger>Error Loading Page</Message>;
   } else {

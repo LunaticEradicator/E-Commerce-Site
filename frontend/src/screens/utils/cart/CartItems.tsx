@@ -31,9 +31,9 @@ export default function CartItems() {
             <div className="main__cart__item__details__product__header__image">
               <img
                 src={
-                  item?.img.includes("upload")
-                    ? `http://localhost:8080${item?.img}`
-                    : item?.img
+                  item?.img.includes("images")
+                    ? item?.img
+                    : `/uploads/${item?.img}`
                 }
                 alt={item.name}
               />

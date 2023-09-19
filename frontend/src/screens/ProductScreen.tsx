@@ -74,9 +74,8 @@ export default function ProductScreen() {
       setFormData((prevFormData) => {
         return { ...prevFormData, comment: "", rating: 0 };
       });
-    } catch (error) {
-      toast.error((error as Error).message);
-      // toast.error(error?.data?.message || error.error);
+    } catch (error: any) {
+      toast.error(error?.data?.message || error.error);
     }
   };
 
@@ -92,9 +91,9 @@ export default function ProductScreen() {
           <div className="main__productDisplayed__content__top">
             <img
               src={
-                selectedProduct?.img.includes("upload")
-                  ? `http://localhost:8080${selectedProduct?.img}`
-                  : selectedProduct?.img
+                selectedProduct?.img.includes("images")
+                  ? selectedProduct?.img
+                  : `/uploads/${selectedProduct?.img}`
               }
               alt={selectedProduct?.name}
               className="main__productDisplayed__content__top__img"
@@ -176,9 +175,12 @@ export default function ProductScreen() {
             {selectedProduct.reviews.length === 0 && (
               <Message>No Reviews</Message>
             )}
-            {selectedProduct.reviews.map((review: any) => {
+            {selectedProduct.reviews.map((review: any, index: number) => {
               return (
-                <div className="main__productDisplayed__reviews__content__info">
+                <div
+                  key={index}
+                  className="main__productDisplayed__reviews__content__info"
+                >
                   <h2>{review?.name}</h2>
                   <div className="main__productDisplayed__reviews__content__info__div">
                     <strong>{review?.topic}</strong>

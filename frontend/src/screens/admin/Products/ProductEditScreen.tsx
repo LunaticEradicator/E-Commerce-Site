@@ -71,8 +71,9 @@ export default function ProductEditScreen() {
       setFormData((prevFormData) => {
         return { ...prevFormData, img: res.image };
       });
-    } catch (error) {
-      toast.error((error as Error).message);
+    } catch (error: any) {
+      toast.error(error?.data?.message || error.error);
+      // toast.error("Sike");
     }
   };
 
