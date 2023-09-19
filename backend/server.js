@@ -43,11 +43,10 @@ app.get("/api/config/paypal", (req, res) =>
 
 //static folder
 const __dirname = path.resolve();
-app.use("/uploads", express.static(path.join(__dirname, "uploads/")));
-
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
-});
+app.use(
+  "/uploads",
+  express.static(path.join(__dirname, "/frontend/public/uploads/"))
+);
 
 if (process.env.NODE_ENV === "production") {
   // set static folder
@@ -61,6 +60,10 @@ if (process.env.NODE_ENV === "production") {
     res.send("...........Running API.........");
   });
 }
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
+});
 
 app.listen(port, () => {
   console.log(`Listing to server ${port}`);
