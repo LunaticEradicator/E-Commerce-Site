@@ -171,7 +171,7 @@ export default function ProfileScreen() {
             <p className="error-message">Password Does Not Match</p>
           </div>
           <Button
-            onClick={() => submitHandler}
+            onClick={(event) => submitHandler(event)}
             className="main__profile__formContainer__updateBtn"
             secondary
             rounded
