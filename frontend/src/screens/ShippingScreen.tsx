@@ -70,6 +70,7 @@ export default function ShippingScreen() {
             name="address"
             placeholder="Enter Your Address"
             onChange={(event) => formHandler(event)}
+            autoComplete="off"
           />
         </div>
         <div className="formContainer__shipping__city">
@@ -81,6 +82,7 @@ export default function ShippingScreen() {
             name="city"
             placeholder="Enter Your City"
             onChange={(event) => formHandler(event)}
+            autoComplete="off"
           />
         </div>
         <div className="formContainer__shipping__state">
@@ -92,6 +94,7 @@ export default function ShippingScreen() {
             name="state"
             placeholder="Enter Your State"
             onChange={(event) => formHandler(event)}
+            autoComplete="off"
           />
         </div>
         <div className="formContainer__shipping__postalCode">
@@ -103,6 +106,7 @@ export default function ShippingScreen() {
             name="postalCode"
             placeholder="Enter Your Pincode"
             onChange={(event) => formHandler(event)}
+            autoComplete="off"
           />
         </div>
         <div className="formContainer__shipping__country">
@@ -114,6 +118,7 @@ export default function ShippingScreen() {
             name="country"
             placeholder="Enter Your Country"
             onChange={(event) => formHandler(event)}
+            autoComplete="off"
           />
         </div>
         <Button

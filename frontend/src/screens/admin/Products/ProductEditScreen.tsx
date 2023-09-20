@@ -123,6 +123,7 @@ export default function ProductEditScreen() {
               placeholder=""
               required
               value={formData?.name}
+              autoComplete="off"
             />
           </div>
           <div className="main__product__edit__formContainer__brand">
@@ -135,6 +136,7 @@ export default function ProductEditScreen() {
               placeholder=""
               required
               value={formData?.brand}
+              autoComplete="off"
             />
           </div>
           <div className="main__product__edit__formContainer__category">
@@ -147,6 +149,7 @@ export default function ProductEditScreen() {
               placeholder=""
               required
               value={formData?.category}
+              autoComplete="off"
             />
           </div>
           {/* If the image is from backend change server to 8080 */}
@@ -162,11 +165,13 @@ export default function ProductEditScreen() {
               placeholder="Enter Image URL"
               required
               value={formData?.img}
+              autoComplete="off"
             />
             <input
               className="main__product__edit__formContainer__image__two"
               type="file"
               onChange={uploadFileHandler}
+              autoComplete="off"
             />
           </div>
           <div className="main__product__edit__formContainer__price">
@@ -179,6 +184,7 @@ export default function ProductEditScreen() {
               placeholder=""
               required
               value={formData?.price}
+              autoComplete="off"
             />
           </div>
           <div className="main__product__edit__formContainer__description">
@@ -191,6 +197,7 @@ export default function ProductEditScreen() {
               placeholder=""
               required
               value={formData?.description}
+              autoComplete="off"
             />
           </div>
           <div className="main__product__edit__formContainer__countInStock">
@@ -203,6 +210,7 @@ export default function ProductEditScreen() {
               placeholder=""
               required
               value={formData?.countInStock}
+              autoComplete="off"
             />
           </div>
           <Button

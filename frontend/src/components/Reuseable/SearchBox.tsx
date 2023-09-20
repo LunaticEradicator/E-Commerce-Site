@@ -35,6 +35,7 @@ export default function SearchBox() {
             value={searchValue}
             placeholder="Search..."
             onChange={(event) => setSearchValue(event.target.value)}
+            autoComplete="off"
           />
           <Button outline rounded>
             <FaSearch />

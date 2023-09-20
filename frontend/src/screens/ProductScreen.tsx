@@ -164,7 +164,12 @@ export default function ProductScreen() {
             </div>
           </div>
         </div>
-        <div className="main__productDisplayed__reviews">
+        <div
+          style={{
+            padding: selectedProduct.reviews.length === 0 ? "20px" : "",
+          }}
+          className="main__productDisplayed__reviews"
+        >
           {selectedProduct.reviews.length > 0 && (
             <Message header className="main__productDisplayed__reviews__header">
               Reviews

@@ -9,6 +9,12 @@
 // }
 nav {
   margin-bottom: 20px;
+  @include ut.breakpoint(xLarge) {
+    margin-bottom: 10px;
+  }
+  @include ut.breakpoint(medium) {
+    margin-bottom: 5px;
+  }
 }
 
 main {
@@ -39,6 +45,9 @@ footer {
 //   text-overflow: ellipsis;
 //   white-space: nowrap;
 // }
+textarea {
+  resize: vertical;
+}
 
 .app {
   display: flex;

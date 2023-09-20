@@ -38,6 +38,9 @@ export default function RegisterScreen() {
   });
 
   function validatePassword(event: React.KeyboardEvent<HTMLInputElement>) {
+    console.log(formData.userConfirmPassword);
+    console.log(formData.userPassword);
+    console.log(formData.userConfirmPassword === formData.userPassword);
     formData.userConfirmPassword !== formData.userPassword
       ? (event.target as HTMLInputElement).setCustomValidity(".error-message")
       : (event.target as HTMLInputElement).setCustomValidity("");
@@ -54,17 +57,17 @@ export default function RegisterScreen() {
 
   // Submit for Register
   const submitHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
     if (
-      formData.userConfirmPassword !== formData.userPassword ||
-      formData.userName !== "" ||
-      formData.userEmail !== "" ||
-      formData.userPassword !== "" ||
-      formData.userConfirmPassword !== ""
+      formData.userName === "" ||
+      formData.userEmail === "" ||
+      formData.userPassword === "" ||
+      formData.userConfirmPassword === "" ||
+      formData.userConfirmPassword !== formData.userPassword
     ) {
       // event.target.setCustomValidity(".error-message");
       toast.error("Password must be same");
     } else {
-      event.preventDefault();
       try {
         // we are send back a mutation from ${BASE_URL} / auth`
         // to check if the user entered email and password is there in the database
@@ -81,8 +84,8 @@ export default function RegisterScreen() {
       } catch (error: any) {
         toast.error(error?.data?.message || error.error);
       }
-      console.log("Submitted");
     }
+    console.log("Submitted");
   };
 
   return (
@@ -98,6 +101,7 @@ export default function RegisterScreen() {
             required
             placeholder="Enter Name"
             onChange={formControllerHandler}
+            autoComplete="off"
           />
           <p className="error-message">Enter A User Name</p>
         </div>
@@ -112,6 +116,7 @@ export default function RegisterScreen() {
             // pattern="^([a-z\d\.-])+@([a-z\d-])+\.([a-z]{2,8})(\.[a-z]{2,8})?$"
             pattern="^([a-z0-9][._]?)+[a-z0-9]@[a-z0-9]+(\.?[a-z0-9]){2}\.(com?|net|org)+(\.[a-z0-9]{2,4})?"
             onChange={formControllerHandler}
+            autoComplete="off"
           />
           <p className="error-message">
             Email must be a valid address, e.g me@mydomain.com
@@ -128,6 +133,7 @@ export default function RegisterScreen() {
             // pattern="^([\w@-_\.]{8,20})$"
             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$"
             onChange={formControllerHandler}
+            autoComplete="off"
           />
           <p className="error-message">
             Password must contain atleast
@@ -149,11 +155,12 @@ export default function RegisterScreen() {
             placeholder="Confirm password"
             onKeyUp={(event) => validatePassword(event)}
             onChange={formControllerHandler}
+            autoComplete="off"
           />
           <p className="error-message">Password Does Not Match</p>
         </div>
         <Button
-          onClick={submitHandler}
+          onClick={(event) => submitHandler(event)}
           className="formContainer__registerBtn"
           secondary
           rounded

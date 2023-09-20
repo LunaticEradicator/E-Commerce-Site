@@ -60,6 +60,7 @@ export default function PaymentScreen() {
                 name="paymentMethod"
                 value="PayPal"
                 checked={formData.paymentMethod === "PayPal"}
+                autoComplete="off"
               />
             </fieldset>
           </div>

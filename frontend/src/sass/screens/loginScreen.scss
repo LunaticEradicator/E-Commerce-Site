@@ -76,5 +76,9 @@ $margin-spacing: 10px;
     margin-top: $padding-spacing;
     margin: 10px;
     margin-bottom: 0px;
+    & > a {
+      color: rgb(0, 150, 0);
+      font-weight: bold;
+    }
   }
 }

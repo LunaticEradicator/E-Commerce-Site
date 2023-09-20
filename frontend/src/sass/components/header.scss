@@ -73,7 +73,7 @@
       @include ut.breakpoint(large) {
         display: none;
         padding: 10px;
-        padding-bottom: 0;
+        // padding-bottom: 5px;
       }
     }
     &:nth-child(5) {
@@ -88,6 +88,7 @@
       all: unset;
       color: rgb(153, 153, 153);
       display: none;
+      // padding-bottom: 10px;
       @include ut.breakpoint(large) {
         padding: 0px;
         display: block;

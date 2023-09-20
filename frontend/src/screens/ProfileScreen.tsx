@@ -120,6 +120,7 @@ export default function ProfileScreen() {
               id="profileName"
               placeholder=""
               value={formData.profileName}
+              autoComplete="off"
             />
             <p className="error-message">Enter A User Name</p>
           </div>
@@ -132,6 +133,7 @@ export default function ProfileScreen() {
               placeholder=""
               pattern="^([a-z0-9][._]?)+[a-z0-9]@[a-z0-9]+(\.?[a-z0-9]){2}\.(com?|net|org)+(\.[a-z0-9]{2,4})?"
               value={formData.profileEmail}
+              autoComplete="off"
             />
             <p className="error-message">
               Email must be a valid address, e.g me@mydomain.com
@@ -146,6 +148,7 @@ export default function ProfileScreen() {
               placeholder="Enter Password"
               //   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$"
               value={formData.profilePassword}
+              autoComplete="off"
             />
             <p className="error-message">
               Password must contain atleast
@@ -167,6 +170,7 @@ export default function ProfileScreen() {
               //   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$"
               onKeyUp={validatePassword}
               value={formData.profileConfirmPassword}
+              autoComplete="off"
             />
             <p className="error-message">Password Does Not Match</p>
           </div>

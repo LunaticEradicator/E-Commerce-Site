@@ -91,6 +91,7 @@ export default function UserEditScreen() {
               id="name"
               required
               value={formData?.name}
+              autoComplete="off"
             />
           </div>
           <div className="main__user__edit__formContainer__email">
@@ -102,6 +103,7 @@ export default function UserEditScreen() {
               id="email"
               required
               value={formData?.email}
+              autoComplete="off"
             />
           </div>
           <div className="main__user__edit__formContainer__isAdmin">
@@ -112,6 +114,7 @@ export default function UserEditScreen() {
               id="isAdmin"
               onChange={(event) => formDataHandler(event)}
               checked={formData?.isAdmin}
+              autoComplete="off"
             />
           </div>
           <Button

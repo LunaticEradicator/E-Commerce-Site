@@ -85,6 +85,7 @@ export default function LoginScreen() {
             required
             placeholder="Enter email"
             onChange={formControllerHandler}
+            autoComplete="off"
           />
         </div>
         <div className="formContainer__userPasswordLogin">
@@ -96,6 +97,7 @@ export default function LoginScreen() {
             required
             placeholder="Enter password"
             onChange={formControllerHandler}
+            autoComplete="off"
           />
         </div>
         <Button
