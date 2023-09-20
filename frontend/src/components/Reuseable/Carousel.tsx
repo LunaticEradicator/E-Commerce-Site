@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
+import { FaAngleDoubleLeft } from "react-icons/fa";
+import { FaAngleDoubleRight } from "react-icons/fa";
 
 const sliderContainerStyle = {
   height: "90%",
@@ -167,10 +169,10 @@ export default function Carousel({ slides, parentWidth }: postProps) {
     <div style={sliderContainerStyle}>
       {/* Arrows*/}
       <div className="leftArrowStyle" onClick={previousArrowHeadHandler}>
-        &#11160;
+        <FaAngleDoubleLeft />
       </div>
       <div className="rightArrowStyle" onClick={nextArrowHeadHandler}>
-        &#11162;
+        <FaAngleDoubleRight />
       </div>
 
       {/* Animation */}
