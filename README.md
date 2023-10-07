@@ -1,5 +1,6 @@
-# E-Commerce 
-### [ Site may take longer than usual to load since [render](https://render.com/) free tier is used for backend hosting ]  ###
+# E-Commerce
+
+### [ Site may take longer than usual to load since [render](https://render.com/) free tier is used for backend hosting ]
 
 **Live Preview -https://e-commerce-jh2z.onrender.com/**
 
@@ -7,9 +8,9 @@
 
 **1, Info**
 
-* E-Commerce platform built with the MERN stack & Redux. 
+- E-Commerce platform built with the MERN stack & Redux.
 
-* It is a full-featured shopping cart with PayPal & credit/debit payments.
+- It is a full-featured shopping cart with PayPal & credit/debit payments.
 
 **2, Features**
 
@@ -26,7 +27,7 @@
     11, Checkout process (shipping, payment method, etc).
     12, PayPal / credit card integration.
     13, Database seeder (products & users).
-    
+
 **3, Technology Used**
 
     1, Typescript
@@ -36,7 +37,6 @@
     5, React
     6, Node.js
     7, Redux
-    
 
 **4, Env Variables**
 
@@ -54,6 +54,3 @@
 
     messi@gmail.com (Customer)
     123456
-
-
-

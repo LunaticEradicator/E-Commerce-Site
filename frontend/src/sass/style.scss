@@ -2,11 +2,10 @@
 @forward "global";
 @forward "util";
 @use "./util/" as ut;
-
-// html,
-// body {
-//   height: 100%;
-// }
+@import url("https://fonts.googleapis.com/css2?family=Jost&family=Montserrat&display=swap");
+body {
+  font-family: "Jost", sans-serif;
+}
 nav {
   margin-bottom: 20px;
   @include ut.breakpoint(xLarge) {

@@ -41,7 +41,7 @@ app.get("/api/config/paypal", (req, res) =>
   res.send({ clientId: process.env.PAYPAL_CLIENT_ID })
 );
 
-//static folder
+//static folder for multer
 const __dirname = path.resolve();
 app.use(
   "/uploads",
