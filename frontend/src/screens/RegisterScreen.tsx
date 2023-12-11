@@ -78,7 +78,7 @@ export default function RegisterScreen() {
           email: formData.userEmail,
           password: formData.userPassword,
         }).unwrap();
-        // we are
+        // navigate(redirect);
         dispatch(registerCredentials({ ...resBody }));
         toast.success("Registered Successfully");
       } catch (error: any) {
@@ -131,7 +131,7 @@ export default function RegisterScreen() {
             required
             placeholder="Enter password"
             // pattern="^([\w@-_\.]{8,20})$"
-            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$"
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$"
             onChange={formControllerHandler}
             autoComplete="off"
           />
@@ -142,7 +142,7 @@ export default function RegisterScreen() {
             <br />
             And must be a 8-16 character
             <br />
-            Eg : YourPassword@007
+            Eg : Password@12
           </p>
         </div>
         <div className="formContainer__userConfirmPassword">
